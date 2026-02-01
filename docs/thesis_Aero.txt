@@ -1,0 +1,1955 @@
+NTNU
+Norwegian University of Science and Technology
+Faculty of Engineering
+Department of Mechanical and Industrial Engineering
+Bachelor’s thesis
+Joakim Saugen
+Aerodynamic Optimization of a Flying
+Boat Hull
+Bachelor’s thesis in Mechanical Engineering
+Supervisor: Anna Olsen
+December 2024
+
+
+
+Joakim Saugen
+Aerodynamic Optimization of a Flying
+Boat Hull
+Bachelor’s thesis in Mechanical Engineering
+Supervisor: Anna Olsen
+December 2024
+Norwegian University of Science and Technology
+Faculty of Engineering
+Department of Mechanical and Industrial Engineering
+
+
+
+MAST2900 - BACHELOR THESIS MECHANICAL ENGINEERING
+Aerodynamic Optimization of a Flying
+Boat Hull
+Joakim Saugen
+Mechanical Engineering
+Autumn 2024
+Norges teknisk-naturvitenskapelige universitet
+Institutt for maskinteknikk og produksjon
+
+Preface
+This thesis investigates the aerodynamic drag of a flying boat hull, and methods to reduce this
+drag. This work is the final thesis of a bachelors degree in mechanical engineering.
+The work in this thesis is part of the ongoing development of a clean sheet, electric flying boat.
+Most of the research done on the subject of flying boat hulls was done over 60 years ago. With
+the increased importance of optimizing aerodynamic drag due to the range challenges of electric
+flight, as well as new possibilities brought on by the design freedom of composites and new
+development methods like CFD, this thesis aims to aid in the development of new means of
+transportation, electric flight.
+I would like to thank my supervisor, Anna Olsen, for all her help and a lot of good guidance
+and support. I would also like to thank the team at the NTNU wind tunnel and, in particular,
+Srikar Yadala V, for allowing me to use their facility for this thesis and for all the help prior to,
+during, and after the testing.
+I also wish to thank the team at Elfly for the support during the work on this thesis. I especially
+want to thank Kenzo Sasaki for his guidance.
+Torp, 20.12.2024
+i
+
+Abstract
+With global warming becoming an increasingly critical challenge, the development of sustainable
+aviation technologies is essential. This thesis investigates methods to reduce the aerodynamic
+drag of a nine-passenger, electric flying boat hull to improve its efficiency and viability for zero-
+emission transport.
+Using a combination of literature review, wind tunnel testing, and computational fluid dynamics
+(CFD) analysis, this study examines the aerodynamic effects of design features such as step
+geometry and fairings, afterbody angle, and overall hull dimensions. The thesis also briefly
+considers how changes to these features might impact hydrodynamic performance, ensuring a
+balanced design approach.
+Due to challenges with the accuracy of the wind tunnel testing, the results from this part of the
+thesis were not directly transferable, but the results were used in order to calibrate the CFD
+results.
+Results demonstrate that aerodynamic drag can be reduced significantly, potentially by 15%
+to 20%, with the most substantial improvements achieved through step fairings and optimizing
+the hull’s angle of incidence. Fairing the step alone offers a reduction of up to 15%, with drag
+reductions showing a non-linear relationship to the extent of fairing applied. These findings
+highlight key opportunities for advancing the design of electric flying boats.
+ii
+
+Sammendrag
+Global oppvarming utgjør en stadig mer kritisk utfordring. Det er derfor essensielt å utvikle
+mer bærekraftige løsninger innen alle områder, inkludert luftfart. Denne oppgaven undersøker
+metoder for a redusere den aerodynamiske motstanden til skroget på en elektrisk flybåt med plass
+til ni passasjerer, for å forbedre effektiviteten og akselerere overgangen til nullutslipps luftfart.
+Gjennom en kombinasjon av litteraturstudier, vindtunneltesting og CFD-analyse undersøker
+studien geometriske endringer for å bedre aerodynamikken, spesielt rundt "step" regionen og
+vinkelen på bakre del av skroget. Oppgaven vurderer også kort hvordan disse endringene vil
+påvirke de hydrodynamiske egenskapene til flyet.
+Grunnet utfordringer med nøyaktigheten på vindtunnel testingen var ikke resultatene fra denne
+delen av studien direkte overførbar, men kunne isteden brukes for å validere CFD modellen.
+Resultatene viser at den aerodynamiske motstanden kan reduseres betydelig, potensielt med 15%
+til20%, derde størsteforbedringene oppnåsgjennom ådelvis retteut "steppet"og endrevinkelen
+på skroget i forhold til luftstrømmen. Ved å delvis dekke til "steppet" kunne den aerodynamiske
+motstanden reduseres med opptil 15%.
+iii
+
+CONTENTS
+Contents
+1 Introduction 1
+1.1 Background . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+1.2 Thesis Objective . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+1.3 Scope . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+1.4 Requirements and Standards . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+1.5 Seaplanes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+2 Hydrodynamics of Flying Boat Hulls 3
+2.1 Hydrodynamic Performance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+2.2 Basic Seaplane Hull . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+2.3 Take-off Performance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+2.4 Hydrodynamic Resistance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+2.5 Dynamic Stability . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+2.6 Hydrodynamic Loads . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+3 Aerodynamic Theory 12
+3.1 Fundamentals of Fluid Dynamics . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+3.2 Fundamentals of Aerodynamics and Flight Physics . . . . . . . . . . . . . . . . . 13
+4 Literature study: Aerodynamic optimization 17
+4.1 Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+4.2 Aerodynamic Impact of the Step . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+4.3 Sternpost Angle . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+4.4 Conventional VS. Planning Tail Hulls . . . . . . . . . . . . . . . . . . . . . . . . . 28
+4.5 Length/Width Ratio . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+4.6 Height/Width Ratio . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+4.7 Chines Radius and Flare . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+4.8 Impact of Deadrise Angle . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+4.9 Results Literature Study . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+5 Wind Tunnel 34
+5.1 Test Objective . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+5.2 Test Facility . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+5.3 Model Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+5.4 Experimental Aerodynamics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+5.5 Other Aerodynamic Dissimilarities . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+5.6 Integration Into Wind Tunnel . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+5.7 Missing Data Points . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+5.8 Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+5.9 Post Test Error Analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+6 CFD Study of Step Geometry 52
+6.1 Choice of CFD Model . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
+6.2 CAD Model Preparation and Import . . . . . . . . . . . . . . . . . . . . . . . . . 54
+6.3 Meshing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+6.4 Runs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
+6.5 Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59
+6.6 Discussion on the Accuracy and Confidence in the Results . . . . . . . . . . . . . 59
+7 Conclusion 63
+iv
+
+8 Future Work 64
+A Step Geometries for Wind Tunnel Testing II
+B Deceleration of AI aids and tools VII
+C CFD Appendix VIII
+v
+
+LIST OF FIGURES
+List of Figures
+2.1 Side-view of an example flying boat. Figure borrowed from Thurston (1978) . . . 3
+2.2 Gradual change from streamlined shape to a flying boat hull. The numbers to
+the right are the relative drag as a percentage of the full flying boat hull. Figure
+borrowed from (Coombes and Clark 1937) . . . . . . . . . . . . . . . . . . . . . . 4
+2.3 Illustration of deadrise angle, with and without flare. Image edited based on two
+original images from (Thurston 1978) . . . . . . . . . . . . . . . . . . . . . . . . . 5
+2.4 Phases during takeoff. Source of figure: Recolored by prof. E. Wilczek, based on
+data from Sottorf (1937) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+2.5 Hydrodynamic forces during displacement phase. Figure borrowed from Sottorf
+(1937) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+2.6 Spray aft of the step, onto the after body. Source of figure: Recolored by prof. E.
+Wilczek, based on drawing by (Sottorf 1937) . . . . . . . . . . . . . . . . . . . . . 7
+2.7 Illustrationofsevereporpoisingleadingtotakeoffattoolowspeed, andsubsequent
+stall and crash. Figure borrowed from FFA (2014) . . . . . . . . . . . . . . . . . 8
+2.8 Example of plot of upper and lower trim limits along the takeoff profile for a
+seaplane. Figure borrowed from lecture held by prof. E. Wilczek (Wilczek 2021) . 10
+2.9 Distribution of afterbody pressure, as a function of sternpost angle. The left
+image shows the view of the frontal section. The right image shows a side view
+from the step extending rearwards. Figure borrowed from Tomaszewski, Smith
+and Chalmers (1946) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+3.1 Development of turbulent flow over a flat plate. Image edited based on an original
+image by Leishman (2024c) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+3.2 Flow around a smooth ball vs golf ball, illustrating the delaying effect of flow
+sepeartion caused by turbulence. Figure borrowed from Leishman (2024c) . . . . 13
+3.3 Coordinate and rotation axis for an aircraft . . . . . . . . . . . . . . . . . . . . . 14
+3.4 Aerodynamic forces acting on an airfoil. Image borrowed from: Leishman (2024a) 14
+3.5 Drag of different shapes, broken down into pressure and friction drag. Different
+shapes can be seen to have very large variations in drag. Image has been edited
+based on two original images from (Talay 1975) . . . . . . . . . . . . . . . . . . . 16
+vi
+
+LIST OF FIGURES
+4.1 Collection of 4 different flying boat hulls, with wind tunnel test data investigating
+the drag related to the depth of the step . . . . . . . . . . . . . . . . . . . . . . . 19
+4.2 Trim limit as a function of step height and speed. Figure borrowed from Olson
+and Land (1942) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+4.3 Hydrodynamic drag during takeoff run, as a function of step height. Source:
+Recolored in an unpublished report by Prof E. Wilczek, based on original data
+from Sottorf (1937) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+4.4 Illustration of Step Geometry. Top Left: V-shaped step from side view. Bottom
+Left: a straight step in side view. Right Figure, V-shaped step from bottom view.
+A straight step would go where the dashed line is located. Figure borrowed from
+Parkinson and Land (1944) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+4.5 Air drag as a function of step shape and angle of attack.Figure borrowed from
+Coombes and Clark (1937) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+4.6 Drag as a percentage of drag without step fairing over a range of fairing lengths.
+Figure borrowed from Coombes and Clark (1937) . . . . . . . . . . . . . . . . . . 22
+4.7 Drag coefficient of a flying boat hull with different step fairings, as a function of
+Reynolds number (106). Figure borrowed from Hamilton (1956) . . . . . . . . . . 23
+4.8 Hulls tested by Riebe and Yates (1947) . . . . . . . . . . . . . . . . . . . . . . . . 24
+4.9 Design assurance levels in aerospace, according to the DO-254 standard, with
+targeted system failure rates. (Mistral 2024) . . . . . . . . . . . . . . . . . . . . 25
+4.10 Landing deceleration and resistance plots, when landing with and without step.
+Figures borrowed from Benson and Freihofner (1944) . . . . . . . . . . . . . . . . 26
+4.11 Ar drag vs angle of incidence . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+4.12 Effect of tail afterbody upsweep on land planes. Figure borrowed from Torenbeek
+(1982). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+4.13 Stability against skipping, as a factor of beam loading, sternpost angle and step
+height. Figure borrowed from Locke (1946) . . . . . . . . . . . . . . . . . . . . . 28
+4.14 The difference between two step VS. one step flying boat hull. Figure is of Model
+203 from the Langley tank facility. Figure borrowed from Riebe and Naeseth (1947a) 29
+4.15 Comparison of hydrodynamic resistance for a two-step (labeled conventional hull)
+and the one-step hull (labeled Planning tail). Source: Recolored by Prof. E.
+Wilczek, based on original figure from Dawson, Walter and Hay (1946) . . . . . . 29
+vii
+
+LIST OF FIGURES
+4.16 Effect of flare on air drag, as a function of angle of incidence. Figure edited based
+on two figures from Coombes and Clark (1937) . . . . . . . . . . . . . . . . . . . 30
+4.17 Hydrodynamic resistance and landing loads as a function of deadrise angle. The
+graph is given in deadrise dihedral angleα, not the typical definition of deadrise
+angle as described in Figure 2.3. Figure borrowed from Sottorf (1937). . . . . . . 31
+4.18 Increase of stability limit due to addition of smaller steps behind the rear step.
+Figure edited based on original from Sottorf (1942) . . . . . . . . . . . . . . . . . 32
+4.19 Afterbody step on Beriev A-40. Source:Wilczek (2021), unknown original source . 33
+5.1 Overview picture of a closed loop wind tunnel, image from www.onera.fr . . . . . 35
+5.2 Setup for mounting the model to the measuring equipment . . . . . . . . . . . . . 36
+5.3 Scale Comparison between 9% model and full scale aircraft . . . . . . . . . . . . 38
+5.4 CAD Render of the model used in wind tunnel testing. The figure shows the
+sections the model was printed in, the interchangeable parts of the model, and the
+stiffing aluminum beams running the length of the model . . . . . . . . . . . . . . 40
+5.5 Model in the process of being assembled. The rear section assembled, while the
+front sections are in the the background . . . . . . . . . . . . . . . . . . . . . . . 40
+5.6 Flow over a body in external and internal flow. Figure Borrowed from: Katz (1995) 42
+5.7 Flow through a wind tunnel, wind development of boundary layer, and pressure
+gradient along the length of the test section. Figure borrowed from Leishman
+(2024c) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+5.8 Compressibility ratio VS. Mach number. Figure borrowed from Leishman (2024c) 44
+5.9 Scale model in the wind tunnel . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+5.11 Smoke visualization of flow separation. Wind speed: 5m/s . . . . . . . . . . . . . 49
+5.12 Measurement made in the wind tunnel showing the size of fluctuations over a
+30-second period. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+5.13 Vortex shedding of a cube. Image borrowed from: Stern and yang (2012) . . . . . 50
+6.1 Difference between solvers methods. Image Borrowed from: LEAP (2018) . . . . 53
+6.2 Flow volume set up as a function of the model size . . . . . . . . . . . . . . . . . 54
+6.3 Example of buildup of a turbulent boundary layer, and linear interpolation error.
+Image edited based on original images from Ansys (2020b) and Wimshurst (2022) 55
+viii
+
+LIST OF FIGURES
+6.4 Inflation layers should be contained within the inflation layers, as seen in the right
+image, in order to resolve the boundary layer properly. Image borrowed from
+Wimshurst (2021a) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+6.5 Example image of good and poor volume transition between inflation layer. Image
+borrowed from Wimshurst (2021a) . . . . . . . . . . . . . . . . . . . . . . . . . . 56
+6.6 Input and output values used for determining the inflation layer in the mesh . . . 56
+6.7 Mesh independence study performed on the TAC1 hull . . . . . . . . . . . . . . . 57
+6.8 Refinement regions used for this CFD study. A third volume was used around the
+step region but is not that visible in the image. . . . . . . . . . . . . . . . . . . . 58
+6.9 Mesh used in the CFD study comparing steps . . . . . . . . . . . . . . . . . . . . 58
+6.10 Results from CFD step study. The drag of the fairings is given as a percentage
+decrease compared to the non-faired step with a depth of 5.8%. The x-axis is the
+length of the fairing for that run . . . . . . . . . . . . . . . . . . . . . . . . . . . 59
+6.11 Flow field around aircraft showing flow separation behind the step without fairing 60
+6.12 Convergence of a CFD run, over 3000 iterations . . . . . . . . . . . . . . . . . . . 61
+6.13 Flow field of flow in the wind tunnel, simulated by CFD. The interference from
+the mounting strut can be clearly seen. The surface of the model is plotted with
+a pressure field in [Pa], while the surrounding filed is plotted with velocity [m/S].
+Model seen from top view . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
+A.1 Frontal and side view of model used in the wind tunnel testing, including wing
+and tail fairings, and tail attachment to change afterbody angle . . . . . . . . . . II
+C.1 Zoomed in of mesh used in the CFD study comparing steps . . . . . . . . . . . . VIII
+C.3 Y + plotted on the surface of the model, in the range of 0 to 2 . . . . . . . . . . . VIII
+C.5 Residuals plotted for the run with no fairings . . . . . . . . . . . . . . . . . . . . IX
+ix
+
+Terminology
+Afterbody Part of aircraft body aft of the step
+Angle of Incidence Angle between fuselage and wing cord
+Beam Width of the hull
+CFD Computational Fluid Dynamics
+Chines Sharp break between hull and fuselage
+CS23 EASA regulations covering small aircraft
+Deadrise Angle from keel to chines
+Drag Coefficient (Cd)Dimensionless number for drag
+EASA European Union Aviation Safety Agency
+Fairing Structure added for aerodynamic (streamlining drag reduction)
+Flare Gradually changing of the deadrise angle
+Forebody Part of aircraft body in front of the step
+Hull Part of a flying boat body that is submerged during water operations
+Hump Period of highest hydrodynamical resistance prior to planning
+Keel Bottom edge of the hull, running the length of the body
+Parasitic Drag Drag not related to lift
+Porpoising Instability in planning, causing oscillating trim
+Skipping Type of porpoising involving heave
+Step Sharp break in the continuity of the hull
+TAC1 Test Aircraft 1
+Trim Angle of the body relative to the horizontal axis (aka. pitch)
+x
+
+1 INTRODUCTION
+1 Introduction
+1.1 Background
+Globally, aviation accounts for about 4% of the total global greenhouse emissions to date. With
+passenger numbers rising by 3% yearly, this share in total emissions is predicted to double by
+2050. (Klöwer 2021) With global warming set to exceed the 2015 Paris 1.5 degree goal in 2024,
+reducing all sources of greenhouse gasses is more crucial than ever. (C3S 2024) The TAC1
+program aims to accelerate this transition by electrifying seaplanes, one of the available market
+segments with the shortest range requirements. The TAC1 program aims to develop a clean-
+sheet, nine-passenger electric flying boat certified under EASA CS23 regulations.
+1.2 Thesis Objective
+Due to batteries’ relatively poor energy density (1.4 MJ/kg) compared to jet fuel (42 MJ/kg),
+reducing the required energy for flight is an important step toward the viability of electric flight.
+The objective of this thesis is therefore:
+Investigate potentials for reducing the aerodynamic drag of the TAC1 flying boat hull.
+Reducing the aerodynamic will also decrease operating cost for an electric aircraft. Although
+electricity is relatively cheap, compared to jet fuel, high performance batteries do not last that
+long, and will have to be replaced at a regular basis. This makes battery cost a variable cost,
+in the same way as fuel, and will be a major driving cost of operations. By reducing the energy
+consumption, the battery wear, and thereby, cost, will be reduced.
+1.3 Scope
+The thesis will focus on the aerodynamic drag of the fuselage and hull of the aircraft. The wings,
+tail section, and external equipment are considered outside the scope of this thesis.
+The thesis consists of the following sections:
+• An introduction to the hydrodynamics of flying boat
+• A literature study on aerodynamic refinements of flying boats
+• An experiment section in the large wind tunnel at NTNU
+1
+
+1 INTRODUCTION
+• A CFD study investigating the step drag
+The initial literature study focused broadly on the fuselage. At the same time, for the experiment
+section, it was decided to reduce the scope further only to consider the step section and afterbody
+angle. These features were chosen due to their relatively large contribution to aerodynamic drag.
+This thesis is only one part of the development of the TAC1 hull. The work on aerodynamics in
+this thesis will be combined with hydrodynamic research and tests from other work, as well as
+commercial and operational limitations to derive the final shape.
+1.4 Requirements and Standards
+As the TAC1 program aims to certify the aircraft for commercial operations under CS23 Level
+3, applicable standards and requirements must be met. Many aircraft performance requirements
+are affected by aircraft drag, but the most critical requirements regarding the fuselage and hull
+are those concerning safety during water operation.
+From CS23 Amendment 4: (EASA 2015)
+• Section 75c: "The landing must be made without excessive vertical acceleration or
+tendency to bounce, nose-over, ground loop, porpoise or water loop."
+• Section 231a: "A seaplane or amphibian may not have dangerous or uncontrollable
+porpoising characteristics at any normal operating speed on the water."
+• Section 233d: "Seaplanes must demonstrate satisfactory directional stability and
+control for water operations up to the maximum wind velocity specified in sub-
+paragraph (a)."
+1.5 Seaplanes
+Seaplanes are currently being operated by about 40 commercial operators in many regions
+around the world, for both short-haul costal transport and sightseeing missions, most notably
+the Maldives and the Vancouver area. These missions are typically very short, with an average
+range of 75 km, making them well-suited for electric aviation.
+Seaplanes can in general be split in two classes: Float planes which utilize external floats below
+the fuselage to provide buoyancy, and flying boats which utilize the fuselage as the body of
+contact with the water. The TAC1 aircraft is a flying boat.
+2
+
+2 HYDRODYNAMICS OF FLYING BOAT HULLS
+2 Hydrodynamics of Flying Boat Hulls
+In addition to functioning as aircraft, seaplanes must function as boats. In order to achieve
+sufficient handling on water during taxiing, takeoff and landing, their shape must deviate from
+that of a relatively streamlined land plane. If one tries to optimize the aerodynamics of a
+seaplane without understanding the hydrodynamics, the design would easily trend towards that
+of a circular fuselage land plane shape, resulting in poor water characteristics. In order to
+optimize the aerodynamics, it is therefore important to understand what features are added to a
+seaplane hull and how they affect the hydrodynamic performance. This section aims to outline
+the basics of flying boat hydrodynamical design. (deCallies 1967).
+A typical flying boat hull can be seen in Figure 2.1. A design goal can then be set for a specific
+hydrodynamic performance, and different characteristics can be tweaked in order to achieve that
+performance at the least aerodynamic penalty possible.
+Figure 2.1: Side-view of an example flying boat. Figure borrowed from Thurston (1978)
+2.1 Hydrodynamic Performance
+There are four primary factors that can be considered as hydrodynamic performance.
+Hydrodynamic resistanceis the water drag that acts on the hull when it moves through the
+water. Generally, we want to reduce this in order to decrease the takeoff distance and power
+requirement of the motor. Shorter takeoffs mean less time for something to go wrong, like hitting
+an object in the sea or starting porpoising. Several flying boats are actually unstable, but avoid
+porpoising by accelerating through the unstable region before it becomes a problem. (Smith and
+White 1954)
+3
+
+2 HYDRODYNAMICS OF FLYING BOAT HULLS
+During landing, hydrodynamic resistance is less important and can even be a good thing, slowing
+the aircraft down faster.
+Dynamic stabilityrefers to the stability in roll, yaw, and pitch, as well as heave, as the aircraft
+moves through the water. Especially instability in pitch and heave can be dangerous for seaplanes
+during takeoff and landing.
+Spray is the water that gets pushed up and out from the hull as the hull moves through the
+water. This spray can seriously damage the propeller and control surfaces of the aircraft and
+needs to be minimized. Spray characteristic is an entire topic in itself and is considered outside
+the scope of this thesis.
+Landing loadsis the force on the hull during landing and is a big driver of hull strength and,
+thereby, hull weight.
+In addition to these considerations, other factors like low-speed maneuverability also fall into the
+category of hydrodynamic performance.
+2.2 Basic Seaplane Hull
+Figure 2.2 shows the gradual change from a streamlined body (shape 1). In the second shape,
+the tail is swept up. This is also done on most land planes in order to give tail clearance to allow
+for rotation during takeoff and landing. For seaplanes, the tail is also swept up to reduce the
+spray that hits the tail, which increases the resistance. (Coombes and Clark 1937)
+Figure 2.2: Gradual change from streamlined shape to a flying boat hull. The numbers to the right are the
+relative drag as a percentage of the full flying boat hull. Figure borrowed from (Coombes and Clark 1937)
+4
+
+2 HYDRODYNAMICS OF FLYING BOAT HULLS
+Figure 2.2, shape 3 shows a hull with a sharp keel. The angleβ, seen in Figure 2.3 is known
+as the deadrise angle. The sharp keel decreases water landing loads, adds lateral stability, and
+helps control spray at the cost of increased hydrodynamical resistance.
+At the intersection between the hull and the fuselage there is also typically a sharp break, known
+as the chine. The chines helps reduce the spray. The hull may also have a concave shape, with a
+larger deadrise angle at the keel, which further decreases landing loads and reduces spray. This
+is known as flare. (Coombes and Clark 1937) (Thurston 1978)
+Figure 2.3: Illustration of deadrise angle, with and without flare. Image edited based on two original
+images from (Thurston 1978)
+Figure 2.2, shape 4 shows the addition of sharp breaks in the shape around the mid and aft
+sections. This is done to create a flow separation for the water and spray to break clear of the
+aft body. Shape 5 adds a flat indent or plane, referred to as a step, to the discontinuity line in
+order to increase the breakage. This step is one of the major drivers of drag for seaplane hulls,
+and this is the main focus point of this thesis. Without the features in shapes 4 and 5, the shape
+would, in effect, create an upside-down airfoil in the water, causing water spray to fly upwards
+behind the body and, subsequently, creating a suction force that would pull the hull down into
+the water and prevent it from taking off. (Coombes and Clark 1937)
+2.3 Take-off Performance
+During stationary and low speed, the hull of a flying boat acts as a displacement hull. The weight
+of the water displaced equals the weight of the aircraft. During a takeoff, as speed increases, the
+hull starts to generate hydrodynamic lift, lifting the hull out of the water into a planning stage.
+As the speed increases further, the hydrodynamic lift is slowly replaced by aerodynamic lift until
+the aircraft reaches takeoff speed. These phases can be seen in figure 2.4. (deCallies 1967)
+The point of maximum resistance occurs during the transition from displacement to planning,
+5
+
+2 HYDRODYNAMICS OF FLYING BOAT HULLS
+Figure 2.4: Phases during takeoff. Source of figure: Recolored by prof. E. Wilczek, based on data from
+Sottorf (1937)
+as the aircraft is lifting itself out of the water. This point is referred to as the hump. A sharp
+increase in pitch (also known as trim) can be seen in figure 2.4 in this phase. Once the hull is
+out of the water, the pitch decreases, and the water resistance decreases again. (deCallies 1967)
+Importantly, the available thrust must be larger than the sum of the resistance. The rate of
+acceleration will be the difference between the thrust and the drag over the mass of the aircraft.
+2.4 Hydrodynamic Resistance
+Each of the four phases introduced in section 2.3 comes with different mechanisms for
+hydrodynamic drag. Depending on which phase we want to optimize for, the design will differ.
+Some general trends do also exist, like deadrise angle, where hydrodynamic drag increases with
+increasing angle, especially for the planning phases (Sottorf 1937)
+The following section is a general explanation of the hydrodynamic drag, in the four phases as
+shown in figure 2.4
+In phase 1the displacement phase, the flying boat hull creates relatively high drag compared to
+a more streamlined hull. This is not of great concern in terms of takeoff performance, however,
+as the excess thrust is large in this phase, leading to a fast acceleration into stage two. The drag
+in this phase does matter, however, if the aircraft is expected to see long taxiing runs. Combined
+6
+
+2 HYDRODYNAMICS OF FLYING BOAT HULLS
+with the poor efficiency of the propeller in this phase, some energy could be saved by reducing
+the drag. During this stage, an air bubble will be drawn in by the negative pressure behind the
+step and start to reduce the whetted area of the after body, as seen in figure 2.5. (Sottorf 1937)
+Figure 2.5: Hydrodynamic forces during displacement phase. Figure borrowed from Sottorf (1937)
+In phase 2the air trapped behind the step increases in length, while the impact pressure on
+the forebody increases, both working to move the center of pressure forward. This causes a
+pitch-up movement that increases the hydrodynamic lift, and the hull lifts out of the water. This
+lifting movement moves the center of pressure aft again, causing a pitch down once the hull is in
+planning mode. The maximum hydrodynamic drag will be somewhere in the region around the
+maximum pitch, and it is important to have sufficient excess thrust to overcome this resistance.
+(ibid.).
+In phase 3the hull is fully planning and only a small part of the hull in front of the step is in
+contact with the water. As speed increases, this patch of contact with the water decreases in size,
+caused by load shifting from hydrodynamic to aerodynamic lift from the wing. The decrease in
+contact with the water also moves the center of pressure further aft, slowly decreasing pitch.
+In phase 4the pitch has to increase in order to increase wing lift and lift the aircraft out of the
+water. This pitch-up increases the spray and drag on the aft body, as can be seen in figure 2.6.
+As the thrust curve also comes down at this point, a second critical phase occurs where drag
+could exceed thrust.
+Figure 2.6: Spray aft of the step, onto the after body. Source of figure: Recolored by prof. E. Wilczek,
+based on drawing by (Sottorf 1937)
+It should be noted that different hulls will differ in these characteristics. deCallies (1967) does
+7
+
+2 HYDRODYNAMICS OF FLYING BOAT HULLS
+not report an increase in hydrodynamic drag during step four, most likely due to having looked
+at different hull geometries.
+2.5 Dynamic Stability
+When under very low speed or stationary, the center of buoyant forces vs the center of gravity
+and wind loads are the primary drivers of stability. At higher speeds, the hydrodynamic forces,
+and increasingly with speed, aerodynamic forces take over. This thesis will focus on the stability
+when moving, known as dynamic stability, as static stability is primarily a function of the overall
+hull width, the height of the center of gravity, and tip float size, neither of which is a focus of
+this thesis. The most critical factor for dynamic stability is the longitudinal stability. Here,
+there are two characteristics that can be critical for a seaplane during takeoff or landing: The
+following section is primarily based on the findings of Smith and White (1954), and Olson and
+Land (1942).
+Figure 2.7: Illustration of severe porpoising leading to takeoff at too low speed, and subsequent stall and
+crash. Figure borrowed from FFA (2014)
+Porpoising is an oscillating change in pitch, typically defined at a minimum amplitude of 2
+degrees. Higher amplitudes may be acceptable, but this is dependent on duration, pilot skill,
+and the speed at which it occurs. The main danger of porpoising is increased stress on the
+airframe, increased spray, and premature takeoff with a subsequent stall. Generally, porpoising
+becomes more critical with higher speed. The instability may be self-sustaining or self-dampened.
+Some highly unstable seaplanes might start porpoising without the aid of external disturbance,
+while other planes require an external disturbance like a wave or sudden change in pitching
+moment from high-mounted engines to start porpoising. Smith and White (1944) report that
+porpoising seems to be more likely to occur during pitch-down rather than pitch-up disturbance.
+This effect has a bigger impact on landings, as the thrust line VS. dragline makes the aircraft
+more likely to have pitch-down moments during landing. (Smith and White 1954)
+It is also important to consider the time component of instability. While one method to determine
+the stability limit is to run tests at a constant speed and measure instability, this represents the
+8
+
+2 HYDRODYNAMICS OF FLYING BOAT HULLS
+real-world conditions poorly, as an aircraft may pass through an unstable range as long as the
+acceleration is sufficient to prevent instability from occurring. (Smith and White 1954) This
+makes the reduction of hydrodynamic drag one of the key ways to combat instability during
+takeoff.
+Benson and Freihofner (1944) Benson and Freihofner (1944) tested the landing stability of a
+model of a flying boat where the depth of the step was reduced to zero by using a retractable
+step. This model was unstable in landings, but as long as the deceleration was sufficient, the
+instability oscillations would be acceptable.
+Skippingis a form of porpoising that also includes a heave motion and is commonly encountered
+during landing. Skipping can have very severe consequences, as the aircraft may lift out of the
+water during these oscillations. If the speed is then below stall speed, the aircraft will stall
+and fall down to the water surface with a large force that may damage or destroy the airframe.
+(Smith and White 1954)
+Trim limitsdetermine within which range of pitch the seaplane will be stable. This is typically
+not a hard line, but instability is more and more likely to occur the closer to the line one gets.
+In addition, due to the time dependency, instability may also not occur if the lines are crossed
+briefly. (ibid.)
+Because of the increased sensitivity during pitch-down disturbance, compared to pitch-up
+movement, as described above, trim limit graphs often come with one upper limit for decreasing
+pitch and one higher one for increasing pitch disturbance. (Olson and Land 1942)
+Forebody Porpoisingis caused by varying pressure on the forebody, just ahead of the step,
+within the area marked pressure area in figure 2.6. This occurs during planning at low trim,
+with little flow over the afterbody. During the hump region, the afterbody will normally prevent
+this type of porpoising, as the afterbody will be partially submerged and dampen any change in
+the center of pressure on the forebody. (Smith and White 1954) The primary design that affects
+the forebody porpoising is the area immediately in front of the step.
+Forebody - afterbody Porpoising is a type of porpoising that only occurs if two steps are
+present, with the pressure area of the aft step oscillating. (ibid.)
+Step Porpoisingis a type of porpoising that is caused by insufficient flow separation behind
+the step. The water spray behind the step creates a suction force on the afterbody, which may
+9
+
+2 HYDRODYNAMICS OF FLYING BOAT HULLS
+Figure 2.8: Example of plot of upper and lower trim limits along the takeoff profile for a seaplane. Figure
+borrowed from lecture held by prof. E. Wilczek (Wilczek 2021)
+oscillate, causing oscillation in pitch. Skipping is a type of step porpoising. Afterbody shape
+and rise angle, known as sternpost angle, as well as the height and ventilation of the step, are
+the most important methods to reduce this porpoising. (Smith and White 1954) An example of
+the distribution of negative pressure aft of the step can be seen in Figure 2.9.
+Figure 2.9: Distribution of afterbody pressure, as a function of sternpost angle. The left image shows the
+view of the frontal section. The right image shows a side view from the step extending rearwards. Figure
+borrowed from Tomaszewski, Smith and Chalmers (1946)
+2.6 Hydrodynamic Loads
+Load coefficient is a unitless coefficient for the concentration of hydrodynamic loads, often used
+for float and flying boat design.
+10
+
+2 HYDRODYNAMICS OF FLYING BOAT HULLS
+C∆0 = ∆0
+w · b3 (2.1)
+Where:
+* ∆0 is the aircraft weight in [kg],
+* w is the specific weight of water [kg
+m3 ],
+* b is the width of the beam in [m]
+11
+
+3 AERODYNAMIC THEORY
+3 Aerodynamic Theory
+3.1 Fundamentals of Fluid Dynamics
+3.1.1 Types of Flow
+Fluid flow over a surface will be either one of two types: laminar or turbulent. With laminar flow,
+the fluid flows in the direction of flow, with very little motion or mixing in secondary directions.
+For turbulent flow, the flow will have internal eddies and vortices, creating a much more uneven
+and mixed flow. (Leishman 2024c)
+3.1.2 Boundary Layer
+When air flows over a surface, the air closest to the surface will stagnate and not move due to
+the friction forces between the fluid molecules and the surface. This is called non-slip. Further
+from the surface, the air will increase speed up to a point where the air is at free-flow speed.
+This layer of slower-moving air, affected by shear forces in the fluid, is called the boundary layer.
+The thickness of the boundary layer depends on many factors, like fluid viscosity, fluid velocity,
+surface roughness, surface geometry, and whether the fluid is in turbulent or laminar flow. (ibid.)
+Figure 3.1: Development of turbulent flow over a flat plate. Image edited based on an original image by
+Leishman (2024c)
+The thickness of the boundary layer is typically defined at where the flow speed is 99% of free
+flow speed, and denoted withδ, and can be seen in figure 3.1. For turbulent flow, the boundary
+layer will be thicker but also have a more uniform velocity profile due to mixing between the
+layers. (ibid.)
+Due to the mentioned shear forces in the fluid, the boundary layer is where the friction drag
+12
+
+3 AERODYNAMIC THEORY
+originates and is, therefore, a very important area to study. Turbulent boundary layers will
+generally have a higher aerodynamic drag than laminar ones. When designing aerodynamic
+surfaces where low drag is a benefit, it is, therefore, generally a good idea to try to keep the flow
+laminar as long as possible. (Leishman 2024c)
+3.1.3 Flow Separation
+Flow separation is when the flow is not able to follow the contours of the shape it flows over.
+Turbulent flow is more resistant to separation than laminar flow. Flow separation causes a large
+pressure drag behind the body, so turbulent flow may reduce drag. This feature can be exploited
+by aerodynamic design, which is why golf balls have dimples. As seen in figure 3.2, the dimpled
+surface causes a turbulent boundary layer, delaying flow separation. (ibid.)
+Figure 3.2: Flow around a smooth ball vs golf ball, illustrating the delaying effect of flow sepeartion caused
+by turbulence. Figure borrowed from Leishman (2024c)
+3.2 Fundamentals of Aerodynamics and Flight Physics
+As an aircraft is not restrained to 2D motion and may move and rotate along all three axes, some
+definitions should be established about what cordite system to use and which forces act in which
+axis system. There are four fundamental forces acting on an aircraft: Weight, Lift, Thrust, and
+Drag. (Leishman 2024b)
+The three main coordinate systems when describing aircraft motion are the body, earth, and
+wind axis, as shown in figure 3.3a. Weight acts in the earth reference, lift and drag acts in the
+wind reference, and thrust acts in the body coordinate system. The angle of attack is defined as
+the difference between the body and wind axis. (ibid.)
+13
+
+3 AERODYNAMIC THEORY
+(a) Coordinate systems for aircraft motion. Figure
+borrowed from Smith (2022)
+(b) Definition of the rotational axis of an aircraft.
+Figure borrowed from NASA (2022a)
+Figure 3.3: Coordinate and rotation axis for an aircraft
+There are also three axes’ of rotation, roll, yaw, and pitch, as seen in figure 3.3b. In this thesis,
+the pitch is sometimes referred to as trim.
+3.2.1 Aircraft Drag
+Aerodynamic drag is defined as the force opposing motion. The force does not act along the
+neutral axis of the body, as the thrust line does, but instead acts in the direction of the wind
+reference axis, as seen in Figure 3.3a. It is caused by the interaction between the air and the
+aircraft. (NASA 2022b)
+Figure 3.4: Aerodynamic forces acting on an airfoil. Image borrowed from: Leishman (2024a)
+There are multiple ways to break down drag into categories, depending on what one wants to
+show. The physics-based breakdown breaks the drag down into pressure and friction drag, as
+14
+
+3 AERODYNAMIC THEORY
+seen in Figure 3.4. As the name implies, the pressure drag is caused by higher pressures acting
+on the forward-facing surfaces than the rearwards-facing faces. This type of drag is related to
+the form and frontal area of the body. The skin friction is caused by shear forces in the boundary
+layer and primarily correlates with the surface area of the body. (Leishman 2024c)
+Another common classification in aerospace is the difference between drag correlated with
+generating lift (induced drag) and drag not correlated with lift (parasitic drag). (ibid.)
+3.2.2 Drag Coefficient
+The drag coefficient is a dimensionless number used to compare the aerodynamic efficiency of
+shapes. Equation 3.1 is used to calculate this coefficient. The reference area used depends on
+the application and must always be checked. For simple shapes, it is common to use the frontal
+projected area or the surface area, while for aircraft, the wing area is typically used. (Ansys
+2020a)
+CD = FD
+1
+2 · ρ · V 2∞ · A (3.1)
+Where:
+* D is the drag in Newtons
+* ρ is the air density,
+* V∞ is the free flow speed of the air in [m/s],
+* A is the reference area,
+Drag coefficients are useful due to the fact that a similar shape with a different size will give
+the same drag coefficient. If one wants to compare the aerodynamic efficiency of two aircraft of
+different sizes, the drag coefficient is a good way to go about it, assuming the wing loading is
+similar. This can be seen in figure 3.5 where the two balls of 1:10 size difference have the same
+drag count.(ibid.)
+If the reference area is sufficiently large, the drag coefficient becomes so small that it becomes
+hard to read, like 0.00323. In those cases, a more readable number may be used, called drag
+count. Drag count isCD ∗104 and means the aforementioned example would be a more readable
+value of 32.3 drag counts. (ibid.)
+15
+
+3 AERODYNAMIC THEORY
+Figure 3.5: Drag of different shapes, broken down into pressure and friction drag. Different shapes can
+be seen to have very large variations in drag. Image has been edited based on two original images from
+(Talay 1975)
+3.2.3 Drag Bookkeeping
+It can sometimes be hard to know which category to place drag, as it may be a combination
+of features and factors that created the drag. One example is cooling drag that sometimes is
+counted as its own drag source, while in other cases, it is accounted for as a reduction of thrust
+of the motor. (Stauffer and Takahashi 2023) This becomes even more challenging if the outlet
+for the cooling duct is oriented in a way as to reduce the low-pressure zone of another system,
+thereby having a reducing component on another system’s drag. (Wolf 2004)
+For the step, the pressure drag directly behind the step easily contributes to the step. The
+increase or decrease of drag on the after body due to the turbulence and flow separation can,
+however, be harder to define but should most likely also be attributed to the step.
+16
+
+4 LITERATURE STUDY: AERODYNAMIC OPTIMIZATION
+4 Literature study: Aerodynamic optimization
+This chapter outlines the current literature on the aerodynamic impact and potential for
+improvements that can be made by refining a flying boat hull. Since the hulls used in the
+referenced tests vary significantly, this section serves as a baseline to identify trends, prioritize
+promising solutions for further testing, and provide reference values to detect and address any
+unrealistic test results. The results found in this section may not be thought of as directly
+applicable to the TAC1 hull without also being supported by a more targeted analysis. The
+chapter is divided into two main categories, step, and overall hull shape:
+Step
+• Step height
+• Step shape
+• Step fairing
+• Step ventilation
+Overall hull shape
+• Sternpost angle
+• Tailcone upsweep
+• Deadrise angle and warp
+• Length/beam ratio
+• Height/width ratio
+• Chines radius
+4.1 Method
+When researching flying boat performance, some challenges were quickly identified. Firstly, the
+number of sources on flying boat performance far exceeded what could reasonably be analyzed.
+Secondly, most of these sources were very old, primarily from 1930 - 1950. Newer sources existed,
+but these were primarily literature studies, using the older sources as primary sources. These
+literature studies did not always reflect the data from the primary sources well. Several errors
+and misrepresentations were found when looking at other literature studies. It was, therefore,
+decided to focus on primary sources where possible. A challenge in avoiding referring to the
+same test twice, as a lot of sources cited each other, was also identified.
+TheprimarydatabaseofsourceswasfoundthroughtheNASATechnicalReportsServer(NTRS).
+The papers include research done in Germany, the UK, and the USA, which has been declassified
+and published.
+17
+
+4 LITERATURE STUDY: AERODYNAMIC OPTIMIZATION
+4.1.1 Parametric Study of Drag
+One good way to investigate the drag of certain features of a flying boat hull is to systematically
+vary one feature, keep the rest of the hull similar, and measure the change in drag from that
+one feature. This can give valuable data, but as drag from one feature can influence the flow
+over other features, it is not certain that when multiple features are changed, the change in drag
+will add up to the sum of the changes in drag expected based on individual tests. Wind tunnel
+testing by Riebe and Naeseth (1947b) found that fairing the step reduced drag by 12% while
+rounding the bow chines reduced drag by 5%. When both features were tested, the sum added
+up to 14% drag reduction, not the expected 17%.
+4.2 Aerodynamic Impact of the Step
+One important factor in determining the amount of design effort to allocate to each design feature
+is to estimate the impact and potential for improvement.
+Prior to this thesis work, the drag contribution of the main step has been calculated to 16 drag
+counts internally by Elfly, which is estimated to be 6.8% of total parasitic drag or 133N at cruise
+speed. The method presented by Hoerner (1965) was used in this calculation. This corresponds
+relatively well with results from full-scale aircraft, where the step drag is typically found to be
+in the range of 2-3% of the full aircraft drag (parasitic and induced drag), considering this was
+calculated for a straight, non-faired step. (Benson and Havens 1945)
+4.2.1 Step Height
+The typical depth of step for seaplanes is in the range of 5- 10% of the beam width. (Chicken
+1999)
+Effect on air drag
+A summary of the aerodynamic drag vs step height as a percentage of the beam of four sources
+can be seen in Figure 4.1a. The hulls in the comparison differ significantly, as can be seen in
+Figure 4.1b. All the hulls are two-stepped hulls. However, the size and shape of the second step
+differ. The size of the model and the number of features, like wing stubs in the test by Riebe
+and Naeseth, will also affect the percentage a certain change in drag will make up.
+The TAC1 hull is most similar to the hull tested by Benson and Lindsay. The 0% depth of step
+18
+
+4 LITERATURE STUDY: AERODYNAMIC OPTIMIZATION
+used as a benchmark in that test still had a sharp break in angle.
+(a) Drag as a percentage of drag with 0% depth of
+step
+ (b) The hulls used in this comparison
+Figure 4.1: Collection of 4 different flying boat hulls, with wind tunnel test data investigating the drag
+related to the depth of the step
+Effect on hydrodynamics
+Impact on Stability: Olson and Land (1942) found that increasing the depth of step had no
+effect on lower limit porpoising but had a large impact on the higher limit porpoising, as seen in
+Figure 4.2. The figure also clearly shows the difference between decreasing trim and increasing
+trim limits, as discussed in chapter 2.5
+Figure 4.2: Trim limit as a function of step height and speed. Figure borrowed from Olson and Land
+(1942)
+Impact on hydrodynamic Drag: Sottorf (1937) tested the hydrodynamic resistance with varying
+depth of step. The results can be seen in figure 4.3. Each depth of step had a different region, and
+it performed better or worse. In general, the higher the depth of step, the higher the resistance
+19
+
+4 LITERATURE STUDY: AERODYNAMIC OPTIMIZATION
+at low speeds, and the lower the resistance at lower speeds. The lowest hump resistance came
+from the medium step heights.
+Figure 4.3: Hydrodynamic drag during takeoff run, as a function of step height. Source: Recolored in an
+unpublished report by Prof E. Wilczek, based on original data from Sottorf (1937)
+A similar result was found by Benson and Freihofner (1944) when comparing the hydrodynamic
+resistance of a 5% of the beam and zero depth of step hull. The zero-step hull had lower resistance
+up until right after the hump. The resistance of the zero-step hull then continued almost linearly
+upwards, while the stepped hull had decreasing resistance after the hump.
+4.2.2 Step Shape
+The step of flying boat hulls may be straight, angled backward in a V-shape, or oval. An
+illustration of straight and V-shaped steps can be seen in figure 4.4. Angling the step backward
+will increase the effective depth of the step at the keel by a factor proportional to the sternpost
+angle.
+Effect on air drag
+Coombes and Clark (1937) investigated the change of air drag from angling the step and found
+that a 30◦ step had 4% higher drag than a straight step. If the angle was increased to 60%,
+the drag came back down to that of a straight step. The same trend was observed for oval-
+shaped steps, with the medium-angle shapes showing the highest drag. V-shaped steps will have
+a varying depth of step, which could influence the overall drag if not corrected properly.
+20
+
+4 LITERATURE STUDY: AERODYNAMIC OPTIMIZATION
+Figure 4.4: Illustration of Step Geometry. Top Left: V-shaped step from side view. Bottom Left: a
+straight step in side view. Right Figure, V-shaped step from bottom view. A straight step would go where
+the dashed line is located. Figure borrowed from Parkinson and Land (1944)
+Figure 4.5: Air drag as a function of step shape and angle of attack.Figure borrowed from Coombes and
+Clark (1937)
+The same conclusion was reached, that V-shaped steps have higher drag, by wind tunnel test
+conducted by Hartman (1935).
+Effect on hydrodynamics
+Parkinson and Land (1944) investigated the landing stability of V-shaped steps and found that
+a V-shaped step with 25% less frontal area than a straight step gave similar landing stability.
+Coombes and Clark (1937) mention that the hydrodynamic resistance is lower, although just
+marginally so.
+4.2.3 Step Fairings
+Several sources have investigated the addition of fairings on the step in order to reduce the
+aerodynamic drag while still having sufficient hydrodynamical performance. Coombes and Clark
+(ibid.) found the relation seen in Figure 4.6, by wind tunnel testing 18 different fared steps. The
+raw data from these tests, including sweeps on the angle of incidence, was published by Smith
+(1957). The wind tunnel tests found a 70% reduction of step drag with a 6 times the depth of the
+21
+
+4 LITERATURE STUDY: AERODYNAMIC OPTIMIZATION
+step with a straight step fairing. This fairing, however, also increased the hydrodynamic drag
+during planning by 40%. A fairing from half the depth of the step could half the step drag, but
+it needed to have a length at least 15 times the depth of the step. Concave steps were not found
+to significantly reduce drag. The best trade-off was suggested to be with a fairing that started
+at 1/4 depth of step and extended rearwards 9 times the depth of step. This fairing halved
+the aerodynamic drag while only increasing the hydrodynamic drag at planning with 15%. No
+information on the stability of this fairing was given.
+Figure 4.6: Drag as a percentage of drag without step fairing over a range of fairing lengths. Figure
+borrowed from Coombes and Clark (1937)
+Benson and Havens (1945) investigated 15 different fared steps in a tank test with a scaled model
+of a 30-ton flying boat. Six of the fairings incorporated ventilation, discussed further in Chapter
+4.2.4. This paper highlighted a step with 1% depth of step unfaired, with a relatively large
+ventilation (ventilation area 7% of the beam width squared) as favorable to a conventional step.
+Hamilton (1956) tested several shapes of step fairings, as seen in Figure 4.7. The straight faring
+9 times the depth of step reduced the drag almost up to the hull without step. The concave
+fairing reduced drag by more than what was found by Coombes and Clark (1937) but still less
+than the other fairings.
+22
+
+4 LITERATURE STUDY: AERODYNAMIC OPTIMIZATION
+Figure 4.7: Drag coefficient of a flying boat hull with different step fairings, as a function of Reynolds
+number (106). Figure borrowed from Hamilton (1956)
+Conway and Maynard (1943) tested a total of 6 fairings, both straight, convex, and concave. One
+of the concave fairings in this study had almost the same drag as a fully faired convex faring.
+This concave fairing was chosen as a baseline for one of the concave fairings tested in the wind
+tunnel.
+Plan and elevation fairings are fairings that curve in more than one plane, as seen in Figure 4.7.
+Riebe and Yates (1947) investigated the three steps seen in Figure 4.8. The one-step hull seen in
+Figure 4.14, which is similar to the current proposed TAC1 hull, was also tested for comparison.
+The hull 221A had an 18% reduction in drag compared to the comparison hull, which had a
+drag coefficient of 0.0066. Hull 221C had a slightly less aggressive fairing, based on the same
+principle, and had a drag reduction of 12%. The single plan form step fairing had less than
+2% drag reduction compared to the comparison hull. It should be noted that the comparison
+hull did not have a step fairing. Another paper by the same authors found a 15% decrease in
+aerodynamic drag by fairing the comparison hull with a straight fairing 9 times the depth of the
+step. (Yates and Riebe 1947)
+These step fairings are very similar to the fairing on the Princess flying boat, a very streamlined
+flying boat that reached an impressive L/D ratio of 19. (Smith 1959)
+These step geometries, although promising, were not chosen for the wind tunnel testing. This
+was due to the fact that they would require a larger modification to the hull than the straight
+and concave steps.
+23
+
+4 LITERATURE STUDY: AERODYNAMIC OPTIMIZATION
+Figure 4.8: Hulls tested by Riebe and Yates (1947)
+4.2.4 Step Ventilation
+As discussed in Chapter 2.5, one of the main reasons for porpoising is negative pressure aft of the
+step. If the step is not sufficient to create an opening to let air into this region, air ducts can be
+added going through the fuselage to add ventilation and equalize the pressure in this region. This
+will increase the upper trim limits and reduce hydrodynamical drag. This negative pressure can
+be quite high and cause the aircraft to stick to the water, making take-off impossible. Dornier
+Do 18 flying boat measured 11.8 kPa negative pressure behind the step (Wilczek 2021) Tests
+with the Sunderland, a flying boat of the same size, measured a negative pressure of 27.5 kPa.
+(Hamilton 1956)
+Hamilton (ibid.) investigated the effect of ventilation the step on the Sunderland flying boat. One
+key finding was that ventilation alone, when the step height was reduced to zero and rounded off,
+was not sufficient to reduce hydrodynamical resistance and instability. A full-scale investigation
+into the hydrodynamical behavior of a highly faired flying boat hull
+As mentioned in Chapter 4.2.3, Benson and Havens (1945) found that stable landings could be
+made with only a 1% depth of step if the ventilation area was large enough. The source included
+the recorded heave and pitch data for all 15 steps tested, giving a good indication of the different
+degrees of proposing and skipping observed. These tests were for a two-step hull and would have
+to be redone for the specific one-step TAC1 hull.
+Forced ventilation
+Some aircraft have experimented with the use of fans in order to push air into the region behind
+the step. This does work, although the amount of air needed makes it highly impractical. The
+Empire flying boat, a boat with a total weight of 20 metric tons, needed an airflow of about
+11m3
+s . (Tomaszewski, Smith and Chalmers 1946) An investigation by Hamilton (1947) found no
+effect in forced ventilation, even for a much smaller, 2.7-ton aircraft.
+24
+
+4 LITERATURE STUDY: AERODYNAMIC OPTIMIZATION
+4.2.5 Retractable Steps
+When studying step design and the trade-off between hydrodynamics and aerodynamics, it can
+be tempting to solve both problems at the same time by making a movable mechanism to retract
+or extend the step, allowing for optimizing both air and water operation. Coombes and Clark
+(1937) was one of the first to discuss the possibility of extendable/retraceable step geometries.
+Benson and Lindsay (1943) investigated the use of a retractable step. A reduction of 8% in
+hydrodynamic resistance, and 2-3% of aerodynamic resistance in flight was found
+The drawback of a movable system is the increased complexity, weight, cost, and risk associated
+with a movable mechanism. The step also has to sustain very high loads during take-off and
+landings.
+One of the most important factors in the feasibility of a movable mechanism is the criticality
+of failure. DO-254 specifies maximum failure rates based on the criticality of events, as seen
+in Figure 4.9. If safe landings can be made with the mechanism in the flight configurations,
+the criticality level would probably be classified as Minor. If the event could cause an unstable
+landing, the criticality level may increase to Hazardous. This may require the mechanism to
+have redundancy or, in other ways, increase the cost and complexity of the mechanism. (Mistral
+2024)
+Figure 4.9: Design assurance levels in aerospace, according to the DO-254 standard, with targeted system
+failure rates. (Mistral 2024)
+Benson and Freihofner (1944) investigated the landing stability and hydrodynamical resistance
+when landing with a step retracted to a 0% depth of step. This test showed a very stable landing
+between a landing pitch of5.5◦ to 12◦. High-speed landings at lower trim than5.5◦ were stable
+only if the deceleration was large enough. If the deceleration was insufficient, the aircraft would
+trim up and take off again (skip). The deceleration curve of the model with and without the
+25
+
+4 LITERATURE STUDY: AERODYNAMIC OPTIMIZATION
+step retracted can be seen in Figure 4.10a. Due to the higher hydrodynamical resistance without
+a step, the landing length was reduced by 50%, which was a potentially valuable feature in
+space-restricted areas.
+(a) Deceleration of a hull with zero depth of step and
+5% depth of step, after landing.
+(b) Sum of air and water resistance, in lb, as a function
+of speed with and without a step, after landing.
+Figure 4.10: Landing deceleration and resistance plots, when landing with and without step. Figures
+borrowed from Benson and Freihofner (1944)
+4.3 Sternpost Angle
+Sternpost angle is the angle of the fuselage after the step, as seen in Figure 2.1. For flying boats,
+this angle is typically in the range of 5◦to 9◦.(Locke 1946) This is done primarily to reduce the
+hydrodynamic resistance due to spray on the afterbody, but this angle also has a big impact on
+the hydrodynamic stability and air drag.
+Impact on aerodynamics
+Coombes and Clark (1937) reported afterbody upsweep angle as one of the most significant
+factors in reducing flying boat drag. The data from these tests were published publicly by Smith
+Smith (1957) and can be seen in Figure 4.11b. A similar trend was found by Hartman (1935)
+and can be seen in Figure 4.11a.
+From Figure 4.11b it can also be seen that the minimum drag does not occur at 0◦of incidence.
+Notably, the optimal angle of incidence increases with increased afterbody upsweep.
+This is a well-documented phenomenon, and it is not only a percentage in flying boats.
+Conventional land aircraft also have an upswept afterbody in order to give ground clearance
+to avoid a tail strike during take-off. (Torenbeek 1982)
+26
+
+4 LITERATURE STUDY: AERODYNAMIC OPTIMIZATION
+(a) Air drag increases due to increasing angle of the
+afterbody of a flying boat hull. Edited image based on
+an original image from Hartman (1935)
+(b) Air drag increase VS tail upsweep over a range
+of fuselage angles of incidents. Image edited based
+on original data from Coombes and Clark (1937),
+published by Smith (1957)
+Figure 4.11: Ar drag vs angle of incidence
+A similar effect as in Figure 4.11 can be seen in Figure 4.12. We can, therefore, be quite confident
+in the effect of this parameter on aircraft drag, although the magnitude may vary from aircraft
+to aircraft and is highly dependent on whether the flow separates or not. Flying boats are not
+helped in this regard, given that they already have a sharp discontinuity (step) where the change
+in direction occurs.
+Figure 4.12: Effect of tail afterbody upsweep on land planes. Figure borrowed from Torenbeek (1982).
+Effect on Hydrodynamics
+Sottorf (1937) describes an increase in hydrodynamic resistance at the hump when increasing
+the afterbody angle from 7◦to 9.5◦. This could be due to the higher afterbody angle causing
+the aircraft to have a higher pitch due to the removal of buoyancy volume aft of the center of
+gravity, increasing the resistance prior to planning.
+The hydrodynamic drag during planning was reported to decrease slightly with increased
+27
+
+4 LITERATURE STUDY: AERODYNAMIC OPTIMIZATION
+sternpost angle. (Sottorf 1937)
+Afterbody angle also greatly influences the upper limit stability, which is the proposing type
+known to cause skipping. Figure 4.13 shows the stability against skipping of a collection of
+full-scale flying boats as a factor of beam loading (described in 2.6, sternpost angle, and step
+height. Higher step height can be seen to decrease skipping while increasing the sternpost angle
+or beam loading will increase the tendency to skip. In order to avoid skipping, Locke (1946)
+recommends to stay above the dashed line. The data is derived from pilot interviews, where the
+pilot experience was used to adjust the rating of stability.
+Figure 4.13: Stability against skipping, as a factor of beam loading, sternpost angle and step height.
+Figure borrowed from Locke (1946)
+4.4 Conventional VS. Planning Tail Hulls
+Most of the sources in this chapter have done their testing on two-stepped hulls, often with the
+rear step being pointed (highly faired in the plan form) as per the definition of Figure 4.7. These
+hulls often also have a lower sternpost angle than one-step hulls.
+Riebe and Naeseth (1947a) tested a one-step hull, modified from a model originally made as a
+two-step hull, seen in Figure 4.14. The drag was reported as "about the same". The tests were
+done at the same lab, at the same Reynolds numbers, but in different studies.
+The TAC1 hull, on the other hand, is designed to have a one-step hull. This is mainly due to the
+advantage this step type gives in hydrodynamic resistance, especially around the hump speed.
+28
+
+4 LITERATURE STUDY: AERODYNAMIC OPTIMIZATION
+Figure 4.14: The difference between two step VS. one step flying boat hull. Figure is of Model 203 from
+the Langley tank facility. Figure borrowed from Riebe and Naeseth (1947a)
+A plot of this decrease, as tested by Sottorf (1937) can be seen in Figure 4.15. A very similar
+reduction in hydrodynamic drag was found by Dawson, Walter and Hay (1946)
+Figure 4.15: Comparison of hydrodynamic resistance for a two-step (labeled conventional hull) and the
+one-step hull (labeled Planning tail). Source: Recolored by Prof. E. Wilczek, based on original figure from
+Dawson, Walter and Hay (1946)
+4.5 Length/Width Ratio
+Coombes and Clark (1937) investigated the effect of length-to-width ratio on flying boats. And
+found a clear drop in drag coefficient with higher length-to-width hulls when using the surface
+area as the reference volume. The same trend was found by Riebe and Lowry (1948). It should
+be noted that the difference is biggest when going from a ratio of 6 to a ratio of 9, while the
+effect beyond 9 is lower, as surface friction drag then starts to increase significantly. The volume
+inside these thinner fuselages is also lower.
+29
+
+4 LITERATURE STUDY: AERODYNAMIC OPTIMIZATION
+4.6 Height/Width Ratio
+Coombes and Clark (1937) republished results from a test done at an unspecified NACA wind
+tunnel on varying the height of a flying boat hull. As expected, the drag increases with increased
+height as both frontal area and surface area increase. The increase was, however, quite linear,
+with a gradient of 1% increase in drag for every 2% increase in height. This trend, in combination
+with the trend on length/width ratio, explains why many seaplanes have been relatively long,
+tall, and slim.
+4.7 Chines Radius and Flare
+The chines and flare of the hull are methods to control spray but add a certain amount of
+aerodynamic drag. Combes and Clark(1937) report a 5% increase in drag from adding flare, but
+it is not specified how much flare other than visually by the image in Figure 4.16.
+Figure 4.16: Effect of flare on air drag, as a function of angle of incidence. Figure edited based on two
+figures from Coombes and Clark (1937)
+Coombes and Clark (ibid.) also found a 1% decrease in aerodynamic drag possible by rounding
+the chines with a radius, with the benefit flattening above a radius of about 10mm. This test’s
+resultswereverydependentontheReynoldsnumber, astheflowboundarylayerwouldbetripped
+by the chine if not already turbulent. Initial testing at Reynolds numbers between3.8 · 106 to
+6.3 · 106 initially found a 2% decrease in drag when rounding the chines, but increasing the
+Reynolds number to108 in later tests saw the impact half for the same radius’s.
+A later test by Riebe and Naeseth (1947b) found a 5% reduction of drag by rounding the chine
+radius. This test was done at a Reynolds number of2.4·106, but the boundary layer was tripped
+at 5% of the length of the hull, so the effects seen by varying the Reynolds number should be a
+lot less than what was seen by the untripped airflow tested by Coombes and Clark (1937).
+30
+
+4 LITERATURE STUDY: AERODYNAMIC OPTIMIZATION
+4.8 Impact of Deadrise Angle
+Deadrise angle, angle β as seen in Figure 2.3, has the biggest impact on the hydrodynamic
+performance, especially the hydrodynamic resistance to get up to and during planning, but it
+also affects the aerodynamic drag. The direct impact was tested for a set of floats by Parkinson,
+RolandandHouse(1939), whichfoundthatahigherdeadriseangleledtoahigherdragcoefficient
+when using the volume as a reference. Coombes and Clark (1937) found an 11% decrease in
+overall drag when changing the deadrise angle from20◦ to 30◦.
+Figure 4.17 shows the impact the deadrise angle has on hydrodynamics and loads. This trade-off
+is typically the driving factor behind the choice of deadrise angle due to its relatively larger
+impact.
+Figure 4.17: Hydrodynamic resistance and landing loads as a function of deadrise angle. The graph is
+given in deadrise dihedral angleα, not the typical definition of deadrise angle as described in Figure 2.3.
+Figure borrowed from Sottorf (1937).
+4.8.1 Deadrise Angle Warp
+Hugli and Axt (1951) found that warping the afterbody deadrise by increasing the deadrise
+from 20◦ at the step up to35◦ at the middle of the afterbody, before bringing it back to20◦
+at the stern, significantly improved hydrodynamic performance. This allowed for the step to
+31
+
+4 LITERATURE STUDY: AERODYNAMIC OPTIMIZATION
+be decreased from 8.3% down to 4.2% of the beam, with similar hydrodynamical performance.
+As discussed in Chapter 4.2.1, the step drag is roughly proportional to the step height. This
+improvement would, therefore, most likely be half the step drag.
+4.8.2 Afterbody Steps
+One of the main drivers of hydrodynamic drag during planning is the spray on the afterbody.
+One very effective way of reducing this drag is by separating the spray by the addition of auxiliary
+steps behind the main step. Sottorf (1942) found a3◦ increase in upper limit stability by the
+addition of these steps, as seen in Figure 4.18.
+Figure 4.18: Increase of stability limit due to addition of smaller steps behind the rear step. Figure edited
+based on original from Sottorf (1942)
+Wilczek (2021) also reports a potential to reduce the hydrodynamic drag right before take-off by
+up to 45% by the addition of auxiliary wedges, but the primary source was not directly cited, so
+no further details are known. In more modern aircraft, the Beriev A-40 from 1986 implemented
+auxiliary steps, as seen in Figure 4.19 This feature is especially interesting as it is outside the
+main region of hydrodynamic forces and, therefore, might be easier to make retractable with
+actuators.
+4.9 Results Literature Study
+Based on the literature reviewed, step-faring geometries were considered the most promising
+option to reduce the drag of the TAC1 flying boat, potentially in combination with step
+ventilation to increase hydrodynamical performance.
+Auxiliaryafterbody stepscould be anattractive wayto improve thehydrodynamicalperformance
+of a highly faired step further; however, it is not considered a viable option if it is not made
+retractable. Therefore, testing the aerodynamic drag would not be of a big significance.
+32
+
+4 LITERATURE STUDY: AERODYNAMIC OPTIMIZATION
+Figure 4.19: Afterbody step on Beriev A-40. Source:Wilczek (2021), unknown original source
+Sternpost angle was chosen as the second most important factor in getting good aerodynamic
+data due to its combination of large impact on aerodynamic drag and relatively lower impact on
+hydrodynamic performance.
+The angle of incidence of the hull was seen as a third big improvement.
+Chine radius showed varying degrees of drag reduction in the sources, but the negative effect
+this feature would have on the spray characteristics was considered outside of the topic of this
+thesis, and this feature was, therefore, not included in further testing.
+33
+
+5 WIND TUNNEL
+5 Wind Tunnel
+Based on the results from Chapter 4, it was decided to investigate the most promising features
+in order to determine the aerodynamic drag reduction possible by changing these features. Wind
+tunnel testing is a resource-intensive test method, but the large deviations between many of the
+hull shapes in the literature study VS. the TAC1 hull meant that many of the results from the
+literature were not directly transferable. Wind tunnel testing was initially chosen over CFD due
+to the author’s lack of experience with CFD.
+5.1 Test Objective
+The primary test objective was to acquire data on the relative drag difference between different
+faired steps. This data will then be used, together with data from hydrodynamic testing, to
+make an informed decision on the step fairing design.
+This test being about relative differences is important for the test setup, as it means that if the
+results are slightly off due to, for example, a low Reynolds number, the comparative results will
+still be similar. The usefulness of displaying the comparative results as a percentage of the full
+fuselage drag means that the test should also aim to get the right fuselage drag, but the accuracy
+could be lower than for factors affecting the relative difference between the geometries.
+As discussed in Chapter 4.2.3, Coombes and Clark (1937) describes a non-linear relationship
+between faring and drag reduction. Due to this, 11 step geometries were chosen, divided into
+three series of step geometries, each varying one variable at a time. Based on recommendations
+from Barlow, William and Pope (1966), a minimum of four geometries per test series was chosen
+so that the loss of any one test sample would still yield a correlation graph. In addition, two
+concave and one convex fully faired geometry and one without fairing were chosen, bringing the
+total geometries to 14.
+The series’ were as follows:
+• Straight Faring, 0% depth of step. Lengths varying from 2 to 8 x the depth of step.
+• Straight Faring, 1% depth of step. Lengths varying from 4 to 10 x the depth of step.
+• Straight Faring, Length 6 x depth of step, varying starting depth from 0% to 3%.
+Each faring was tested at an angle of attack from0◦ to 5◦
+34
+
+5 WIND TUNNEL
+The tested geometries can be seen in appendix A.
+It was chosen to only test two angles of afterbody. This was due to the difficulty and time
+required to make this extension part. The current designed upsweep angle was chosen as the
+base case, and a neutral upsweep angle was chosen as a second geometry in order to measure the
+drag penalty of the upsweep.
+5.2 Test Facility
+The wind tunnel used in the test is the large-scale wind tunnel at NTNU, which has a cross-
+section of 2.7m x 1.8m and a maximum speed of 16 m/s. For reference, the full-scale aircraft is
+designed to cruise at 51 m/s at 1219 m altitude.
+The wind tunnel used in this thesis is a closed-loop wind tunnel, similar to the example seen in
+Figure 5.1. This type of wind tunnel requires a smaller motor and less power than a straight,
+open wind tunnel, as the kinetic energy of the air is maintained. The NTNU wind tunnel required
+about 54 kW just to maintain the airspeed at 16 m/s. This power is mainly dissipated in as
+friction, heating up the air. Some larger wind tunnels have active water-cooled radiators to deal
+with this. The NTNU wind tunnel does not have active cooling. On the day of testing, the air
+started out at17◦C, and heated up to about28◦C before stabilizing. This temperature change
+will change the air properties and must be accounted for.
+Figure 5.1: Overview picture of a closed loop wind tunnel, image from www.onera.fr
+5.2.1 Data Acquisition
+For the test proposed, the primary metric of interest is the drag force. More specifically, the
+relative change in aerodynamic drag was the most important factor. The small change in drag
+35
+
+5 WIND TUNNEL
+between the different tested geometries required a precise measuring method.
+Prior to the test, the full-scale aircraft drag of the features tested was calculated to 80.9
+drag counts, with wing area as the reference area. The drag force expected can be found by
+reversing the drag coefficient equation 3.1 to solve for the drag force, and usingV∞ = 16m/s,
+ρ = 1.228kg/m3, andA = 0.357m2.
+This gives an estimated drag force for the model of 0.454 N, or 46.3 grams. The drag due to the
+step was estimated to be in the range of±10%, or±4.63grams.
+Force Measuring
+Thewindtunnelisequippedwithasix-componentforcebalancesensorthathasastatedaccuracy
+of ±10mg. (Larsen 2021). This would make the error due to the force balance around 0.22%
+of the difference due to the step geometries. The force balance is completely isolated form the
+main body of the wind tunnel, in order to reduce vibrations.
+Measurements of forces were made with 5Hz frequency over a period of 30 seconds in order to
+cancel out any fluctuations.
+(a) Mounting plate for the force balance sensor,
+with the rotatable section around it
+(b) Strut used to mount the model to the force
+balance sensor
+Figure 5.2: Setup for mounting the model to the measuring equipment
+Airspeed
+The airspeed inside the tunnel was measured using a pitot tube exposed to the free-flow air
+and converted to airspeed using Bernoulli’s equation. The pressures were measured using a
+Setra Model 239 differential pressure transducer with a stated accuracy of±0.073% of full-scale
+reading.
+36
+
+5 WIND TUNNEL
+5.3 Model Design
+5.3.1 Model Scaling Theory
+When doing wind tunnel tests, it is often not feasible to test the model at full size due to
+economical reasons. Scaled-down models are then used, but the difference must be accounted
+for.
+Reynolds Number
+The Reynolds number is a dimensionless number used for aerodynamical compassion. Two flows
+with the same Reynolds number will give similar results. As seen in the equation for the Reynolds
+number 5.1, if the size is reduced, the fluid velocity must increase by a similar fraction, keeping
+the other fluid variables constant. This is often not possible due to cost or physical limitations
+like the speed of sound.
+Re = ρ · u · L
+µ (5.1)
+We are then left with two options: changing the fluid parameters or accepting lower Reynolds
+numbers. Some of the wind tunnel tests referred to in this thesis were tested in compressed air
+tunnels. Another method is to use other mediums, like cooled nitrogen or water.
+5.3.2 Model Size
+The model was initially sized to fit in a smaller,0.5m2 wind tunnel at NTNU, with a wind
+speed of 35 m/s. The model size was chosen to balance blockage percentage (see chapter 5.4.1),
+model build effort, and Reynolds number. This analysis gave a size of 9% of the full scale,
+which would have given a blockage factor of 7.5% and a Reynolds number of 6.7% of the full
+scale. A comparison between the model size and scale model can be seen in Figure 5.3 Material
+requirements generally scale with the size cubed, while the Reynolds number only scales with
+size squared, so an increase in Reynolds number by increasing the size above this would quickly
+have become very resource intensive.
+Two weeks prior to the testing, it was decided to switch to a larger wind tunnel with lower top air
+speed due to the increased availability of measuring equipment, mainly a digital six-component
+force sensor and a rotatable floor, allowing for automatic and precise change in angle of incidence,
+37
+
+5 WIND TUNNEL
+Figure 5.3: Scale Comparison between 9% model and full scale aircraft
+as seen in Figure 5.2. The smaller wind tunnel only had an analog force sensor.
+It was chosen not to rescale the model, even though a much larger model, up to 29% of full
+scale, could now fit with a blockage ratio below 10%. With the new wind tunnel, the Reynolds
+number was reduced from 6.7% to 3.0% of full-scale cruise Reynolds number due to a decrease
+in tunnel airspeed. The new Reynolds number was1.43 · 106, when using the length from the
+bow to the step as the characteristic length. This Reynolds number is high enough for the flow
+to be turbulent.
+It was recognized that this could affect the accuracy of the measurements, but it was believed that
+actively tripping the boundary layer and having access to more accurate measuring equipment
+would make up for this increase in Reynolds number difference. This difference in Reynolds
+number would make the flow more prone to detaching, but this can then be seen as a safety
+margin to the real-world case. If the flow stays attacked in the wind tunnel, it is more likely
+to do so in real life. The Reynolds number will also affect the losses due to skin friction, and
+this will act in the opposite direction, increasing drag with a higher Reynolds number. (Ansys
+2020a)
+Because of this, theCD plotted against the Reynolds number will often follow a pattern similar
+to that seen in Figure 4.7. Notably, the relative difference between the fairings in this figure does
+not change significantly. (ibid.)
+A Reynolds sweep from 5 m/s up to 16 m/s was also planned in order to check the variability in
+CD due to the Reynolds number.
+38
+
+5 WIND TUNNEL
+5.3.3 Model Design and Production Method
+Some design goals were set for the model used in the wind tunnel testing:
+• Barlow, William and Pope (1966) suggests that the form similarity of the fuselage should
+be within 0.25 mm of the intended position for a model with a wingspan between 1.8m
+to 2.4m in low-speed wind tunnels. The scale model in this thesis would have had a wing
+span of 1.89 m if it had wings and, therefore, falls into this size category.
+• Model stiffness should be sufficient to avoid bending of the model, larger than the form
+similarity goal above. This was achieved with internal extruded aluminum members. These
+members also allowed for accurate alignment of the sections.
+• Quickly interchangeable step geometries were required to be able to quickly test many
+different step geometries. A sliding mechanism without any bolt holes was chosen.
+• Interchangeable afterbody angle was required according to the test plan. As only two
+geometries were to be tested, it was considered sufficient to bolt them to the model.
+• Due to the chosen size, transport without disassembly would be challenging. A design that
+allowed for splitting the model in half was set.
+• Wing and tail mountings were added to make it possible to mount wings and full tail to
+the model at a later stage. This allows the model to be reused for other tests or marketing,
+reducing waste.
+Historically, wind tunnel models have mostly been made from wood or milled aluminum. (ibid.)
+For this thesis, 3D printing was chosen due to the accessibility to a 3D printer at Elfly. This
+printer is a Bambu x1 printer with a build volume of 250x250x250 mm. This meant the model
+had to be cut into sections in order to be printed. This production method will give a model
+with a lower stiffness, geometric accuracy, and higher surface roughness than what could have
+been achieved with aluminum as a trade-off against less resource-intensive production. The
+aforementioned form similarity, stiffness, and surface roughness goals were considered achievable
+with 3D printing.
+39
+
+5 WIND TUNNEL
+Figure 5.4: CAD Render of the model used in wind tunnel testing. The figure shows the sections the
+model was printed in, the interchangeable parts of the model, and the stiffing aluminum beams running
+the length of the model
+Figure 5.5: Model in the process of being assembled. The rear section assembled, while the front sections
+are in the the background
+The model was made hollow before printing, reducing both required material and print time by
+about 70%. The walls were made 10mm thick, with three printed layers on each side and 15%
+infill between. The material used was PLA due to its low cost and sufficient strength for the
+application.
+Surface Roughness
+Barlow, William and Pope (1966) suggests wet sanding the surface with No. 600 paper for
+aluminum surfaces; however, this is for wind tunnel testing where the absolute drag is the drag
+number of interest.
+In the case of this test, as we care more about the relative drag, the surface finish is of lesser
+importance. Activity tripping the boundary layer also reduces the impact of surface roughness
+as it does not determine the transition point.
+40
+
+5 WIND TUNNEL
+With these considerations in mind, as well as time restraints, it was chosen to use a combination
+of machine and hand sanding with P120 and P240 was used, before hand sanding with P300.
+Variable print height was used to reduce the needed surface sanding while balancing print times,
+ranging from 0.08 mm to 0.28 mm layer height, depending on the gradient and features. The
+largest imperfections were seen around holes used for fasting.
+It was still important to get similar surface roughness for the interchangeable step sections as
+deviations here would affect the comparative results, so extra care was taken to sand these a
+similar amount.
+5.4 Experimental Aerodynamics
+5.4.1 Internal Flow Errors
+A well-designed wind tunnel is able to replicate the airflow experienced in free flight quite well,
+but there will always be some differences that need to be understood and compensated for.
+In free flight, an aircraft experiences what is referred to as external flow, with little to no
+interference from surrounding objects. The air is free to divert around the object, and the
+static pressure is the same everywhere. In a wind tunnel, however, the flow is confined by walls,
+known as internal flow. This causes some differences in the flow, which must be accounted for:
+Blockage
+When placing a model inside a tunnel section, the model will occupy some of the cross-section,
+and the area available to the flow will shrink. In a closed tunnel, the air mass flow into the test
+section will be the same as the flow out. If we assume the flow to be incompressible, the only
+two variables that may change are speed and area, as seen in equation 5.2. (Barlow, William
+and Pope 1966)
+˙m = ρ · V · A = constant (5.2)
+In order to keep the errors from this phenomenon small, it is generally recommended to keep the
+blockage ratio, defined by equation 5.3 to below 5 - 10%. (ibid.) (Airshaper 2020)
+BlockageRatio = ModelF rontalArea
+T unnelFrontalArea (5.3)
+41
+
+5 WIND TUNNEL
+As mentioned in chapter 5.3.2, the model was originally sized to have a blockage ratio of 7.5%.
+With the swap to the larger wind tunnel, the blockage ratio was reduced to 0.8%. This increased
+the local airflow speed from 16 m/s to 16.13 m/s.
+Wall interference
+Wall interference is the effect the wall has on the flow lines and vortexes generated by the model.
+In general, we want the model to be far enough from the wall to avoid the wall interfering.
+In aircraft testing, this is especially applicable to wing tip vortexes. (Airshaper 2020) The
+phenomena can be seen in Figure 5.6.
+Figure 5.6: Flow over a body in external and internal flow. Figure Borrowed from: Katz (1995)
+This was the original reason for orienting the model sideways when the smaller wind tunnel was
+planned to be used. This wind tunnel only had a height of 500 mm. Since the model was taller
+than wide, orienting it on the side would increase the wall clearance from 125 mm to 162.5 mm.
+With the larger wind tunnel, this factor was considered insignificant.
+Static Buoyancy
+As the flow in a wind tunnel is internal flow, there will be a pressure drop along the length
+of the flow, as seen at the top of Figure 5.7. This pressure drop will create a static buoyancy
+force in the horizontal direction if not accounted for, especially for longer bodies like the model
+in this test. Therefore, some wind tunnels, including the large wind tunnel at NTNU, have
+an expanding cross-section along the length of the flow. Due to Bernoulli’s law, this causes a
+pressure increase along the flow length, counteracting the pressure drop due to wall interference.
+(Leishman 2024c)
+Boundary layer Growth
+As explained in Chapter 5.2, the nozzle right in front of the test section also removes most of the
+built-up boundary layer. Throughout the test section, the boundary layer will build back up.
+42
+
+5 WIND TUNNEL
+Figure 5.7: Flow through a wind tunnel, wind development of boundary layer, and pressure gradient along
+the length of the test section. Figure borrowed from Leishman (2024c)
+This can be seen in Figure 5.7, and reduces the effective flow area. This can also be counteracted
+by a gradual increase in cross-section. This is done in the NTNU wind tunnel, as seen in Figure
+5.9.
+5.5 Other Aerodynamic Dissimilarities
+Air densityThe local air density will matter as this is one of the inputs to, among others, the
+Reynolds number and drag coefficient. This was adjusted for by measuring the air pressure on
+the day of testing and comparing it to the standard atmospheric conditions at cruise altitude.
+On the day of testing, the atmospheric pressure was measured to 733 mmHg (97.7 kPa), using
+an analog mercury barometer. Air density was calculated using equation 5.4, with the help of a
+calculator by Czernia and Szyk (2024). Recorded air pressure and temperatures were used. A
+value for relative humidity of 50% was used as this was not measured.
+ρ =
+ pd
+Rd · T
+
++
+ pv
+Rv · T
+
+(5.4)
+This gave an air density of1.12kg/m3. For comparison, at the intended cruise altitude of 1219
+m, at 15◦C, air density is expected to be1.058kg/m3. These values are used when comparing
+the Reynolds numbers.
+Incompressible and compressible flow
+43
+
+5 WIND TUNNEL
+Air is generally considered incompressible below a speed of Mach 0.32, as this is the threshold
+where compressibility exceeds 5%. This is about twice the cruise speed of the TAC1. However,
+the local flow may accelerate as it passes around the body and airfoil, causing the Mach number
+to be higher locally. As seen in figure 5.8, the relationship between compressibility and Mach
+number is not linear, and at speed above the TAC1 cruise speed, the effect increases quite
+significantly. The formula for calculating the compressibility of air can be seen in equation 5.5.
+(Leishman 2024c)
+ρ
+ρ0
+= (1 + γ − 1
+2 · M2)
+−1
+γ−1 (5.5)
+Figure 5.8: Compressibility ratio VS. Mach number. Figure borrowed from Leishman (2024c)
+At a speed of 51m/s, like that of the full-scale TAC1 aircraft, compressibility is only 1.1%,
+and likely higher in certain regions. At the air speeds in the wind tunnel, the air will have a
+compressibility of less than 0.1%. This error was not accounted for as the change in density is
+highly localized and cannot be easily applied as a correction factor. It will be a source of error,
+although small.
+5.5.1 Boundary Layer Tripping
+As discussed in section 3.1.2, the transition point between laminar and turbulent flow will vary
+with the Reynolds number, and as the turbulent flow has higher drag than laminar and is more
+resistant to flow separation, the point of transition will affect the measured values. When testing
+in a wind tunnel at a lower Reynolds number than in real life, the transition will, therefore, occur
+at a different point. To account for this, we can add an irregularity in the flow path in order to
+force the air to become turbulent. This is called tripping the boundary layer. The height of the
+44
+
+5 WIND TUNNEL
+trip strip should be high enough to ensure boundary layer tripping but not so high as to cause
+separation or significant pressure drag. Barlow, William and Pope (1966) suggests placing the
+trip strip where the diameter of the fuselage is half that of the maximum diameter. The paper
+also shows a method of choosing the trip height by gradually varying it and observing at what
+height theCD stabilizes. This was not done as the absolute drag was not the primary number
+of interest, and a small increase in read drag was due to using a too-high trip strip being used.
+Wind tunnel tests conducted at the NASA Langley Research Center by Ribere, Naeseth, Lowry,
+and Yates all used transition strips in order to force transition to turbulent flow at a specific
+point. A strip 12.7 mm wide, with 0.2 mm diameter particles was used to trip the boundary
+layer at the desired position (5% of the hull length from the bow) The wind tunnel tests were
+also corrected for blockage and buoyancy forces caused by the tunnel static pressure gradient.
+Angles of attack were corrected for bending in structural members. (Riebe and Naeseth 1947b)
+(Riebe and Lowry 1948) (Riebe and Yates 1947).
+For this wind tunnel test, a 10 mm strip of No. 80 sandpaper was added at 85 mm from the
+front of the model. The particle size is equivalent to what was used by the wind tunnel tests
+mentioned, but the height of the paper was also included. This position is in the middle between
+the two sources stated above. It is also at the position where the windshield starts, a feature
+thought to trip the boundary layer at this position in the full-scale aircraft regardless. This trip
+strip can be seen if Figure 5.9
+5.5.2 Summary Wind Tunnel Corrections
+Summary of corrections applied and error not accounted for:
+• Reynolds number= 1.43 · 106 (3.0% of full aircraft Re)
+• Blockage factor= 0.81% corrected for
+• Static buoyancy and boundary layer growth= accounted for by tunnel geometry
+• Force measurement accuracy= 0.22% of force range expected by steps
+• Air speed measurement accuracy= ±0.073% of FS
+• Air density and temperature= measured and corrected for
+• Compressibility = error in air density estimated to be about 1.1%
+• Boundary layer tripping= Tripped with No. 80 paper at 85 mm from the bow
+This error buildup reflects the assumptions and calculations made prior to the testing.
+45
+
+5 WIND TUNNEL
+5.6 Integration Into Wind Tunnel
+The model was originally designed to be mounted on its side in order to give better clearance to
+the wall and reduce wall interference, as the model is higher than its width, while the smaller
+wind tunnel was wider than tall. When moving to the larger wind tunnel, it was decided to keep
+this orientation due to the rotation floor, which would allow for accurate and fast changes in
+the angle of attacks. This comes with the trade-off that flow visualization will be harder, as one
+does not see the flow in a side-view against the high-contrast black wall.
+Figure 5.9: Scale model in the wind tunnel
+The model was mounted using a 30mm x 60 mm aluminum flex beam. The model had a 30 x 60
+mm hole in the side, and bolts were used to fasten the model from the top of the model into two
+threaded holes in the beam. The bolts were designed to be sunk into the model, and the holes
+were taped over to reduce interference.
+5.7 Missing Data Points
+The data series for the geometry with no fairing only had measurements for 2◦, 4◦, and 6◦. This
+was due to this being the intended sweep. However, after testing this geometry, it was chosen to
+expand the sweep to 0◦to 5◦, at 1◦intervals due to how fast-changing angles turned out to be.
+46
+
+5 WIND TUNNEL
+Some data points were also discovered to be missing due to human error. These data points
+were:
+• 1% depth of step, 10 x length of depth of step fairing, Angle of Incidence at 3◦
+• Fully faired, Angle of Incidence at 5◦
+5.8 Results
+The results from the wind tunnel test were inconclusive. Most of the results were as expected,
+like in Figure 5.10a, where the longer the fairing, the lower the drag. But some results, notably
+from the tests with 1% depth of step, did not follow this trend. As seen in Figure 5.10b, the
+results are reversed from what one would expect. This holds true even if you apply all the
+corrections discussed earlier.
+5.8.1 Flow Visualization
+Flow visualization with a smoke wand was used to visualize the flow for two different geometries
+and can be seen in Figure 5.11. A clear difference between the faired and unfaired steps can be
+seen. The flow separation region is much larger with the unfaired step. The flow in the faired
+step also does not seem to re-attach until the angle flattens back after the fairing.
+5.9 Post Test Error Analysis
+Since only a few data points were off and most aligned with the expected theory, it would be
+tempting to disregard them and declare the results valid. However, if one assumes that the
+underlying results are still there but with a large amount of random noise on top, this is exactly
+what one would expect to get. Most results would be correct, but some, seemingly random,
+would not be.
+The main theory for the inclusive results is the lack of fairing of the mounting strut. The
+original plan was to add a 3D printed fairing to the strut, but this was prioritized printed last
+and dropped when the tail angle geometry failed three times in the printer. The lack of fairing
+may have caused two problems in the readings. Figure 6.13 shows the flow around the strut,
+and how in creates separation. This simulation is a RANS simulation that would not capture
+vortexes.
+47
+
+5 WIND TUNNEL
+(a) Force measured for the fairings with depth of step 0
+(b) Force measured for the fairings with depth of step 1%
+Firstly, a large amount of noise can be seen in the measured signal, as seen in Figure 5.12. The
+noise far exceeds the expected measured drag change due to the change in geometry. This could
+be an issue related to the flow or measuring, but it is thought to be more likely related to flow
+separation around the strut used to mount the model. Blunt objects can cause vortex shedding,
+as seen in Figure 5.13. It should be noted that vortex shedding is typically percent in Reynolds
+numbers from 1 to103, while the Reynolds number in the wind tunnel over the mounting strut
+is about6 · 104. (Ansys 2020a)
+48
+
+5 WIND TUNNEL
+(a) No faring on the step, step depth 5.8% of beam
+width
+(b) Depth of step 1%. Length of fairing 6 times the
+depth of step.
+Figure 5.11: Smoke visualization of flow separation. Wind speed: 5m/s
+This error could have been avoided by checking the drag expected from the strut and comparing
+it to the The strut had a frontal area of about 67% of the fuselage, but as seen in Figure 3.5, the
+drag coefficient can vary by more than an order of magnitude depending on the shape. While
+a rectangular shape can have a drag coefficient based on frontal area around 2, fairing it could
+bring it down to less than a tenth of that. This would have made the drag from the strut about
+equal to the fuselage, not an order of magnitude larger.
+Another thing that could have caught this error is doing a CFD run on the test set-up. This
+is a common thing to do for wind tunnel testing, as it allows, among other things, to check for
+interference between vortexes and the walls. However, as the plan up until the day before the
+testing was to fair the strut, the CFD would probably have been run with a fairing, not catching
+the error.
+49
+
+5 WIND TUNNEL
+Figure 5.12: Measurement made in the wind tunnel showing the size of fluctuations over a 30-second
+period.
+Figure 5.13: Vortex shedding of a cube. Image borrowed from: Stern and yang (2012)
+The second error was not recording the air speeds measured during the runs. The air speeds
+were measured as a pressure differential and converted to speeds with a MATLAB script created
+by the NTNU lab. These were observed to be16±0.05m/s for all the runs, and this was thought
+to be accurate enough that it would not need to be adjusted for. If converting to expected force
+variation, this would only mean a variation of±0.6% of the force on the model. The error made
+was to not account for the fact that this error would also affect the strut, and as the strut had
+a drag about ten times that of the model, the variation in drag force measured due to a change
+in airspeed by only±0.05m/s would actually cause an error up to±6%, not ±0.6%. Errors
+related to the reading of airspeed, discussed in Chapter 5.2.1, would add to this error, also with
+a multiplier factor of 10.
+The error estimation was also somewhat made complicated by not having access to the data
+50
+
+5 WIND TUNNEL
+sheets for the equipment in the wind tunnel. A secondary source, a master thesis from 2021
+utilizing the same tunnel, was used for the source of information on the wind tunnel accuracy.
+Due to this, an error buildup analysis of the wind speed accuracy was not possible. A number
+on the accuracy of 0.073% of full scale reading was found, but not what the full scale reading of
+the equipment was.
+The accuracy of the wind tunnel force balance was found in the thesis, but it was not clear if
+this was the absolute accuracy, repeatability, or the resolution. Due to the measurement being
+zeroed between each run, absolute accuracy and repeatability would in effect be the same for
+this setup.
+51
+
+6 CFD STUDY OF STEP GEOMETRY
+6 CFD Study of Step Geometry
+Due to the inconclusive wind tunnel results, it was decided to do a limited study in CFD to
+obtain the results not obtained in the wind tunnel. Although the wind tunnel test did not show
+the drag difference of step fairings as desired, it could still be used as a validation case to validate
+the CFD setup.
+SimScale was used to run the CFD, using an academic thesis license provided by the SimScale
+team. SimScale provides an interface that integrates meshing, simulation set-up, and post-
+prepossessing in one platform. SimScale utilizes open-source solvers from Open-foam in the
+background. The service also comes with cloud computing, allowing the simulations to be set
+up and run without the need for expensive computing hardware.
+CFD is a very complex topic that requires years to fully understand. In this thesis, the following
+factors were considered when setting up the mesh and simulation:
+Factors considered and goals set
+• k − ω SST chosen as RANS model
+• Y + target of 1 with full resolving of the boundary layer, between 0.7 - 1.5 reached.
+• Inflation layer growth rate of 1.47
+• Mesh resolution study conducted
+• Convergence of total force in X direction used as measure of convergence
+For most other values, default or values recommended by SimScale (2024b) were used.
+6.1 Choice of CFD Model
+CFD (Computational Fluid Dynamics) is a method to estimate the airflow. The key word is
+estimate, and no CFD solver will be perfect. There are three main categories of CFD solvers,
+seen in Figure 6.1. DNS is the most computationally resource intensive, while RANS, is the least
+resource intensive. (LEAP 2018)
+An example of a downside of using a RANS model is that if we wanted to check if the strut used
+in the wind tunnel modeling caused vibrations due to large eddies forming, the RANS would not
+capture this.
+52
+
+6 CFD STUDY OF STEP GEOMETRY
+Figure 6.1: Difference between solvers methods. Image Borrowed from: LEAP (2018)
+In this thesis, RANS will be used due to the computational power available and the accuracy
+required.
+6.1.1 RANS turbulence model
+Many RANS turbulence models exist, but the most popular are the following:
+Spalart-Allmaras is a one equation model. Has some limitations in modeling separated flows.
+k-epsilon is a popular two-equation turbulence model, with one equation for turbulent kinetic
+energy andk−ϵ one for turbulent energy dissipation. The model does not always solve boundary
+layer flow with adverse pressure gradients well.
+k-omegais another two-equation turbulence model that is known to better model the boundary
+layer.
+k-omega SST uses k − ω for near-wall boundary wall prediction and thek − ϵ in the free
+stream, combining the strengths of these two models. It is known to give a good prediction of
+flow separation.
+6.1.2 Choosing a RANS Turbulence Model
+VersteefandMalalasekera(2007)recommendstheSpalart-Allmaras, k−ω ork−ω SSTturbulence
+model for external aerodynamics. Thek − ω is stated to perform best over a backwards-facing
+step.
+Sazak (2017) did a CFD study comparingk − ϵ, Spalart-Allmaras, andk − ω SST, specifically
+for seaplane floats, up against validation data from a NACA wind tunnel test. In this test, the
+53
+
+6 CFD STUDY OF STEP GEOMETRY
+k − ω SST came out with the best results, with an error of about 10% of the wind tunnel test.
+An example validation case run by SimScale for a body with a backwards-facing step also used
+the k − ω SST model. (SimScale 2024a)
+Based on these considerations, it was chosen to use thek − ω SST turbulence model.
+6.2 CAD Model Preparation and Import
+A guideline from SimScale on how to import and set up the boundary conditions was used.
+(SimScale 2024b)
+The simulation was run with a symmetry plane down the symmetric axes of the aircraft in order
+to reduce the computational cost. The remaining three walls were set up with slip condition,
+while the inlet was set as velocity inlet and the outlet as pressure outlet.
+Figure 6.2: Flow volume set up as a function of the model size
+6.3 Meshing
+6.3.1 Inflation Layers
+Modelingtheflowbehaviorintheboundarylayer, andespeciallytheskinfrictionforcesthatcome
+from it, is important to get accurate CFD results. There are two primary methods of achieving
+this, either through very thin inflation layers that contain the boundary layer or through not
+modeling the boundary layer but having the CFD solver use correction factors known as wall
+functions. (Ansys 2020b)
+Figure 6.3 shows the breakdown of a boundary layer. We either want the first inflation height
+to be within the thinnest laminar sub-layer or cover the entire boundary layer with one cell.
+The reason for this can be seen in the right part of Figure 6.3. CFD solvers linearly interpolate
+54
+
+6 CFD STUDY OF STEP GEOMETRY
+between nodes, and if there are mesh layers in the boundary layer, the linear interpolation will
+create an offset.
+Figure 6.3: Example of buildup of a turbulent boundary layer, and linear interpolation error. Image edited
+based on original images from Ansys (2020b) and Wimshurst (2022)
+A unitless value, known asY +, is used in order to describe how far into the boundary layer the
+first cell height reaches.
+If we are using wall functions, we generally wantY + to be larger than 350. If we are resolving
+the boundary layer, we want aY + less than 5. A goal forY + of 1 is commonly used. (Ansys
+2020b)
+As wall functions do not predict flow separation well, we will aim for a lowY + value in this
+study. (Wimshurst 2022)
+We also want to make sure the boundary layer is contained within the inflation layers, as seen
+in Figure 6.4.
+Figure 6.4: Inflation layers should be contained within the inflation layers, as seen in the right image, in
+order to resolve the boundary layer properly. Image borrowed from Wimshurst (2021a)
+A third factor to keep in mind is the layer growth. The cell volume growth within the inflation
+layers should preferably not exceed 1.3. The difference in volume from one cell to another should
+not be too large. This is particularly important in the transition from the inflation layers to the
+55
+
+6 CFD STUDY OF STEP GEOMETRY
+main mesh, as seen in Figure 6.5.
+Figure 6.5: Example image of good and poor volume transition between inflation layer. Image borrowed
+from Wimshurst (2021a)
+Based on these considerations, a tool by Wimshurst (2021b) was used to estimate inflation layers
+parameters. This tool inputs values for velocity, characteristic length, viscosity, density, targeted
+Y +, and a number of inflation layers. The output is first layer height, final layer height, boundary
+layer thickness, and growth ratio.
+The values used in this study can be seen in Figure 6.6.
+The growth rate had to be higher than the recommended 1.3 as this would have required 28
+layers, and the SimScale solver only permits 20 layers.
+This only gives a first estimate to choose inflation layer parameters. The actualY + will be
+calculated by the CFD solver when it runs, and one might have to iteratively change the inflation
+layer parameters to get the desiredY + value.
+Figure 6.6: Input and output values used for determining the inflation layer in the mesh
+56
+
+6 CFD STUDY OF STEP GEOMETRY
+6.3.2 Mesh Resolution
+Mesh resolution is another important factor in CFD accuracy. It is good practice to do a mesh
+independence study, where one gradually varies the mesh resolution and observes the changes in
+output.
+As a baseline for this study, we can look at two mesh independence studies done by SimScale
+(2024a) and Sazak (2017), both for similar shapes and with wind tunnel data for comparison.
+Both studies usedk − ω SST.
+The mesh study done by Sazak (ibid.) decreased the deviation to the wind tunnel data from 18%
+to 9% by increasing the mesh from 2.74 million to 10.44 million. In the end, theCD had more
+or less stabilized. This was for a seaplane float.
+The mesh study done by SimScale (2024a) decreased the deviation to the wind tunnel data from
+17% to 6% by increasing the mesh from 3.8 million to 23.8 million. Here, the mesh had not
+stabilized at 10 million cells but stabilized when it increased to 23.8 million. This shape was a
+blunt body with a sharp break at the rear to cause flow separation.
+Figure 6.7: Mesh independence study performed on the TAC1 hull
+Figure 6.7 shows the mesh independence study performed. The results stabilized after 4.7 million
+cells. Although the 12M cell mesh might give more accurate results, the difference Vs the extra
+required computational power, was not considered a good trade-off.
+The rest of the study was therefore conducted with the 4.7 million cell count mesh. No mesh
+57
+
+6 CFD STUDY OF STEP GEOMETRY
+qualities were changed between runs from this point.
+6.3.3 Refinement Regions
+In order to get the most out of the mesh cell count, refinement regions are used to increase the
+mesh count where it is needed the most. Three volumetric regions, two containing the entire
+aircraft and one around the step region, were used, as seen in Figure 6.8.
+Figure 6.8: Refinement regions used for this CFD study. A third volume was used around the step region
+but is not that visible in the image.
+In addition, a surface refinement was used in order to increase the mesh’s detail around the
+curves on the model.
+Figure 6.9 and C.1 shows the final mesh with 4.7 million cell count. Figure C.3 shows theY +
+for the run without step fairing.
+Figure 6.9: Mesh used in the CFD study comparing steps
+6.4 Runs
+The following geometries were run in the CFD study:
+• 0% depth of step, with straight fairings lengths from 2 to 8 x the depth of step
+• 1% depth of step, with straight fairings lengths from 4 to 10 x the depth of step
+• 2% and 3% depth of step, with straight fairings lengths of 6 x the depth of step
+• Geometry with no fairing
+• Geometry with baseline concave fairing
+No angle of attack sweeps were conducted.
+58
+
+6 CFD STUDY OF STEP GEOMETRY
+The second concave faring and the fully faired fairing were omitted due to time constraints.
+6.5 Results
+The results from the CFD study can be seen in Figure 6.10. The results are expressed as the
+drag force reduction, with the non-faired 5.8% depth of step as a baseline.
+Two series, one for the 1% depth of step and the other for 2% depth of step, is plotted. The rest
+of the results are plotted as single data points. The concave fairing did not fit onto the x-axis
+and is instead plotted as a dashed horizontal line.
+Figure 6.10: Results from CFD step study. The drag of the fairings is given as a percentage decrease
+compared to the non-faired step with a depth of 5.8%. The x-axis is the length of the fairing for that run
+For all the data points, the skin friction was more or less constant, around 270 to 273 Newton.
+The main source of difference was the pressure drag.
+6.6 Discussion on the Accuracy and Confidence in the Results
+Two data points do not follow the trend of what was expected, as do the last two points of the
+two series. For these points, the drag increases with longer fairing.
+For the data point on the 0% depth of step series, this might be due to errors with the previous
+59
+
+6 CFD STUDY OF STEP GEOMETRY
+Figure 6.11: Flow field around aircraft showing flow separation behind the step without fairing
+data point (0% depth of step, length of faring 6). This run failed to converge twice, and the
+mesh was, therefore, slightly tweaked. For the last data point on the 1% depth of step, no good
+explanation was found for why the drag increased.
+This unexplained increased increase decreases the confidence in the data, as there might be an
+error in the simulation set-up.
+6.6.1 Flow Separation Comparison
+The flow separation behind the un-faried step, seen if Figure 6.11, was very similar to the flow
+separation seen in the wind tunnel, seen in Figure 5.11a, both in length and height. This is a
+good sign that the simulation might treat the separation correct. It should be noted that the
+flow visualization in the wind tunnel was done at only 5 m/s while this CFD run is at 51 m/s,
+so not too much emphasis should be put on this.
+6.6.2 Convergence
+Looking at the convergence of the force data, it was clear that the simulations were not fully
+converging in the 1000 iterations it were running. One simulation run was set to 3000 iterations
+to see how far from convergence the runs were.
+As seen in Figure 6.12, the results did not converge until after about 3000 iterations. Running
+all the runs at this length would have tripled the run time and computational power required,
+and would not have been feasible with the core hours allocated, without reducing mesh size.
+Instead, it was checked that each run got to about the same gradient of convergence. It was
+then thought that the remaining convergence would affect all runs similarly, and that the results
+as a percentage of each other would be similar. This was checked for one fairing, the 1% depth
+of step, 6 times the length fairing, running both that fairing and the non faired step to 3000
+60
+
+6 CFD STUDY OF STEP GEOMETRY
+iterations. The difference in percentage at 1000 iterations was 6.3% and after 3000 attentions,
+7.1%. This should therefore not significantly change the comparative results.
+Figure 6.12: Convergence of a CFD run, over 3000 iterations
+If the absolute number on the drag is to be used, a correction factor should be applied to the
+CFD results. The converged results after 3000 iterations were 17.1% higher than the results after
+1000 itterations.
+6.6.3 Validation Case: Compare to Wind Tunnel Data
+The same test set-up, as in the wind tunnel, was also run in the CFD. The CFD estimated 5.2N
+for the mounting strut and 1.2N for the model under the same conditions as in the wind tunnel.
+This is 19% higher than what was measured in the wind tunnel.
+The mesh was not very refined, and the mounting strut had some differences, like missing fillets
+on the corner in the CFD. With this in mind, 19% accuracy is within what could be expected.
+As seen earlier in this chapter, errors in other wind tunnel testings were in the range of 17% to
+7%, compared to wind tunnel data.
+61
+
+6 CFD STUDY OF STEP GEOMETRY
+Figure 6.13: Flow field of flow in the wind tunnel, simulated by CFD. The interference from the mounting
+strut can be clearly seen. The surface of the model is plotted with a pressure field in [Pa], while the
+surrounding filed is plotted with velocity [m/S]. Model seen from top view
+6.6.4 Comparing Results to Expected Values Based on Theory
+The overall test aligned well with what was expected from the theory. The same non-linear trend
+shown by Coombes and Clark (1937) is seen. The fairings not starting from 0% depth of step
+are also seen to be a lot less effective, similar to what was shown by Coombes and Clark (ibid.).
+The effect of fairing the step at 2% and 3% starting depth was smaller than what was expected.
+62
+
+7 CONCLUSION
+7 Conclusion
+The objective of the thesis was to investigate the potential for reducing the aerodynamic drag
+of a flying boat hull. From the literature study and tests done, the following conclusions can be
+drawn:
+Summary of conclusions
+• The minimum drag of a flying boat can be expected at a positive angle of incidence
+• Step fairings can be effective in reducing the drag by up to 15% of hull drag
+• Step with a start depth of step can only be expected to provide a maximum of half
+the drag reduction achievable with a fairing starting at 0% depth of the step
+• Features like afterbody angle, deadrise warp, step ventilation, and auxiliary steps
+can be a way to reduce the required step or allow for more aggressive fairing
+In addition, the thesis work has gathered and sorted an extensive database of more than 50
+sources on flying boat hull design that can be used for further development.
+The method for testing many step fairings in a short period, by making a small part of the model
+interchangeable, also proved to be effective and could be implemented also for hydrodynamic
+testing.
+63
+
+8 FUTURE WORK
+8 Future Work
+Due to time constraints, the number of CFD runs was limited. More CFD runs, particularly the
+angle of incidence and the remaining geometries from the wind tunnel, should be run.
+After that, the next step in the development would be to use the results from this thesis in a
+trade-off against results from hydrodynamic testing.
+The steps with a starting depth of step did not significantly reduce drag, and these are thought
+to be the ones with the most promising hydrodynamic performance. If the hydrodynamic testing
+proves that these are the only feasible step fairings, a movable step could be considered.
+The first step in that development is to determine the criticality of landing with the extended
+fairing and the loads/suction that acts on the fairing.
+64
+
+REFERENCES
+References
+Airshaper (2020). “Scale model wind tunnel testing explained”. In.
+Ansys (2020a).Drag Forces in External Flows - Real External Flows – Lesson 2. https://inno
+vationspace.ansys.com/courses/wp-content/uploads/sites/5/2020/09/Drag-Force-i
+n-External-Flows-Lesson-2-Handout.pdf . Accessed: 21.10.2024.
+— (2020b). “Turbulent Boundary Layers”. In:Ansys.com.
+Barlow, William and Pope (1966).Low speed wind tunnel testing. John Wiley and Sons Inc.
+Benson and Freihofner (1944). “Landing Charctersitics of a model of a flying boat with the depth
+of step reduced to zero by the means of a retractable flap”. In:NACA, Langley Memorial
+Aeronautical Laboratory Langley Field, Va.
+Benson and Havens (1945). “Tank tests of flying boat model equiped with several types of
+fairings designed to reduce the air drag of the main step”. In:Langley Memorial Aeronautical
+Laboratory Langley Field, Va.
+Benson and Lindsay (1943). “The use of retractable planing flap instead of a fixed step on a
+seaplane”. In:Langley Memorial Aeronautical Laboratory Langley Field, Va.
+C3S (2024).Copernicus: 2024 virtually certain to be the warmest year and first year above 1.5°C.
+Chicken (1999). “Conceptual design methodologies for waterborne and amphibious aircraft”. PhD
+thesis. Cranfield University.
+Conway and Maynard (1943). “Wind-tunnel tests of four full-scale seaplane floats”. In:NACA,
+Langley Memorial Aeronautical Laboratory Langley Field, Va.
+Coombes and Clark (1937). “The Air Drag of Hulls: The Effect of Alterations in the Main
+Dimensions and Various Detail Features”. In:Aircraft Engineering and Aerospace Technology,
+Vol. 9, Iss 12 pp. 315-328.
+Czernia and Szyk (2024).Air Density Calculator.
+Dawson, Walter and Hay (1946). “Tank Tests to Determine the Effect of Varying Design
+Parameters of Planning-Tail Hulls”. In:National Advisory Committee for Aeronautics.
+deCallies(1967).“Hydrodynamicsmanual”.In: Naval Air Test Center, Patuxent River, Maryland.
+EASA (2015). CS23 - Certification Specifications and Acceptable Means of Compliance for
+Normal, Utility, Aerobatic, and Commuter Category Aeroplanes.
+FFA (2014).Seaplane, skiplane, and float/ski equipped helicopter operations handbook.
+65
+
+REFERENCES
+Hamilton (1947). “An investigation into the effect of forced and natural afterbody ventilation on
+the hydrodynamic characteristics of a small flying boat (Saro 37) with a 1:20 fairing over the
+main step”. In:Pricipal Director of Research.
+— (1956). “A Full-scale Investigation into the Hydrodynamic Behaviour of a Highly Faired
+Flying-boat Hull”. In:Aeronautical Research Council Reports and Memoranda.
+Hartman (1935). “The aerodynamic drag of flying boat models as meassured in the N.A.C.A
+20-foot wind tunnel”. In:Langley Memorial Aeronautical Laboratory Langley Field, Va.
+Hoerner (1965).Fluid-Dynamic Drag. Published by the Author.
+Hugli and Axt (1951). “Hydrodynamical investigation of a series of hull models suitable for small
+flying boats and amphibians”. In:Stevens Institude of Technology.
+Katz (1995).Race Car Aerodynamics. Bentley Publishers.
+Klöwer (2021). “Quantifying aviation’s contribution to global warming”. In:Environ. Res. Lett.
+16.
+Larsen (2021). “Aerodynamic validation of a Formula Student race car”. MA thesis. NTNU.
+LEAP, Australia (2018). “Turbulence Modelling using ANSYS Fluent- Presentation and Demo -
+ANSYS CFD for FSAE teams - 1/10”. In:youtube.com.
+Leishman (2024a). “Aerodynamics of Airfoil Sections”. In:Embry-Riddle Aeronautical University.
+— (2024b). Airplane Equations of Motion. Accessed: 13.10.2024.
+— (2024c). Introduction to Aerospace Flight Vehicles. Embry-Riddle Auronotical Univeristy.
+Locke (1946). “An analysis of the skipping characteristics of some full-size flying boats”. In:
+NACA.
+Mistral (2024). “Airborne Electronics – Airworthiness Regulations and Safety Requirements”. In:
+https://www.mistralsolutions.com.
+NASA (2022a).Aircraft Rotations. https://www1.grc.nasa.gov/beginners-guide-to-aeron
+autics/aircraft-rotations/. Accessed: 13.10.2024.
+— (2022b). What is Drag?https://www1.grc.nasa.gov/beginners-guide-to-aeronautics
+/what-is-drag/. Accessed: 13.10.2024.
+Olson and Land (1942). “The Longitudinal Stability of Flying Boats as Determined by Tests of
+Models in the NACA Tank I : Methods Used for the Investigation of Longitudinal Stability
+Characteristics”. In:NACA, Langley Memorial Aeronautical Laboratory Langley Field, Va.
+66
+
+REFERENCES
+Parkinson and Land (1944). “The landing stability of a powered dynamic model of a flying
+boat with a 30 degree V-Step and with two depths of transverse step”. In:Langley Memorial
+Aeronautical Laboratory Langley Field, Va.
+Parkinson, Roland and House (1939). “Hydrodynamic and aerodynamic tests of a family of
+models of seaplane floats with varying angles of dead rise”. In:National Advisory Commitiee
+for Aeronautics.
+Riebe and Lowry (1948). “Effect of length-beam ratio on aerodynamic characteristics of flying-
+boat hulls without wing interference”. In:Langley Memorial Aeronautical Laboratory Langley
+Field, Va.
+Riebe and Naeseth (1947a). “Aerodynamic Characteristics of three deep stepped planing tail
+flying boat hulls”. In:NACA, Langley Memorial Aeronautical Laboratory Langley Field, Va.
+— (1947b). “Effect of Aerodynamic Refinement on the Aerodynamic Characteristics of a Flying-
+boat Hull”. In:Langley Memorial Aeronautical Laboratory Langley Field, Va.
+Riebe and Yates (1947). “Aerodynamic characteristics of three planing-tail flying-boat hulls.” In:
+Langley Memorial Aeronautical Laboratory Langley Field, Va.
+Sazak (2017). “Parametric investigation of hull shaped fuselage for amphibious uav”. MA thesis.
+Middle East Technical University.
+SimScale (2024a). “Aerodynamics: Flow around the Ahmed Body”. In:Simscale.com.
+— (2024b). “Tutorial: Incompressible Flow around a Formula Student Car”. In:SimScale.com.
+Smith (1957). “Wind-tunnel tests on seaplane hulls in the R.A.E 5-ft Diameter Open Jet
+Tunnel and the N.P.L Copressed Air Tunnel”. In:Aeronautical Research Council Reports
+and Memoranda.
+— (1959). “The Full-scale drag of some Flying Boat Seaplanes”. In: Aeronautical Research
+Council Reports and Memoranda.
+— (2022). Climbing and Gliding Caveat. https://aircraftflightmechanics.com/AircraftP
+erformance/GlidingFlight.html. Accessed: 13.10.2024.
+Smith and White (1954). “A Review of Porpoising Instability of Seaplanes”. In:Aeronautical
+Research Council Reports and Memoranda.
+Sottorf (1937). “The Design of Floats”. In:Technical Memorandums National Advisory Committie
+of Aeronautics.
+— (1942). “Systematic model researches on the stability limits of the dvl series of float designs”.
+In: Deutschen Luftfahrtforschung.
+67
+
+REFERENCES
+Stauffer and Takahashi (2023). “A History and Commentary on Thrust/Drag Bookkeeping”. In:
+Arizona State University, Tempe.
+Stern and yang (2012). “A simple and efficient direct forcing immersed boundary framework for
+fluid–structure interactions”. In:Journal of Computational Physics.
+Talay (1975).Introduction to the Aerodynamics of Flight. Nasa.
+Thurston (1978).Design for Flying. McGraw-Hill.
+Tomaszewski, Smith and Chalmers (1946). “A Preliminary Examination of Hull Afterbody
+Ventilation”. In:Royal Aircraft Establishment.
+Torenbeek (1982). Synthesis of Subsonic Airplane Design. Springer-Science+Business Media,
+B.V.
+Versteef and Malalasekera (2007).An Introduction to Computational Fluid Dynamics. Pearson.
+Wilczek (2021).Seaplane Design - A Forgotten Art. Hamburg Aerospace Lecture Series.
+Wimshurst (2021a). “[CFD] Inflation Layers / Prism Layers in CFD”. In:youtube.com.
+— (2021b). “Inflation Layer Calculator”. In:fluidmechanics101.com.
+— (2022). “Understanding y+ in CFD Part 1/2”. In:youtube.com.
+Wolf (2004). “Minimizing the Cooling System Drag for the New Porche 911 Carrera”. In:Porche
+AG.
+Yates and Riebe (1947). “Effect of Lenght-beam ratio on the aerodynamic characteristics of
+Flying Boat Hulls”. In:NACA, Langley Memorial Aeronautical Laboratory Langley Field, Va.
+I
+
+A STEP GEOMETRIES FOR WIND TUNNEL TESTING
+A Step Geometries for Wind Tunnel Testing
+Figure A.1: Frontal and side view of model used in the wind tunnel testing, including wing and tail
+fairings, and tail attachment to change afterbody angle
+II
+
+Depthof step0%, Lengthof fairing2xdepthof step:
+Depthof step0%, Lengthof fairing4xdepthof step:
+Depthof step0%, Lengthof fairing6xdepthof step:
+Depthof step0%, Lengthof fairing6xdepthof step:
+
+
+Depthof step1%, Lengthof fairing4xdepthof step:
+Depthof step1%, Lengthof fairing6xdepthof step:
+Depthof step1%, Lengthof fairing8xdepthof step:
+Depthof step1%, Lengthof fairing10xdepthof step:
+
+
+Depthof step2%, Lengthof fairing6xdepthof step:
+Depthof step3%, Lengthof fairing6xdepthof step:
+NoFaring, Depthof step5.8%
+
+
+Fullyfaired:
+Original concavefairingasbaseline:
+ConcavefaringbasedonConwayandMaynard(1943)
+Measurements[mm] usedtodefinetheconcavefaringbasedonConwayandMaynard(1943)
+
+
+B DECELERATION OF AI AIDS AND TOOLS
+B Deceleration of AI aids and tools
+VII
+
+C CFD APPENDIX
+C CFD Appendix
+Figure C.1: Zoomed in of mesh used in the CFD study comparing steps
+(a) Mesh quality around the nose
+(b) Mesh quality around the step
+Figure C.3:Y + plotted on the surface of the model, in the range of 0 to 2
+VIII
+
+C CFD APPENDIX
+(a) Close up view of inflation layer mesh, on the keel, right before the step
+(b) Same section as Figure C.4a, showing the flow field. The Boundary layer can see to be
+contained in the inflation layers
+Figure C.5: Residuals plotted for the run with no fairings
+IX
+

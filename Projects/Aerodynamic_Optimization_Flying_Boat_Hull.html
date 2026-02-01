@@ -1,0 +1,271 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Aerodynamic Optimization of a Flying Boat Hull – Joakim Saugen</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta name="robots" content="noindex, nofollow" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="skills.css" />
+    <link rel="stylesheet" href="../assets/css/carousel.css" />
+    <link rel="stylesheet" href="../assets/css/spinwheel.css" />
+    <link rel="stylesheet" href="../assets/css/navbar.css" />
+    <style>
+      /* Page-specific: remove carousel box shadow so it blends with background */
+      .carousel,
+      .carousel-v1 {
+        box-shadow: none !important;
+        background: transparent !important;
+      }
+      /* Also make fade slides transparent so no grey panel shows */
+      .carousel-fade .carousel-slide {
+        background: transparent !important;
+      }
+      /* Align v1 carousel captions to the exact left edge of the image */
+      .carousel-v1 .carousel-caption {
+        margin-left: 0 !important; /* default is 5%; override so it lines up with image */
+      }
+      /* Make the inner slide wrapper shrink to the image width and center it */
+      .carousel-v1 .carousel-slide {
+        justify-content: center; /* already centered, ensure alignment */
+      }
+      .carousel-v1 .carousel-slide > div {
+        width: auto !important;           /* override 100% width */
+        display: inline-block !important; /* shrink to content width (image) */
+        margin: 0 auto;                   /* center wrapper inside slide */
+        text-align: left;                 /* captions align left under image */
+      }
+      /* Let image define the wrapper width via intrinsic scaling by height */
+      .carousel-v1 .carousel-slide img {
+        width: auto !important;   /* override 100% so width equals rendered content */
+        height: 340px;            /* keep fixed box height */
+        max-width: 100%;          /* prevent overflow on narrow screens */
+        object-fit: contain;      /* keep entire image visible within height */
+        object-position: center;  /* center image horizontally in wrapper if narrower */
+        display: block;
+        margin: 0 auto;           /* center image within the wrapper */
+      }
+      /* Responsive correction: undo global 98vw constraints for the image */
+      @media (max-width: 900px) {
+        .carousel-v1 .carousel-slide { min-width: 98vw; max-width: 98vw; }
+        .carousel-v1 .carousel-slide img {
+          width: auto !important;
+          min-width: 0 !important;
+          max-width: 98vw;  /* image may grow up to viewport width */
+          height: 220px;    /* match small-screen box height */
+        }
+      }
+
+      /* Chapters + TOC */
+      .toc { margin: 0.5em 0 1.25em; }
+      .toc h3 { margin: 0 0 0.5em; }
+      .toc ol { margin: 0; padding-left: 1.25em; }
+      .chapters details { margin: 1.25em 0; }
+      .chapters summary { cursor: pointer; font-weight: 600; font-size: 1.05em; }
+      .chapters details > *:not(summary) { margin-top: 0.75em; }
+      header.major {
+        margin-top: 2em;
+      }
+      #main {
+        margin: 0 auto;
+        max-width: 900px;
+        padding: 0 20px;
+      }
+    </style>
+  </head>
+
+  <body class="is-preload">
+  <div id="navbar-include"></div>
+  <script src="../assets/js/load-navbar.js"></script>
+
+    <script src="../assets/js/load-navbar.js"></script>
+
+    <!-- Main -->
+    <div id="main">
+
+      <!-- Project Content -->
+      <section id="project">
+        <header class="major">
+          <h2>Aerodynamic Optimization of a Flying Boat Hull</h2>
+          <p>NTNU, Norway, Dec 2024</p>
+        </header>
+        <span class="image main" style="width: 90%;"><img src="../images/Projects/Aero_Thesis/Forside.png" alt="Conclusion" /></span>
+
+        <!-- Summary / Overview -->
+        <p>
+          This thesis investigated how to <strong>reduce the aerodynamic drag</strong> of a nine‑passenger electric flying boat hull, as part of the <a href="https://el-fly.no">Noemi Aircraft Program</a>. 
+          The work combines an extensive <a href="#chapter-1">literature review</a>, <a href="#chapter-2">wind tunnel testing</a>, and a <a href="#chapter-3">CFD Analysis</a> to study the impact of step geometry and fairings, afterbody (sternpost) angle, and hull incidence. Hydrodynamic implications are considered qualitatively to keep a balanced design.
+        </p>
+        <span class="image main" style="width: 90%;"><img src="../images/Projects/Aero_Thesis/Conclusion.png" alt="Conclusion" /></span>
+    
+
+
+        <h3>The challenge of seaplane design</h3>
+        <blockquote>
+          Seaplane design must satisfy both air and water performance. Hull features that are essential for water operations (step, chines, afterbody upsweep, deadrise) often penalize aerodynamics. The goal is to minimize aerodynamic penalty while retaining sufficient hydrodynamic performance.
+        </blockquote>
+        
+        <p>
+          Link to <a href="https://ntnuopen.ntnu.no/ntnu-xmlui/handle/11250/3175213?locale-attribute=en" target="_blank" rel="noopener">full thesis report</a>.
+        </p>
+        <!-- Wind Tunnel Model Carousel (kept visible) -->
+        <div class="carousel-demo">
+          <h3>Wind Tunnel Model</h3>
+          <p>Historically, wind tunnel models have mostly been made from wood or milled aluminum. Due to resource limitations, 3D printing the model was used to create the model.
+            The main drawbacks of 3D printing being surface finish and limited size, was solved with careful alignment of sections, and post sanding of the surface.
+          </p>
+          <div class="carousel carousel-v1" data-start-index="2">
+            <button class="carousel-arrow left" aria-label="Previous">
+              <svg viewBox="0 0 32 32"><polyline points="20,8 12,16 20,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="carousel-track">
+              <div class="carousel-slide">
+                <div>
+                  <img src="../images/Projects/Aero_Thesis/Model_3D_Print.png" alt="Wind tunnel model CAD" />
+                  <div class="carousel-caption">Wind tunnel model with interchangeable step modules and internal aluminum beams.</div>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div>
+                  <img src="../images/Projects/Aero_Thesis/Bambu_Lab.jpg" alt="3D printing" />
+                  <div class="carousel-caption">Sections printed on a Bambu Lab X1C and post‑sanded for finish.</div>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div>
+                  <img src="../images/Projects/Aero_Thesis/Half_Assembly.jpg" alt="Assembly" />
+                  <div class="carousel-caption">Partial assembly; aluminum profiles align hollow sections and add stiffness.</div>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div>
+                  <img src="../images/Projects/Aero_Thesis/Assembeld.jpg" alt="Assembled model" />
+                  <div class="carousel-caption">Assembled model ~1.4 m long (≈9% scale).</div>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div>
+                  <img src="../images/Projects/Aero_Thesis/Fairings.jpg" alt="Fairing set" />
+                  <div class="carousel-caption">Interchangeable fairings; 14 geometries tested across series.</div>
+                </div>
+              </div>
+            </div>
+            <button class="carousel-arrow right" aria-label="Next">
+              <svg viewBox="0 0 32 32"><polyline points="12,8 20,16 12,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="carousel-dots"></div>
+          </div>
+        </div>
+
+        <!-- Collapsible chapters (commented out for now) -->
+        <!--
+        <div class="chapters">
+          <details id="chapter-1" class="chapter">
+            <summary>Chapter 1: Theory &amp; Research</summary>
+            <p>
+              Flying boat hulls must balance conflicting requirements: features critical for water performance (step, deadrise, afterbody upsweep, chines) create aerodynamic penalties. A comprehensive literature review identified key design variables and their impacts.
+            </p>
+            <h4>Hydrodynamic fundamentals</h4>
+            <ul>
+              <li><strong>The step:</strong> A discontinuity in the hull bottom that allows water flow separation, preventing suction on the afterbody. Typical depth: 5–10% of beam width. Deeper steps improve stability limits but increase aerodynamic drag.</li>
+              <li><strong>Deadrise angle:</strong> The V-shape of the hull cross-section reduces landing loads but increases hydrodynamic resistance during planing.</li>
+              <li><strong>Sternpost angle (afterbody upsweep):</strong> Typically 5–9°; reduces spray on the tail but creates aerodynamic drag. Higher angles improve upper trim stability limits (reduce skipping tendency).</li>
+              <li><strong>Porpoising:</strong> Oscillations in pitch/heave during takeoff or landing. Caused by interactions between forebody pressure, afterbody suction, and step ventilation. Critical for safety and certification (CS23 requirements).</li>
+            </ul>
+            <h4>Aerodynamic optimization opportunities</h4>
+            <p>Literature from 1930s–1950s wind tunnel and tank tests (NACA, RAE, German DVL) plus modern CFD studies show:</p>
+            <ul>
+              <li><strong>Step fairings:</strong> Streamlining the step can reduce its drag contribution by 50–70% (Coombes & Clark 1937; Hamilton 1956). Straight fairings ~6–9× step depth offer best trade-off. Concave fairings less effective. Plan-form fairings (curved in multiple planes) achieve ~18% total hull drag reduction (Riebe & Yates 1947).</li>
+              <li><strong>Step ventilation:</strong> Ducts or openings to equalize pressure behind the step reduce hydrodynamic drag and porpoising. Forced ventilation impractical (high airflow needed).</li>
+              <li><strong>Retractable steps:</strong> Tested by Benson & Lindsay (1943); 8% hydro drag reduction, 2–3% aero reduction in flight. Adds complexity/weight; requires failure-mode analysis for certification.</li>
+              <li><strong>Hull incidence:</strong> Minimum drag typically at positive angle (not 0°); varies with afterbody upsweep.</li>
+              <li><strong>Length/beam ratio:</strong> Higher ratios (9+) reduce drag but limit internal volume.</li>
+              <li><strong>Chines and flare:</strong> Rounding chine radius can reduce drag ~5%; flare increases drag ~5%.</li>
+            </ul>
+            <h4>Design priorities for this study</h4>
+            <p>Step fairing geometry and afterbody angle were prioritized due to their large individual contributions (~6–8% and ~4% of total parasitic drag respectively) and relatively independent influence on hydrodynamics, making them good candidates for optimization without compromising water performance.</p>
+          </details>
+
+          <details id="chapter-2" class="chapter">
+            <summary>Chapter 2: Wind Tunnel Model</summary>
+            <p>
+              Objective: measure relative drag differences between step fairing geometries and two afterbody angles; use results alongside hydrodynamic data to inform the step design. Tests run in NTNU’s large closed‑loop tunnel (2.7 × 1.8 m) at up to 16 m/s with a six‑component force balance and rotating floor for precise incidence changes.
+            </p>
+            <h4>Model and method</h4>
+            <ul>
+              <li>Scale: ~9% of full scale; PLA 3D‑printed hollow sections with internal aluminum beams for stiffness and accurate alignment.</li>
+              <li>Interchangeable step modules enabled rapid swapping of 14 geometries (straight/concave fairings, varying lengths and start depths), plus two afterbody angles.</li>
+              <li>Boundary layer tripped with sandpaper strip; blockage ~0.8%; tunnel geometry mitigated buoyancy and boundary layer growth.</li>
+            </ul>
+            <span class="image main"><img src="../images/Projects/Aero_Thesis/Wind Tunnel Setup.png" alt="Wind tunnel setup" /></span>
+            <div class="carousel-caption" style="margin-left: 0; margin-top: -1.5em; text-align: left;">Image showing the wind tunnel set-up. The model was mounted on the side to take advantage of the rotable floor, allowing for fast and acurate AoA adjustments. </div>
+
+
+            <h4>Results and learnings</h4>
+            <ul>
+              <li>General trend: longer straight fairings reduced drag as expected; smoke visualization confirmed larger separation with an un‑faired step.</li>
+              <li>Confounders: an unfared mounting strut likely introduced large noise and interference; minor airspeed logging errors scaled up due to strut drag.</li>
+              <li>Outcome: treat wind tunnel data as qualitative and for CFD calibration/validation rather than definitive quantitative results.</li>
+            </ul>
+          </details>
+
+          <details id="chapter-3" class="chapter">
+            <summary>Chapter 3: CFD Analysis</summary>
+            <p>
+              A CFD study was conducted to get more data on the relative difference bewteen the fairing drag values. SimScale (OpenFOAM) was used with the k–ω SST model.
+            </p>
+            <h4>Setup highlights</h4>
+            <ul>
+              <li>Domain: symmetry plane; slip walls elsewhere; velocity inlet and pressure outlet.</li>
+              <li>Inflation layers tuned for Y+ ~1; growth ratio constrained by solver to 20 layers.</li>
+              <li>Mesh refinment study conducted, convergence after 4.7M cells was found</li>
+              <li>Convergence: many cases required ~3000 iterations for full convergence; comparative trends were similar at 1000 vs 3000 iterations.</li>
+              <li>Runs: straight fairings of varying lengths at 0%, 1%, 2%, 3% start depths; concave fairing; no‑fairing baseline.</li>
+            </ul>
+            <h4>Key findings</h4>
+            <ul>
+              <li>Non‑linear benefit with fairing length: significant drag reduction up to ~15% (relative to un‑faired baseline); diminishing returns beyond ~6–9× depth.</li>
+              <li>Starting the fairing below full depth (e.g., 1–3% of beam) reduced effectiveness vs starting at 0% depth.</li>
+              <li>Skin friction contributions were nearly constant; reductions were driven by pressure drag changes around the step/afterbody.</li>
+              <li>Validation: simplified CFD of the wind‑tunnel setup (incl. strut) predicted total drag ~19% higher than measurements—reasonable given mesh and geometry simplifications.</li>
+            </ul>
+          </details>
+        </div>
+        -->
+
+
+
+        <ul class="actions">
+          <li><a href="../index.html#return" class="button">← Back to Portfolio</a></li>
+        </ul>
+      </section>
+
+    </div>
+
+    <!-- Navbar -->
+
+    <!-- Scripts -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/browser.min.js"></script>
+    <script src="../assets/js/breakpoints.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/carousel-demo.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var navbar = document.querySelector('.main-navbar');
+        if (!navbar) return;
+        function updateNavbar() {
+          if (window.scrollY < 10) {
+            navbar.classList.add('navbar-top');
+          } else {
+            navbar.classList.remove('navbar-top');
+          }
+        }
+        updateNavbar();
+        window.addEventListener('scroll', updateNavbar);
+      });
+    </script>
+
+  </body>
+</html>

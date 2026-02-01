@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>About Me – Joakim Saugen</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta name="robots" content="noindex, nofollow" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="skills.css" />
+    <link rel="stylesheet" href="../assets/css/carousel.css" />
+    <link rel="stylesheet" href="../assets/css/hotspot.css" />
+    <link rel="stylesheet" href="../assets/css/navbar.css" />
+    <script src="../assets/js/load-navbar.js"></script>
+    <style>
+      /* Page-specific: remove carousel box shadow so it blends with background */
+      .carousel,
+      .carousel-v1 {
+        max-width: 100%;
+      }
+      .hotspot-modal-content .carousel-v1 .carousel-slide > div {
+        width: 100% !important;
+      }
+      .hotspot-modal-content .carousel-v1 .carousel-slide img {
+        width: 100% !important;
+        height: auto !important;
+        max-height: 400px;
+        object-fit: contain;
+      }
+      /* Ensure video embeds maintain proper width in carousel */
+      .hotspot-modal-content .carousel-v1 .video-embed {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      @media (max-width: 900px) {
+        .hotspot-modal-content .carousel-v1 .carousel-slide img {
+          max-height: 300px;
+        }
+      }
+      header.major {
+        margin-top: 2em;
+      }
+      #main {
+        margin: 0 auto;
+        max-width: 900px;
+        padding: 0 20px;
+      }
+    </style>
+  </head>
+  <body class="is-preload">
+  <div id="navbar-include"></div>
+  <script src="../assets/js/load-navbar.js"></script>
+
+
+    <!-- Main -->
+    <div id="main">
+
+      <!-- About Me Content -->
+      <section id="about">
+        <header class="major">
+          <h2>About Me</h2>
+        </header>
+
+        <h3>404 SITE NOT FOUND</h3>
+        <p>
+          Ooops, this site is still under construction.
+        </p>
+      </section>
+    </div>
+
+
+    <!-- Scripts -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/browser.min.js"></script>
+    <script src="../assets/js/breakpoints.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/carousel-demo.js"></script>
+    <script src="../assets/js/hotspot.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var navbar = document.querySelector('.main-navbar');
+        function updateNavbar() {
+          if (window.scrollY < 10) {
+            navbar.classList.add('navbar-top');
+          } else {
+            navbar.classList.remove('navbar-top');
+          }
+        }
+        updateNavbar();
+        window.addEventListener('scroll', updateNavbar);
+      });
+    </script>
+
+  </body>
+</html>

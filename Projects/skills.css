@@ -1,0 +1,49 @@
+# Footnote bar (shared for all pages using skills.css)
+.footnote-bar {
+    width: 100%;
+    background: #1f1815 url('../images/bg_4.png') center center repeat;
+    color: #fff;
+    text-align: center;
+    font-size: 0.95em;
+    padding: 2em 0 1.4em 0;
+    min-height: 4.5em;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 1001;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.07);
+    display: block;
+}
+.footnote-bar a { color: #49bf9d; text-decoration: underline; }
+/* Custom footer override for Skills page only */
+#footer {
+    background-attachment: scroll;
+    background-color: #1f1815;
+    background-image: url("../../images/bg_4.png"), url("../images/bg_footer.png") !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% auto !important;
+    background-clip: border-box;
+    bottom: auto;
+    left: auto;
+    padding: 2.25em 1.5em;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    display: block !important;
+    overflow: hidden;
+    height: 120px;
+}
+#footer .icons {
+    margin: 0 0 1em 0;
+}
+#footer .copyright {
+    margin: 0 0 1em 0;
+}
+#footer .copyright li {
+    border-left-width: 0;
+    display: block;
+    line-height: 2.25em;
+    margin-left: 0;
+    padding-left: 0;
+}

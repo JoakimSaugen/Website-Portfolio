@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Aircraft Propulsion Design – Joakim Saugen</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="skills.css" />
+  <link rel="stylesheet" href="../assets/css/carousel.css" />
+  <link rel="stylesheet" href="../assets/css/hotspot.css" />
+  <link rel="stylesheet" href="../assets/css/navbar.css" />
+    <style>
+      /* Make carousel fit nicely inside modals */
+      .hotspot-modal-content .carousel,
+      .hotspot-modal-content .carousel-v1 {
+        max-width: 100%;
+        background: transparent;
+        box-shadow: none;
+        margin: 0.5em 0 0.25em 0;
+      }
+      /* Make carousel content and captions align with text width */
+      .hotspot-modal-content .carousel-v1 .carousel-slide > div { width: 100% !important; }
+      .hotspot-modal-content .carousel-v1 .carousel-slide img {
+        width: 100% !important;   /* match modal text width */
+        height: auto !important;  /* preserve aspect ratio */
+        max-width: 100%;
+        object-fit: contain;
+        display: block;
+      }
+      .hotspot-modal-content .carousel-caption { margin-left: 0 !important; }
+      header.major {
+        margin-top: 2em;
+      }
+      #main {
+        margin: 0 auto;
+        max-width: 900px;
+        padding: 0 20px;
+      }
+    </style>
+  </head>
+
+  <body class="is-preload">
+  <div id="navbar-include"></div>
+  <script src="../assets/js/load-navbar.js"></script>
+  <!-- The shared navbar and footer will be injected above. -->
+  <div id="footer-include"></div>
+
+
+
+    <!-- Main -->
+    <div id="main">
+
+      <!-- Project Content -->
+      <section id="project">
+        <header class="major">
+          <h2>Aircraft Propulsion Design</h2>
+          <p>Noemi, Norway, Nov. 2023 - Jul 2025</p>
+        </header>
+
+
+        <p>My role in the Noemi project mainly focused on battery integration and motor thermal management. </br>
+          Here's some highlights of the work I did:</p>
+          
+          
+        <!-- Hotspot Interactive Image -->
+        
+        <div class="hotspot-container">
+          <img src="../images/Projects/Elfly/Elfly_CAD_Scale.jpg" alt="Aircraft Propulsion System">
+          <!-- Hotspot Markers (positioned with percentages: left, top) -->
+          <div class="hotspot-marker" data-modal="hotspot-modal-1" style="left: 62%; top: 65%;"></div>
+          <div class="hotspot-marker" data-modal="hotspot-modal-2" style="left: 57%; top: 50%;"></div>
+          <div class="hotspot-marker" data-modal="hotspot-modal-3" style="left: 52%; top: 70%;"></div>
+          <div class="hotspot-marker" data-modal="hotspot-modal-4" style="left: 40%; top: 65%;"></div>
+        </div>
+        <div class="carousel-caption" style="margin-left: 0; margin-top: -1.5em;">CAD render of Noemi electric seaplane. Image: Elfly LinkedIn</div>
+
+        <!-- Hotspot Modals -->
+        <div id="hotspot-modal-1" class="hotspot-modal">
+          <div class="hotspot-modal-content">
+            <span class="hotspot-modal-close">&times;</span>
+            <h3>Battery Pack Integration</h3>
+            <p>My main responsibility at Elfly was the integration of the lithium-ion battery pack into the airframe. This work included:</p>
+            <ul>
+              <li>Collaboration with airframe design teams to define integration points, as well as coordinating with the flight physics department regarding CG positioning of the battery.</li>
+              <li>Conceptual development of a mounting solution for the battery pack to meet the CS23 crashworthiness requirements of 18g, as well as serviceability requirements.</li>
+              <li>Designing a thermal runaway system to contain potential thermal runaway events.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="hotspot-modal-2" class="hotspot-modal">
+          <div class="hotspot-modal-content">
+            <span class="hotspot-modal-close">&times;</span>
+            <h3>Electric Motor Cooling</h3>
+            <p>During my time at Elfly, I was responsible for the design of the electric motor oil cooling system. This work included:</p>
+            <ul>
+              <li>State-of-the-art research.</li>
+              <li>A MATLAB script for sizing the cooling requirements, required heat exchanger size and drag penalty depending on flight scenario. The script was made to be integratable into a larger aircraft level flight model.</li>
+              <li>Supplier engagement for component sourcing.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="hotspot-modal-3" class="hotspot-modal">
+          <div class="hotspot-modal-content">
+            <span class="hotspot-modal-close">&times;</span>
+            <h3>Charging System</h3>
+            <p>As part of the developemnt of the battery system, I also worked on the charging system. This work included: 
+
+              <ul>
+								<li>Conceptual design and dimentioning of ground charging and battery thermal management infrastructure.</li>
+								<li>Development of a tool to estimate turnaround time, based on various input parameters.</li> 
+                    <li>Sizing and routing of charging cables.</li>
+						</ul>
+            </p>
+
+          </div>
+        </div>
+
+        <div id="hotspot-modal-4" class="hotspot-modal">
+          <div class="hotspot-modal-content">
+            <span class="hotspot-modal-close">&times;</span>
+            <h3>Avionics CAD / Cockpit Mock-up</h3>
+            <p>As part of the role, I was responsible for avionics CAD. </p>
+            <p>I also worked on the avionics section of the cockpit mock-up, 3D printing mock-ups for the flight deck to allow testing of the aerogenomics and layout of panels and switches. </p>
+
+            <!-- Embedded carousel inside modal -->
+            <div class="carousel carousel-v1">
+              <button class="carousel-arrow left" aria-label="Previous">
+                <svg viewBox="0 0 32 32"><polyline points="20,8 12,16 20,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div class="carousel-track">
+                <div class="carousel-slide">
+                  <div>
+                    <img src="../images/Projects/Elfly/Cockpit Mockup.jpg" alt="Cockpit mock-up" />
+                    <div class="carousel-caption">Cockpit mock-up. Image: Elfly LinkedIn</div>
+                  </div>
+                </div>
+                <div class="carousel-slide">
+                  <div>
+                    <img src="../images/Projects/Elfly/Cockpit Mockup Roof.jpg" alt="Cockpit mock-up roof" />
+                    <div class="carousel-caption">Cockpit mock-up roof. Image: Elfly LinkedIn</div>
+                  </div>
+                </div>
+              </div>
+              <button class="carousel-arrow right" aria-label="Next">
+                <svg viewBox="0 0 32 32"><polyline points="12,8 20,16 12,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div class="carousel-dots"></div>
+            </div>
+
+
+          </div>
+        </div>
+
+        <br />
+          <p></p>In addition to those responsibilities, I also took initiative to several other tasks, such as:
+          <ul>
+								<li>Implementation of EWIS CAD.</li>
+								<li>Development of a battery testing infrastructure.</li>
+								<li>Development of a aircraft-wide weight tracking tool with automatic logging of weight data.</li>
+						</ul>
+        </p>
+
+        <br>
+
+        <ul class="actions">
+          <li><a href="../index.html#return" class="button">Back to Portfolio</a></li>
+        </ul>
+      </section>
+
+    </div>
+
+
+  <!-- Scripts -->
+  <script src="../assets/js/jquery.min.js"></script>
+  <script src="../assets/js/browser.min.js"></script>
+  <script src="../assets/js/breakpoints.min.js"></script>
+  <script src="../assets/js/util.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/carousel-demo.js"></script>
+  <script src="../assets/js/hotspot.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var navbar = document.querySelector('.main-navbar');
+      function updateNavbar() {
+        if (window.scrollY < 10) {
+          navbar.classList.add('navbar-top');
+        } else {
+          navbar.classList.remove('navbar-top');
+        }
+      }
+      updateNavbar();
+      window.addEventListener('scroll', updateNavbar);
+    });
+  </script>
+  </body>
+</html>

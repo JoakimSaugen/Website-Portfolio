@@ -1,0 +1,446 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Skills | Joakim Saugen</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="skills.css" />
+    <link rel="stylesheet" href="../assets/css/carousel.css" />
+    <link rel="stylesheet" href="../assets/css/hotspot.css" />
+    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700&display=swap" rel="stylesheet" />
+        <!-- Navigation Bar -->
+        <nav class="main-navbar navbar-top">
+            <a href="../index.html" class="navbar-title">
+                Joakim Saugen<br>
+                <span style="font-size: 0.95em; font-weight: normal; color: #399762;">Mechanical R&amp;D Engineer</span>
+            </a>
+            <div style="flex: 1 1 auto;"></div>
+            <a href="Skills.html">Skills</a>
+            <a href="../index.html#projects">Projects</a>
+            <a href="About_Me.html" style="margin-right: 1.2em;">About Me</a>
+        </nav>
+        <style>
+        body {
+            /* Prevent content jump when navbar overlays */
+            padding-top: 0 !important;
+        }
+        .main-navbar {
+            transition: background 0.4s cubic-bezier(.4,0,.2,1), color 0.4s cubic-bezier(.4,0,.2,1);
+        }
+        .main-navbar.navbar-top {
+            background: rgba(255,255,255,0.0) !important;
+            color: #222 !important;
+            box-shadow: none !important;
+        }
+        .main-navbar.navbar-top a {
+            color: #222 !important;
+        }
+        .main-navbar.navbar-top a:hover, .main-navbar.navbar-top a.active {
+            color: #399762 !important;
+        }
+        .main-navbar.navbar-top a::after {
+            background: #399762 !important;
+        }
+        .main-navbar.navbar-top a[href="Skills.html"].active {
+            color: #399762 !important;
+        }
+        .main-navbar.navbar-top a[href="About_Me.html"].active {
+            color: #399762 !important;
+        }
+        .main-navbar.navbar-top a[href="../index.html#projects"].active {
+            color: #399762 !important;
+        }
+                /* Modern top navigation bar */
+                .main-navbar {
+                    width: 100%;
+                    background: #222;
+                    color: #fff;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 2.5em;
+                    padding: 0.525em 0 0.525em 0;
+                    font-family: 'Source Sans Pro', Arial, sans-serif;
+                    font-size: 0.88em;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+                    position: sticky;
+                    top: 0;
+                    z-index: 1000;
+                    padding: 0.6em 0 0.6em 0;
+                }
+                .main-navbar a {
+                    color: #fff;
+                    text-decoration: none;
+                    padding: 0.5em 1.2em;
+                    border-radius: 6px;
+                    transition: background 0.18s, color 0.18s, border-bottom 0.18s;
+                    border-bottom: none;
+                    position: relative;
+                }
+                .main-navbar a:hover, .main-navbar a.active {
+                    background: transparent;
+                    color: #399762;
+                }
+                .main-navbar a::after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: 0.2em;
+                    height: 3px;
+                    background: #399762;
+                    opacity: 0;
+                    transition: opacity 0.18s;
+                    border-radius: 2px;
+                }
+                .main-navbar a:hover::after, .main-navbar a.active::after {
+                    opacity: 1;
+                }
+                /* Persistent footnote bar */
+                .footnote-bar {
+                    width: 100%;
+                    background: #1f1815 url('../assets/css/images/bg_4.png') center center repeat;
+                    color: #fff;
+                    text-align: center;
+                    font-size: 0.95em;
+                    padding: 2em 0 1.4em 0;
+                    min-height: 4.5em;
+                    position: fixed;
+                    left: 0;
+                    bottom: 0;
+                    z-index: 1001;
+                    box-shadow: 0 -2px 8px rgba(0,0,0,0.07);
+                    display: none;
+                }
+                .footnote-bar.visible { display: block; }
+                .footnote-bar a { color: #49bf9d; text-decoration: underline; }
+        .skill-link { color: #399762 !important; }
+        .contact-info-box {
+            max-width: 800px; margin: 2em auto; padding: 2em 2em 1em 2em;
+            background: #f8f8f8; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+        }
+        </style>
+        <script>
+            // Toggle transparent navbar at top
+            document.addEventListener('DOMContentLoaded', function() {
+                var navbar = document.querySelector('.main-navbar');
+                function updateNavbar() {
+                    if (window.scrollY < 10) {
+                        navbar.classList.add('navbar-top');
+                    } else {
+                        navbar.classList.remove('navbar-top');
+                    }
+                }
+                updateNavbar();
+                window.addEventListener('scroll', updateNavbar);
+            });
+        </script>
+</head>
+<body class="is-preload">
+
+    <div id="main" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; max-width: 900px; margin: 0 auto; width: 100%;">
+        <header style="text-align: center; margin-bottom: 2em;">
+            <h1 style="font-size: 2.2em; color: #222; margin-bottom: 0.5em;">My Professional Skills</h1>
+            <p style="max-width: 600px; margin: 0 auto; color: #444; font-size: 1.15em;">Below you'll find a summary of my technical and creative skills, spanning engineering software, programming, and hands-on prototyping. Click on any skill for more details about my experience and proficiency.</p>
+        </header>
+        <section id="skills-section" style="width: 100%;">
+            <div class="contact-info-box">
+                <h2 style="color: black;">Skills</h2>
+                <div class="row">
+                    <div class="col-6 col-12-xsmall">
+                        <h4 style="color: black;"><u>Engineering Software</u></h4>
+                        <ul class="alt skills-list">
+                            <li><a href="#" class="skill-link" data-modal="skill-modal-solidworks" title="Open details">SolidWorks CAD - Proficient</a></li>
+                            <li><a href="#" class="skill-link" data-modal="skill-modal-onshape" title="Open details">Onshape CAD - Proficient</a></li>
+                            <li><a href="#" class="skill-link" data-modal="skill-modal-altair" title="Open details">Simscale Heat Transfer - Basic</a></li>
+                            <li><a href="#" class="skill-link" data-modal="skill-modal-simscale" title="Open details">SimScale CFD - Basic</a></li>
+                            <li><a href="#" class="skill-link" data-modal="skill-modal-altium" title="Open details">Altium PCB Design - Basic</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-12-xsmall">
+                        <h4 style="color: black;"><u>Programming</u></h4>
+                        <ul class="alt skills-list">
+                            <li><a href="#" class="skill-link" data-modal="skill-modal-matlab" title="Open details">MATLAB Data Analysis - Proficient</a></li>
+                            <li><a href="#" class="skill-link" data-modal="skill-modal-ccppython" title="Open details">C / C++ / Python - Basic</a></li>
+                            <li><a href="#" class="skill-link" data-modal="skill-modal-appscripts" title="Open details">Appscripts JavaScript - Basic</a></li>
+                            <li><a href="#" class="skill-link" data-modal="skill-modal-webapp" title="Open details">Web &amp; App dev. - Basic</a></li>
+                            <li><a href="#" class="skill-link" data-modal="skill-modal-blender" title="Open details">Blender Modeling and Animations</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <h4 style="color: black;"><u>Other Skills</u></h4>
+                <ul class="alt">
+                    <li><a href="#" class="skill-link" data-modal="skill-modal-batterytesting" title="Open details">Battery Cell Testing</a></li>
+                                        <li>Rapid Prototyping (
+                                            <a href="#" class="skill-link" data-modal="skill-modal-3dprinting" title="3D Printing">3D printing</a>,
+                                            <a href="#" class="skill-link" data-modal="skill-modal-sheetmetal" title="Sheet Metal">Sheet Metal</a>,
+                                            <a href="#" class="skill-link" data-modal="skill-modal-milling" title="Milling">Milling</a>,
+                                            <a href="#" class="skill-link" data-modal="skill-modal-laser" title="Laser Cutting">Laser Cutting</a>,
+                                            manual turning, soldering)
+                                        </li>
+                </ul>
+            </div>
+            <!-- Skill Modals (reusing hotspot modal styles) -->
+            <!-- Engineering Software -->
+            <div id="skill-modal-solidworks" class="hotspot-modal">
+                <div class="hotspot-modal-content">
+                    <span class="hotspot-modal-close">&times;</span>
+                    <h3>SolidWorks CAD</h3>
+                    <p>Two years experience in soldiworks, building parts and assemblies.</p>
+                    <img src="../images/Skills/Solidworks.png" alt="CFD_GIF" class="hotspot-modal-image" />
+                    <p>I used SolidWorks at Revolve NTNU to design part for the cars <a href="Revolve_R22.html">Battery </a> and <a href="Revolve_R23_Cooling.html">Cooling System</a>.</p>
+                </div>
+            </div>
+            <div id="skill-modal-onshape" class="hotspot-modal">
+                <div class="hotspot-modal-content">
+                    <span class="hotspot-modal-close">&times;</span>
+                    <h3>Onshape CAD</h3>
+                    <p>Two years experience in Onshape, including EWIS CAD.</p>
+                    <img src="../images/Skills/Onshape.png" alt="CFD_GIF" class="hotspot-modal-image" />
+                    <p>I used Onshape at <a href="Aircraft_Propulsion_Design.html">Elfly</a> and <a href="Mechanical_Engineer_Product_Developer.html">DC Opportunities</a>, as well as own hobby projects.</p>
+                </div>
+            </div>
+            <div id="skill-modal-altair" class="hotspot-modal">
+                <div class="hotspot-modal-content">
+                    <span class="hotspot-modal-close">&times;</span>
+                    <h3>Simscale Heat Transfer</h3>
+                    <p>Basic experience with thermal simulation using the Conjugate Heat Transfer Analysis module in simscale.</p>
+                    <img src="../images/Projects/DCO/CFD Animation.gif" alt="CFD_GIF" class="hotspot-modal-image" />
+                    <p>You can click here to read more about <a href="Mechanical_Engineer_Product_Developer.html">this project</a>.</p>
+                </div>
+            </div>
+            <div id="skill-modal-simscale" class="hotspot-modal">
+                <div class="hotspot-modal-content">
+                    <span class="hotspot-modal-close">&times;</span>
+					<h3>SimScale CFD</h3>
+                    <p>During my thesis for the Noemi aircraft program, I did a CFD study on the hull of a seaplane.</p>
+                    <img src="../images/Projects/Aero_Thesis/Forside.png" alt="Aero Thesis - Forside" class="hotspot-modal-image" />
+                    <p>You can click here to read more about <a href="Aerodynamic_Optimization_Flying_Boat_Hull.html">this project</a>.</p>
+                </div>
+            </div>
+            <div id="skill-modal-altium" class="hotspot-modal">
+                <div class="hotspot-modal-content">
+                    <span class="hotspot-modal-close">&times;</span>
+                    <h3>Altium PCB Design</h3>
+                    <p>Design of a PCB for LV power distribution with 37V, 24V and 12V, distributed among 10 fused busses.</p>
+                    <div style="width: 75%; margin: 1em auto; text-align: center;">
+                        <img src="../images/Projects/Aurora Pack/DB_In_Casing.jpg" alt="Aurora Pack - DB In Casing" class="hotspot-modal-image" style="width: 100%; display: block; margin: 0 auto;" />
+                    </div>
+                    <p style="margin-top: 0.5em;">You can click here to read more about <a href="Revolve_R22.html">this project</a>.</p>
+                </div>
+            </div>
+            <!-- Programming -->
+            <div id="skill-modal-matlab" class="hotspot-modal">
+                <div class="hotspot-modal-content">
+                    <span class="hotspot-modal-close">&times;</span>
+                    <h3>MATLAB Data Analysis</h3>
+                    <p>Proficient in data processing, plotting, and analysis in MATLAB. Some of the projects I have used MATLAB are: </p>
+                    <img src="../images/Projects/Aurora Pack/SOC_Temp_Effect_3D_view_New_Scale.png" alt="MATLAB Plot Example" class="hotspot-modal-image" style="width: 75%; display: block; margin-left: auto; margin-right: auto;" />
+                    <ul>
+                        <li>Data analysis and plotting for <a href ="Lithium_Ion_Battery_Pack_Thermal_Management_PCM.html">battery cell testing </a>. </li>
+                        <li>Data analysis and plotting of data from <a href="Aerodynamic_Optimization_Flying_Boat_Hull.html">wind tunnel testing</a> </li>
+                        <li>Wrote script to log, translate and plot CANBUS data from battery cell testing</li>
+                        <li>Wrote script to size cooling system for electric propusion unit of a seaplane</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="skill-modal-ccppython" class="hotspot-modal">
+                <div class="hotspot-modal-content">
+                    <span class="hotspot-modal-close">&times;</span>
+                    <h3>C / C++ / Python</h3>
+                    <p>Basic experience across scripting and embedded-oriented tasks. Python for data analysis.</p>
+                </div>
+            </div>
+            <div id="skill-modal-appscripts" class="hotspot-modal">
+                <div class="hotspot-modal-content">
+                    <span class="hotspot-modal-close">&times;</span>
+                    <h3>Appscripts JavaScript</h3>
+                    <p>Basic automation of Google Workspace tasks and data processing using Apps Script. <br> Example: Built a weight tracking tool for the Noemi aircraft program that daily reset selectable options, logged the weight and plotted the developemnt over time.  </p>
+                </div>
+            </div>
+            <div id="skill-modal-webapp" class="hotspot-modal">
+                <div class="hotspot-modal-content">
+                    <span class="hotspot-modal-close">&times;</span>
+                    <h3>Web &amp; App Development</h3>
+                    <p>Basic front-end development with HTML, CSS, and JavaScript for static pages. I have built a few websites and one andriod app previoussely, as hobby projects. </p>
+                </div>
+            </div>
+            <div id="skill-modal-blender" class="hotspot-modal">
+                <div class="hotspot-modal-content">
+                    <span class="hotspot-modal-close">&times;</span>
+                    <h3>Blender Modeling &amp; Animations</h3>
+                    <p>Basic skills in 3D modeling and scene animations for visualization and presentations.</p>
+                    <div class="carousel carousel-v1" id="blender-carousel">
+                        <button class="carousel-arrow left" aria-label="Previous">
+                            <svg viewBox="0 0 32 32"><polyline points="20,8 12,16 20,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <div class="carousel-track">
+                            <div class="carousel-slide">
+                                <div>
+                                    <img src="../images/Skills/Blender_Render.jpg" alt="Blender 3D Render" />
+                                    <div class="carousel-caption">Example 3D rendering created in Blender in 2015. Rendering focused on rendering realistic water/rain/mist interaction with lighting.  </div>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div>
+                                    <div class="video-embed">
+                                        <iframe src="https://www.youtube.com/embed/OEd59Gbba9A" title="Blender Animation Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen data-video-slide></iframe>
+                                    </div>
+                                    <div class="carousel-caption">Animation demo. </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-arrow right" aria-label="Next">
+                            <svg viewBox="0 0 32 32"><polyline points="12,8 20,16 12,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <div class="carousel-dots"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Other Skills -->
+            <div id="skill-modal-batterytesting" class="hotspot-modal">
+                <div class="hotspot-modal-content">
+                    <span class="hotspot-modal-close">&times;</span>
+                    <h3>Battery Cell Testing</h3>
+                    <p>Experience with various aspects of cell testing, writing test plans, safety around cell testing, thermal runaway testing, in labs at Institute for Energy Technology (IFE) and Norwegian University of Science and Technology (NTNU). You can <a href="Lithium_Ion_Battery_Pack_Thermal_Management_PCM.html">click here to read more </a>about some of the cell testing I have worked on.</p>
+                </div>
+            </div>
+            <div id="skill-modal-3dprinting" class="hotspot-modal">
+                <div class="hotspot-modal-content">
+                    <span class="hotspot-modal-close">&times;</span>
+                    <h3>3D Printing</h3>
+                    <p>Though the past years, I have printed hundreds of parts, both for functional prototypes, jigs, and visual models, in materials ranging from PLA to UL94 V-0 ABS and PA-GF. Here's some examples:</p>
+                    <div class="carousel carousel-v1" id="printing-carousel-skills">
+                      <button class="carousel-arrow left" aria-label="Previous">
+                        <svg viewBox="0 0 32 32"><polyline points="20,8 12,16 20,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </button>
+                      <div class="carousel-track">
+                        <div class="carousel-slide">
+                          <div>
+                            <img src="../images/Skills/Wind_Tunnel_Model.jpg" alt="3D-printed wind tunnel model" />
+                            <div class="carousel-caption">1.4 meter wind tunnel model, FDM 3D printed in sections, and strengthened with internal aluminium profiles. The design included 14 quickly interchangable geometries in the section of interest.</div>
+                          </div>
+                        </div>
+                        <div class="carousel-slide">
+                          <div>
+                            <img src="../images/Skills/3D print ABS.JPG" alt="Battery Brackets" />
+                            <div class="carousel-caption">Functional battery brackets for Formula Student battery pack, FDM printed in UL94 V-0 ABS.</div>
+                          </div>
+                        </div>
+                        <div class="carousel-slide">
+                          <div>
+                            <img src="../images/Projects/Lyra/SLS_Cap.jpg" alt="SLS printed cap" />
+                            <div class="carousel-caption">SLS-printed cap used in for the cooling of electric motors.</div>
+                          </div>
+                        </div>
+                        <div class="carousel-slide">
+                          <div>
+                            <img src="../images/Skills/Battery_Mock_Up.jpg" alt="Battery mock-up" />
+                            <div class="carousel-caption">FDM 3D-printed mock-up of battery module.</div>
+                          </div>
+                        </div>
+                      </div>
+                      <button class="carousel-arrow right" aria-label="Next">
+                        <svg viewBox="0 0 32 32"><polyline points="12,8 20,16 12,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </button>
+                      <div class="carousel-dots"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="skill-modal-sheetmetal" class="hotspot-modal">
+                <div class="hotspot-modal-content">
+                    <span class="hotspot-modal-close">&times;</span>
+                    <h3>Sheet Metal</h3>
+                    <p>Designing metal parts such as enclosures, considering bend radii, tolerances, and manufacturability. I've also manufactured some simple sheet metal parts by hand. Here's an example:</p>
+                    <div class="carousel carousel-v1" id="sheetmetal-carousel-skills">
+                      <button class="carousel-arrow left" aria-label="Previous">
+                        <svg viewBox="0 0 32 32"><polyline points="20,8 12,16 20,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </button>
+                      <div class="carousel-track">
+                        <div class="carousel-slide">
+                          <div>
+                            <img src="../images/Projects/DCO/Sheet Metal Enclosure_2.png" alt="Sheet metal enclosure" />
+                            <div class="carousel-caption">Sheet metal enclosure prototype for power electronics assembly.</div>
+                          </div>
+                        </div>
+                        <div class="carousel-slide">
+                          <div>
+                            <img src="../images/Projects/DCO/Sheet Metal Enclosure_3.jpg" alt="Sheet metal enclosure variant" />
+                            <div class="carousel-caption">Sheet metal enclosure prototype for power electronics assembly.</div>
+                          </div>
+                        </div>
+                      </div>
+                      <button class="carousel-arrow right" aria-label="Next">
+                        <svg viewBox="0 0 32 32"><polyline points="12,8 20,16 12,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </button>
+                      <div class="carousel-dots"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="skill-modal-milling" class="hotspot-modal">
+                <div class="hotspot-modal-content">
+                    <span class="hotspot-modal-close">&times;</span>
+                    <h3>Milling</h3>
+                    <p>Experience with manual milling for brackets, fixtures, and small components, including basic workholding and tooling selection.</p>
+                    <div style="width: 75%; margin: 1em auto; text-align: center;">
+                      <img src="../images/Projects/DCO/CNC - Heatsink.png" alt="CNC milled heatsink" class="hotspot-modal-image" style="width: 100%; display: block; margin: 0 auto;" />
+                      <p class="carousel-caption" style="margin-top: 0.5em;">CNC-milled heatsink geometry for power electronics cooling.</p>
+                    </div>
+                </div>
+            </div>
+            <div id="skill-modal-laser" class="hotspot-modal">
+                <div class="hotspot-modal-content">
+                    <span class="hotspot-modal-close">&times;</span>
+                    <h3>Laser Cutting</h3>
+                    <p>I using laser cutting for quick prototyping, and other applications. Here's some examples:</p>
+                    <div class="carousel carousel-v1" id="laser-carousel-skills">
+                      <button class="carousel-arrow left" aria-label="Previous">
+                        <svg viewBox="0 0 32 32"><polyline points="20,8 12,16 20,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </button>
+                      <div class="carousel-track">
+                        <div class="carousel-slide">
+                          <div>
+                            <img src="../images/Projects/DCO/Circuit Breaker Mock-up.png" alt="Laser-cut dimming plates" />
+                            <div class="carousel-caption">Quick mockup to visualize size and fit, made from laser cut and bend plastic sheets.</div>
+                          </div>
+                        </div>
+                        <div class="carousel-slide">
+                          <div>
+                            <img src="../images/Skills/Safety_Enclosure.jpg" alt="Laser-cut stand wall" />
+                            <div class="carousel-caption">Custom electrically insulating laser-cut panels for power electronics testing enclosure.</div>
+                          </div>
+                        </div>
+                      </div>
+                      <button class="carousel-arrow right" aria-label="Next">
+                        <svg viewBox="0 0 32 32"><polyline points="12,8 20,16 12,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </button>
+                      <div class="carousel-dots"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                <li><a href="https://www.linkedin.com/in/joakim-saugen" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                <li><a href="https://github.com/JoakimSaugen" class="icon brands fa-github"><span class="label">Github</span></a></li>
+                <li><a href="mailto:joakimes@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+            </ul>
+            <ul class="copyright">
+                <li>Web Design: Joakim Saugen. Base template from: <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </div>
+    </footer>
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/browser.min.js"></script>
+    <script src="../assets/js/breakpoints.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/hotspot.js"></script>
+    <script src="../assets/js/carousel-demo.js"></script>
+</body>
+</html>

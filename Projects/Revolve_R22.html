@@ -1,0 +1,672 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Project Title – Joakim Saugen</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta name="robots" content="noindex, nofollow" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="skills.css" />
+    <link rel="stylesheet" href="../assets/css/hotspot.css" />
+    <link rel="stylesheet" href="../assets/css/carousel.css" />
+    <link rel="stylesheet" href="../assets/css/navbar.css" />
+    <style>
+      /* Page-specific: remove carousel box shadow so it blends with background */
+      .carousel,
+      .carousel-v1 {
+        box-shadow: none !important;
+        background: transparent !important;
+      }
+      /* Also make fade slides transparent so no grey panel shows */
+      .carousel-fade .carousel-slide {
+        background: transparent !important;
+      }
+      /* Align v1 carousel captions to the exact left edge of the image */
+      .carousel-v1 .carousel-caption {
+        margin-left: 0 !important; /* default is 5%; override so it lines up with image */
+      }
+      /* Make the inner slide wrapper shrink to the image width and center it */
+      .carousel-v1 .carousel-slide {
+        justify-content: center; /* already centered, ensure alignment */
+      }
+      .carousel-v1 .carousel-slide > div {
+        width: auto !important;           /* override 100% width */
+        display: inline-block !important; /* shrink to content width (image) */
+        margin: 0 auto;                   /* center wrapper inside slide */
+        text-align: left;                 /* captions align left under image */
+      }
+      /* Let image define the wrapper width via intrinsic scaling by height */
+      .carousel-v1 .carousel-slide img {
+        width: auto !important;   /* override 100% so width equals rendered content */
+        height: 340px;            /* keep fixed box height */
+        max-width: 100%;          /* prevent overflow on narrow screens */
+        object-fit: contain;      /* keep entire image visible within height */
+        object-position: center;  /* center image horizontally in wrapper if narrower */
+        display: block;
+        margin: 0 auto;           /* center image within the wrapper */
+      }
+      /* Responsive correction: undo global 98vw constraints for the image */
+      @media (max-width: 900px) {
+        .carousel-v1 .carousel-slide { min-width: 98vw; max-width: 98vw; }
+        .carousel-v1 .carousel-slide img {
+          width: auto !important;
+          min-width: 0 !important;
+          max-width: 98vw;  /* image may grow up to viewport width */
+          height: 220px;    /* match small-screen box height */
+        }
+      }
+
+      /* Tabbed Content Styles */
+      .tabs-container {
+        margin: 2em 0;
+        background-color: #fff;
+        padding: 1.5em;
+        border-radius: 0.5em;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Chapter separator styling */
+      h3[id] {
+        padding-top: 2em;
+        margin-top: 2em;
+        border-top: 2px solid rgba(0, 0, 0, 0.1);
+      }
+      h3[id]:first-of-type {
+        border-top: none;
+        margin-top: 0;
+        padding-top: 0;
+      }
+      .tabs-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5em;
+        margin-bottom: 1.5em;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 0;
+      }
+      .tab-button {
+        background: transparent;
+        border: none;
+        padding: 0.75em 1.5em;
+        cursor: pointer;
+        font-size: 1em;
+        font-weight: 600;
+        color: #888888;
+        border-bottom: 3px solid transparent;
+        transition: all 0.2s ease;
+        position: relative;
+        bottom: -2px;
+      }
+      .tab-button:hover {
+        color: #399762;
+        background: rgba(57, 151, 98, 0.1);
+      }
+      .tab-button.active {
+        color: #399762;
+        border-bottom-color: #399762;
+      }
+      .tab-content {
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+      .tab-content.active {
+        display: block;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Vertical Tabs Layout */
+      .tabs-vertical-container {
+        margin: 2em 0;
+        display: flex;
+        gap: 2em;
+        flex-wrap: wrap;
+        background-color: #fff;
+        padding: 1.5em;
+        border-radius: 0.5em;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      .tabs-vertical-nav {
+        flex: 0 0 200px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+        border-right: 2px solid rgba(255, 255, 255, 0.1);
+        padding-right: 1em;
+      }
+      .tab-button-vertical {
+        background: transparent;
+        border: none;
+        padding: 0.75em 1em;
+        cursor: pointer;
+        font-size: 1em;
+        font-weight: 600;
+        color: #888888;
+        text-align: left;
+        border-left: 3px solid transparent;
+        transition: all 0.2s ease;
+        margin-left: -1em;
+        padding-left: 1em;
+      }
+      .tab-button-vertical:hover {
+        color: #399762;
+        background: rgba(57, 151, 98, 0.1);
+      }
+      .tab-button-vertical.active {
+        color: #399762;
+        border-left-color: #399762;
+        background: rgba(57, 151, 98, 0.05);
+      }
+      .tabs-vertical-content {
+        flex: 1;
+        min-width: 0;
+      }
+      .tab-content-vertical {
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+      .tab-content-vertical.active {
+        display: block;
+      }
+
+      @media (max-width: 736px) {
+        .tab-button {
+          padding: 0.6em 1em;
+          font-size: 0.9em;
+        }
+        .tabs-vertical-container {
+          flex-direction: column;
+        }
+        .tabs-vertical-nav {
+          flex: none;
+          border-right: none;
+          border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+          padding-right: 0;
+          padding-bottom: 1em;
+        }
+        .tab-button-vertical {
+          margin-left: 0;
+          padding-left: 0.75em;
+          border-left: none;
+          border-bottom: 2px solid transparent;
+        }
+        .tab-button-vertical.active {
+          border-left: none;
+          border-bottom-color: #399762;
+        }
+      }
+      header.major {
+        margin-top: 2em;
+      }
+      #main {
+        margin: 0 auto;
+        max-width: 900px;
+        padding: 0 20px;
+      }
+
+      /* Navbar styles */
+      .navbar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        background-color: #333;
+        padding: 1em;
+        border-radius: 0.5em;
+        margin-bottom: 2em;
+      }
+      .navbar a {
+        color: #fff;
+        text-decoration: none;
+        padding: 0.75em 1.5em;
+        margin: 0 0.5em;
+        border-radius: 0.3em;
+        transition: background 0.3s;
+      }
+      .navbar a:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+    </style>
+  </head>
+  <body class="is-preload">
+
+    <script src="../assets/js/load-navbar.js"></script>
+
+    <!-- Main -->
+    <div id="main">
+
+      <!-- Project Content -->
+      <section id="project">
+        <header class="major">
+          <h2>Formula Student Battery Responsible</h2>
+        </header>
+
+        
+        <blockquote>
+          8 months.<br>
+          One   <a href="#battery-pack-design">80 kW battery pack</a> built.<br>
+          One <a href="#development-process">LV distribution system</a> redesigned.<br>
+
+          Heres some highlights
+        
+        </blockquote>
+
+        <!-- Chapter 1: Battery Pack Design -->
+        <h3 id="battery-pack-design">Battery Pack Design</h3>
+        <p>Although my years team did not make drastic changes to the battery pack, we still had to manufacture everything <span style="background-color: #ffd966ff; padding: 2px 4px; border-radius: 2px;">to spec, on time</span>, from what documentation was left from the prevoius team. <br>
+        Althoug the battery pack would not get a mayor upgrade until the next year, we did some incromental improvments, which can be seen bellow: </p>
+
+        <!-- Tabbed Hotspot Section -->
+        <div class="tabs-container">
+          <div class="tabs-nav">
+            <button class="tab-button active" data-tab="pack-level">Pack Level</button>
+            <button class="tab-button" data-tab="segment-level">Segment Level</button>
+          </div>
+
+          <div id="pack-level" class="tab-content active">
+            <div class="hotspot-container" style="width: 75%;">
+              <img src="../images/Projects/Aurora Pack/Aurora_Pack_info.png" alt="Battery Pack Overview">
+              
+              <!-- Pack Level Hotspot Markers -->
+              <div class="hotspot-marker" data-modal="hotspot-modal-pack-1" style="left: 30%; top: 40%;"></div>
+              <div class="hotspot-marker" data-modal="hotspot-modal-pack-2" style="left: 70%; top: 40%;"></div>
+            </div>
+          </div>
+
+          <div id="segment-level" class="tab-content">
+            <div class="hotspot-container" style="width: 64%;">
+              <img src="../images/Projects/Aurora Pack/R22 Segment.png" alt="Segment Design Overview">
+              
+              <!-- Segment Level Hotspot Markers -->
+              <div class="hotspot-marker" data-modal="hotspot-modal-1" style="left: 20%; top: 28%;"></div>
+              <div class="hotspot-marker" data-modal="hotspot-modal-2" style="left: 75%; top: 19%;"></div>
+              <div class="hotspot-marker" data-modal="hotspot-modal-3" style="left: 50%; top: 45%;"></div>
+              <div class="hotspot-marker" data-modal="hotspot-modal-4" style="left: 80%; top: 70%;"></div>
+              <div class="hotspot-marker" data-modal="hotspot-modal-5" style="left: 17%; top: 65%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pack Level Hotspot Modals -->
+        <div id="hotspot-modal-pack-1" class="hotspot-modal">
+          <div class="hotspot-modal-content">
+            <span class="hotspot-modal-close">&times;</span>
+            <h3>Pack Configuration</h3>
+            <p>The complete battery pack consists of 6 interchangeable segments arranged to deliver 600V nominal voltage and 7.44 kWh total capacity. Each segment can be individually removed and replaced for maintenance or upgrades.</p>
+            <ul>
+              <li><strong>Total Segments:</strong> 6</li>
+              <li><strong>Modules per Segment:</strong> 4</li>
+              <li><strong>Total Modules:</strong> 24</li>
+              <li><strong>Pack Voltage:</strong> 600V nominal</li>
+              <li><strong>Pack Capacity:</strong> 7.44 kWh</li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="hotspot-modal-pack-2" class="hotspot-modal">
+          <div class="hotspot-modal-content">
+            <span class="hotspot-modal-close">&times;</span>
+            <h3>Cooling System Integration</h3>
+            <p>The pack-level cooling system integrates forced air ventilation through all segments. Air is drawn from the front and sides of the vehicle, flowing through the 9 cooling channels in each segment.</p>
+            <ul>
+              <li><strong>Cooling Method:</strong> Forced air convection</li>
+              <li><strong>Total Air Channels:</strong> 54 (9 per segment)</li>
+              <li><strong>Channel Diameter:</strong> 3.5mm</li>
+              <li><strong>Target Temperature:</strong> 25-45°C during operation</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Segment Level Hotspot Modals -->
+        <div id="hotspot-modal-1" class="hotspot-modal">
+          <div class="hotspot-modal-content">
+            <span class="hotspot-modal-close">&times;</span>
+            <h3>Interchangeable Modular Design</h3>
+            <p>The battery is designed of 6 interchangeable segments, each consisting of 4 replaceable modules. This ensures excellent reparability if a fault occurs during the season.</p>
+            <img src="../images/Projects/Aurora Pack/R22 Module.png" alt="Thermal System" class="hotspot-modal-image">
+          </div>
+        </div>
+
+        <div id="hotspot-modal-2" class="hotspot-modal">
+          <div class="hotspot-modal-content">
+            <span class="hotspot-modal-close">&times;</span>
+            <h3>High Current PCB</h3>
+            <p>Each cell is connected though the high current PCB, Featureing: <br>
+              - 0.5mm integrated copper busbars <br>
+              - Laser welded cell tabs for low resistance and high reliability connection<br>
+              - High accuracy (± 0.8 °C) temperature sensors for each cell pair <br>
+              - Fused, integrated traces and connection to BMS for voltage reading
+            </p>
+            <img src="../images/Projects/Aurora Pack/HCPCB.png" alt="Battery Cells" class="hotspot-modal-image">
+          </div>
+        </div>
+
+        <div id="hotspot-modal-3" class="hotspot-modal">
+          <div class="hotspot-modal-content">
+            <span class="hotspot-modal-close">&times;</span>
+            <h3>Cell Structural Fastening</h3>
+            <p> The cell fastning concept was desinged to met the competition requirement for the brackets to hold under a 40g crash, while staying lightweight, non-conductive parts, while at the same time being possible to dissasembel and leaving as much space and surface area as possible for the air cooling. 
+              This years desing featured a new UL94 HB rated tape to meet new competition fire retardant requirements, new fillament for the brackets (a UL94 V-0 PC/ABS material), as well as a new UL94 V-0 glass fiber rods to lock the segments into place. 
+                
+            </p>
+            <img src="../images/Projects/Aurora Pack/Module_Fastening.png" alt="Chassis" class="hotspot-modal-image" style="width: 75%; display: block; margin-left: auto; margin-right: auto;">
+          </div>
+        </div>
+
+        <div id="hotspot-modal-4" class="hotspot-modal">
+          <div class="hotspot-modal-content">
+            <span class="hotspot-modal-close">&times;</span>
+            <h3>Cell Pairing Process</h3>
+            <p>After arriving at our facility, each cell was sorted and paired based on both capacity and internal resistance, to achive the best performance battery on a pack level.</p>           
+            <p>For capacity, the lowest cells were parired with the highest capacity cells to even out the total segment capacity.</p>
+            
+            <img src="../images/Projects/Aurora Pack/Capacity Pairing.png" alt="Monitoring" class="hotspot-modal-image">
+
+
+            <p>As seen in the figure below, cells with unequal resistance will result in a mismatch in cell current within the parallel cell pair. Cells were therefore matched to have as similar resistance within the cell pairs. This mismatch lead to additional current and therefore additional heat generation within the pack.</p>
+            <img src="../images/Projects/Aurora Pack/CellPairingTheory.png" alt="Map" class="hotspot-modal-image">
+            
+            <p>In addition, in order to achive the best overall pack cooling, cell pairs with higher internal resistance were places in the front and sides, the areas known to have the best air cooling. </p>
+            <img src="../images/Projects/Aurora Pack/Internal Resitance Map.png" alt="Map" class="hotspot-modal-image">
+
+          </div>
+        </div>
+
+        <div id="hotspot-modal-5" class="hotspot-modal">
+          <div class="hotspot-modal-content">
+            <span class="hotspot-modal-close">&times;</span>
+            <h3>Integrated Air Cooling</h3>
+            <p> Each segment was integrated with 9, 3.3mm air channels, providing air cooling to both sides of the cell pouch. This years design featured a XX Increase in air channel size.  </p>
+            <img src="../images/Projects/Aurora Pack/Air_Cooling_Expanded.png" alt="Air_Cooling" class="hotspot-modal-image">
+          </div>
+        </div>
+
+        <!-- Chapter 2: LV Distribution -->
+        <h3 id="development-process">Development of a New Low Voltage Distribution System </h3>
+        
+        
+
+        <!-- Tabbed Content Section -->
+        <div class="tabs-container">
+          <div class="tabs-nav">
+            <button class="tab-button active" data-tab="overview">Overview</button>
+            <button class="tab-button" data-tab="design">Design Process</button>
+            <button class="tab-button" data-tab="manufacturing">Testing</button>
+            <button class="tab-button" data-tab="testing">Results</button>
+          </div>
+
+          <div id="overview" class="tab-content active">
+            <img src="../images/Projects/Aurora Pack/Image for website.svg" alt="Design Overview">
+              
+            </ul>
+          </div>
+
+          <div id="design" class="tab-content">
+            <p>
+              The PCB was designed using Altium Designer. In total, two revisions were made.
+            </p>
+
+            <div class="carousel-demo">
+              <div class="carousel carousel-v1" data-start-index="0">
+                <button class="carousel-arrow left" aria-label="Previous">
+                  <svg viewBox="0 0 32 32"><polyline points="20,8 12,16 20,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="carousel-track">
+                  <div class="carousel-slide">
+                    <div>
+                      <img src="../images/Projects/Aurora Pack/PCB_Microscope.JPG" alt="Battery segment design" />
+                      <div class="carousel-caption">The prototype was hand soldered to allow for rapid testing and debugging while building the circuit.</div>
+                    </div>
+                  </div>
+                  <div class="carousel-slide">
+                    <div>
+                      <img src="../images/Projects/Aurora Pack/DB_Testing_Voltage.JPG" alt="High current PCB" />
+                      <div class="carousel-caption">Testing of the voltage output, showing 12V.08V, slightly over to account for cable losses.</div>
+                    </div>
+                  </div>
+                  <div class="carousel-slide">
+                    <div>
+                      <img src="../images/Projects/Aurora Pack/Little_Woopsie.JPG" alt="Cell pairing capacity" />
+                      <div class="carousel-caption">Little Woopsie. The footprint of the main DCDC was mirrored in the layout, and one connector did not fit. This is why we test: Fixed for Rev 2.</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="carousel-arrow right" aria-label="Next">
+                  <svg viewBox="0 0 32 32"><polyline points="12,8 20,16 12,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="carousel-dots"></div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div id="manufacturing" class="tab-content">
+            <p>
+              The previous system had suffered from reliability issues under load and in higher temperatures. 
+              The new system was therefore thoroughly tested under load and in climate chamber to ensure reliable operation.
+            </p>
+
+            <div class="carousel-demo">
+              <div class="carousel carousel-v1" data-start-index="0">
+                <button class="carousel-arrow left" aria-label="Previous">
+                  <svg viewBox="0 0 32 32"><polyline points="20,8 12,16 20,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="carousel-track">
+                  <div class="carousel-slide">
+                    <div>
+                      <img src="../images/Projects/Aurora Pack/Test_Setup_1.jpg" alt="Test setup 1" />
+                      <div class="carousel-caption">Test setup for system load testing. Fans and power resistors were used for load simulation. Power was supplied by a 600V supply, through a 16:1 DCDC as in the car. An equivalent capacitance was connected to simulate inrush current at start-up.</div>
+                    </div>
+                  </div>
+                  <div class="carousel-slide">
+                    <div>
+                      <img src="../images/Projects/Aurora Pack/Test_Setup_2.jpg" alt="Test setup 2" />
+                      <div class="carousel-caption">Climate chamber testing under 60°C to simulate the worst case ambient temperature. A power resistor board, seen in the left lower corner was used as load.</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="carousel-arrow right" aria-label="Next">
+                  <svg viewBox="0 0 32 32"><polyline points="12,8 20,16 12,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="carousel-dots"></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="testing" class="tab-content">
+            <p>
+              
+            </p>
+
+            <ul>
+              <li>System size kept (better EWIS planning)</li>
+              <li>All new power requirements met, while only adding 79 grams</li>
+              <li>No failures of the system during the entire testing and competition season</li>
+            </ul>
+
+            <div style="width: 60%; margin: 2em auto;">
+              <img src="../images/Projects/Aurora Pack/DB_Weight.jpg" alt="Distribution board weight" style="width: 100%; display: block;" />
+              <div class="carousel-caption">Final system weight: 238 grams total weight including carbon fiber casing, connectors and cooling.</div>
+            </div>
+            <div style="width: 60%; margin: 2em auto;">
+              <img src="../images/Projects/Aurora Pack/Revolve_Skid.jpg" alt="Revolve skid pad testing" style="width: 100%; display: block;" />
+              <div class="carousel-caption">The 2022 season became one of the best seasons of the team, in part due to increased reliability. Here's from winning the skidpad competition in Germany.</div>
+            </div>
+
+            <p>
+              The modular design proved invaluable during the season, allowing for quick repairs and maintaining 
+              competition readiness throughout multiple events.
+            </p>
+          </div>
+        </div>
+
+        <!-- Vertical Tabs Section - COMMENTED OUT FOR NOW, MAY USE ON DIFFERENT PAGE
+        <div class="tabs-vertical-container">
+          <div class="tabs-vertical-nav">
+            <button class="tab-button-vertical active" data-tab-v="overview">Overview</button>
+            <button class="tab-button-vertical" data-tab-v="design">Design Process</button>
+            <button class="tab-button-vertical" data-tab-v="testing">Testing</button>
+            <button class="tab-button-vertical" data-tab-v="results">Results</button>
+          </div>
+
+          <div class="tabs-vertical-content">
+            <div id="overview" class="tab-content-vertical active">
+              <img src="../images/Projects/Aurora Pack/Image for website.svg" alt="Design Overview">
+            </div>
+
+            <div id="design" class="tab-content-vertical">
+              <p>
+                The PCB was designed using Altium Designer. In total, two revisions were made.
+              </p>
+
+              <div class="carousel-demo">
+                <div class="carousel carousel-v1" data-start-index="0">
+                  <button class="carousel-arrow left" aria-label="Previous">
+                    <svg viewBox="0 0 32 32"><polyline points="20,8 12,16 20,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <div class="carousel-track">
+                    <div class="carousel-slide">
+                      <div>
+                        <img src="../images/Projects/Aurora Pack/PCB_Microscope.JPG" alt="Battery segment design" />
+                        <div class="carousel-caption">The prototype was hand soldered to allow for rapid testing and debugging while building the circuit.</div>
+                      </div>
+                    </div>
+                    <div class="carousel-slide">
+                      <div>
+                        <img src="../images/Projects/Aurora Pack/DB_Testing_Voltage.JPG" alt="High current PCB" />
+                        <div class="carousel-caption">Testing of the voltage output, showing 12V.08V, slightly over to account for cable losses.</div>
+                      </div>
+                    </div>
+                    <div class="carousel-slide">
+                      <div>
+                        <img src="../images/Projects/Aurora Pack/Little_Woopsie.JPG" alt="Cell pairing capacity" />
+                        <div class="carousel-caption">Little Woopsie. The footprint of the main DCDC was mirrored in the layout, and one connector did not fit. This is why we test: Fixed for Rev 2.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="carousel-arrow right" aria-label="Next">
+                    <svg viewBox="0 0 32 32"><polyline points="12,8 20,16 12,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <div class="carousel-dots"></div>
+                </div>
+              </div>
+            </div>
+
+            <div id="testing" class="tab-content-vertical">
+              <p>
+                The previous system had suffered from reliability issues under load and in higher temperatures. 
+                The new system was therefore thoroughly tested under load and in climate chamber to ensure reliable operation.
+              </p>
+
+              <div class="carousel-demo">
+                <div class="carousel carousel-v1" data-start-index="0">
+                  <button class="carousel-arrow left" aria-label="Previous">
+                    <svg viewBox="0 0 32 32"><polyline points="20,8 12,16 20,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <div class="carousel-track">
+                    <div class="carousel-slide">
+                      <div>
+                        <img src="../images/Projects/Aurora Pack/Test_Setup_1.jpg" alt="Test setup 1" />
+                        <div class="carousel-caption">Test setup for system load testing. Fans and power resistors were used for load simulation. Power was supplied by a 600V supply, through a 16:1 DCDC as in the car. An equivalent capacitance was connected to simulate inrush current at start-up.</div>
+                      </div>
+                    </div>
+                    <div class="carousel-slide">
+                      <div>
+                        <img src="../images/Projects/Aurora Pack/Test_Setup_2.jpg" alt="Test setup 2" />
+                        <div class="carousel-caption">Climate chamber testing under 60°C to simulate the worst case ambient temperature. A power resistor board, seen in the left lower corner was used as load.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="carousel-arrow right" aria-label="Next">
+                    <svg viewBox="0 0 32 32"><polyline points="12,8 20,16 12,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <div class="carousel-dots"></div>
+                </div>
+              </div>
+            </div>
+
+            <div id="results" class="tab-content-vertical">
+              <ul>
+                <li>System size kept (better EWIS planning)</li>
+                <li>All new power requirements met, while only adding 79 grams</li>
+                <li>No failures of the system during the entire testing and competition season</li>
+              </ul>
+
+              <div style="width: 60%; margin: 2em auto;">
+                <img src="../images/Projects/Aurora Pack/DB_Weight.jpg" alt="Distribution board weight" style="width: 100%; display: block;" />
+                <div class="carousel-caption">Final system weight: 238 grams total weight including carbon fiber casing, connectors and cooling.</div>
+              </div>
+              <div style="width: 60%; margin: 2em auto;">
+                <img src="../images/Projects/Aurora Pack/Revolve_Skid.jpg" alt="Revolve skid pad testing" style="width: 100%; display: block;" />
+                <div class="carousel-caption">The 2022 season became one of the best seasons of the team, in part due to increased reliability. Here's from winning the skidpad competition in Germany.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        END OF COMMENTED VERTICAL TABS SECTION -->
+
+        <ul class="actions">
+          <li><a href="../index.html#return" class="button">← Back to Portfolio</a></li>
+        </ul>
+      </section>
+
+    </div>
+
+    <div id="footer-include"></div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/browser.min.js"></script>
+    <script src="../assets/js/breakpoints.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/carousel-demo.js"></script>
+    <script src="../assets/js/hotspot.js"></script>
+  <script>
+    // Simple tab handling for horizontal tab groups on this page
+    document.addEventListener('DOMContentLoaded', function () {
+    var containers = document.querySelectorAll('.tabs-container');
+    for (var i = 0; i < containers.length; i++) {
+      (function (container) {
+      var buttons = container.querySelectorAll('.tab-button');
+      var contents = container.querySelectorAll('.tab-content');
+      for (var j = 0; j < buttons.length; j++) {
+        buttons[j].addEventListener('click', function () {
+        var targetId = this.getAttribute('data-tab');
+        if (!targetId) return;
+        for (var k = 0; k < buttons.length; k++) {
+          buttons[k].classList.remove('active');
+        }
+        for (var m = 0; m < contents.length; m++) {
+          contents[m].classList.remove('active');
+        }
+        this.classList.add('active');
+        var target = container.querySelector('#' + targetId);
+        if (target) {
+          target.classList.add('active');
+        }
+        });
+      }
+      })(containers[i]);
+    }
+    });
+  </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var navbar = document.querySelector('.main-navbar');
+            function updateNavbar() {
+                if (window.scrollY < 10) {
+                    navbar.classList.add('navbar-top');
+                } else {
+                    navbar.classList.remove('navbar-top');
+                }
+            }
+            updateNavbar();
+            window.addEventListener('scroll', updateNavbar);
+        });
+    </script>
+
+  </body>
+</html>

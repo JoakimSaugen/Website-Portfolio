@@ -1,0 +1,83 @@
+<nav class="main-navbar navbar-top">
+  <a href="../index.html" class="navbar-title">
+    <span style="display: block; line-height: 1; margin-bottom: 0.55em; margin-left: 0.55em; margin-top: 0.2em;">Joakim Saugen</span>
+    <span style="display: block; font-size: 0.95em; font-weight: normal; color: #399762; line-height: 1; margin-top: 0.12em; margin-bottom: 0.35em; margin-left: 0.55em;">Mechanical R&amp;D Engineer</span>
+  </a>
+  <div style="flex: 1 1 auto;"></div>
+  <a href="Skills.html">Skills</a>
+  <a href="../index.html#projects">Projects</a>
+  <a href="About_Me.html" style="margin-right: 1.2em;">About Me</a>
+</nav>
+<style>
+/* Match Skills.html look & behavior */
+.main-navbar {
+  width: 100%;
+  background: #222;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5em;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
+  font-size: 0.9em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  padding: 0.6em 0 0.6em 0;
+  transition: background 0.4s cubic-bezier(.4,0,.2,1), color 0.4s cubic-bezier(.4,0,.2,1);
+}
+.main-navbar.navbar-top { background: rgba(255,255,255,0.0) !important; color: #222 !important; box-shadow: none !important; }
+.main-navbar.navbar-top a { color: #222 !important; }
+.main-navbar.navbar-top a:hover, .main-navbar.navbar-top a.active { color: #399762 !important; }
+.main-navbar.navbar-top a::after { background: #399762 !important; }
+.main-navbar.navbar-top a[href="Skills.html"].active { color: #399762 !important; }
+.main-navbar.navbar-top a[href="About_Me.html"].active { color: #399762 !important; }
+.main-navbar.navbar-top a[href="../index.html#projects"].active { color: #399762 !important; }
+.main-navbar a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.325em 1.2em;
+  border-radius: 6px;
+  transition: background 0.18s, color 0.18s, border-bottom 0.18s;
+  border-bottom: none;
+  position: relative;
+}
+.main-navbar a.navbar-title:hover {
+  color: #399762 !important;
+}
+.main-navbar a:hover, .main-navbar a.active { background: transparent; color: #399762; }
+.main-navbar a::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0; right: 0; bottom: 0.2em;
+  height: 3px; background: #399762; opacity: 0; transition: opacity 0.18s; border-radius: 2px;
+}
+.main-navbar a:hover::after, .main-navbar a.active::after { opacity: 1; }
+/* Project page headers: force main header text to black */
+#main header.major h2 { color: #000 !important; }
+
+/* Project-style pages layout: keep footer at bottom on short pages */
+body.navbar-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body.navbar-layout #main {
+  flex: 1 0 auto;
+}
+</style>
+
+<script>
+  // Mark pages that use this navbar so we can apply layout just to them
+  (function() {
+    try {
+      document.body.classList.add('navbar-layout');
+    } catch (e) {
+      // fail silently if body is not available yet
+    }
+  })();
+</script>
+

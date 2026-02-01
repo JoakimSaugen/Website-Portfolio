@@ -98,7 +98,7 @@ input, select, textarea {
 		}
 
 	body, input, select, textarea {
-		color: #a2a2a2;
+		color: #000000;
 		font-family: "Source Sans Pro", Helvetica, sans-serif;
 		font-size: 16pt;
 		font-weight: 400;
@@ -111,7 +111,7 @@ input, select, textarea {
 		-ms-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 		transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 		border-bottom: dotted 1px;
-		color: #49bf9d;
+		color: #399762;
 		text-decoration: none;
 	}
 
@@ -159,6 +159,7 @@ input, select, textarea {
 	h3 {
 		font-size: 1.25em;
 		line-height: 1.5em;
+		color: #000000;
 	}
 
 	h4 {
@@ -239,6 +240,15 @@ input, select, textarea {
 
 	.align-right {
 		text-align: right;
+	}
+
+/* Project date lines (index tiles) */
+
+	/* Date/location line under each project card: normal-ish size, closer to title */
+	section#two .work-item h3 + p {
+		font-size: 1em;
+		margin-top: -0.5em;
+		margin-bottom: 0.75em;
 	}
 
 /* Container */
@@ -1794,6 +1804,13 @@ input, select, textarea {
 		font-size: 2em;
 	}
 
+	/* Project detail pages: date/location line just under title, normal size but closer */
+	section#project header.major h2 + p {
+		font-size: 1em;
+		margin-top: -0.5em;
+		margin-bottom: 1.25em;
+	}
+
 /* Form */
 
 	form {
@@ -2133,7 +2150,29 @@ input, select, textarea {
 				width: 100%;
 			}
 
+	/* Ensure project main images fit the content column with side margins */
+	.image.main {
+		display: block;
+		margin: 0 auto 2rem; /* center and keep vertical spacing */
+		max-width: 100%; /* allow image to fill the content column */
+		width: 100%;
+	}
+
+	.image.main img {
+		width: 100%;
+		height: auto; /* preserve aspect ratio */
+		display: block;
+	}
+
+	@media screen and (min-width: 1281px) {
+		/* Cap very large images on desktop */
+		.image.main {
+			max-width: 1100px;
+		}
+	}
+
 		.image.avatar {
+			border: 3px solid #666;
 			border-radius: 100%;
 		}
 
@@ -2143,6 +2182,8 @@ input, select, textarea {
 
 			.image.avatar img {
 				border-radius: 100%;
+				height: 100%;
+				object-fit: cover;
 				width: 100%;
 			}
 
@@ -2464,17 +2505,17 @@ input, select, textarea {
 		input[type="reset"]:hover,
 		input[type="button"]:hover,
 		.button:hover {
-			border-color: #49bf9d;
-			color: #49bf9d !important;
+			border-color: #399762;
+			color: #399762 !important;
 		}
 
 		input[type="submit"]:active,
 		input[type="reset"]:active,
 		input[type="button"]:active,
 		.button:active {
-			background-color: rgba(73, 191, 157, 0.1);
-			border-color: #49bf9d;
-			color: #49bf9d !important;
+			background-color: rgba(57, 151, 98, 0.1);
+			border-color: #399762;
+			color: #399762 !important;
 		}
 
 		input[type="submit"].icon,
@@ -2517,8 +2558,8 @@ input, select, textarea {
 		input[type="reset"].primary,
 		input[type="button"].primary,
 		.button.primary {
-			background-color: #49bf9d;
-			border-color: #49bf9d;
+			background-color: #399762;
+			border-color: #399762;
 			color: #ffffff !important;
 		}
 
@@ -2526,16 +2567,16 @@ input, select, textarea {
 			input[type="reset"].primary:hover,
 			input[type="button"].primary:hover,
 			.button.primary:hover {
-				background-color: #5cc6a7;
-				border-color: #5cc6a7;
+				background-color: #43a173;
+				border-color: #43a173;
 			}
 
 			input[type="submit"].primary:active,
 			input[type="reset"].primary:active,
 			input[type="button"].primary:active,
 			.button.primary:active {
-				background-color: #3eb08f;
-				border-color: #3eb08f;
+				background-color: #33845a;
+				border-color: #33845a;
 			}
 
 		input[type="submit"].disabled, input[type="submit"]:disabled,
@@ -2591,16 +2632,19 @@ input, select, textarea {
 		-webkit-justify-content: space-between;
 		-ms-justify-content: space-between;
 		justify-content: space-between;
-		background-color: #1f1815;
-		background-attachment: scroll,								scroll;
-		background-image: url("images/overlay.png"), url("../../images/bg.jpg");
-		background-position: top left,							top left;
-		background-repeat: repeat,								no-repeat;
-		background-size: auto,								150%;
+		background-color: #15100e;
+		background-attachment: scroll,							scroll;
+		background-image:
+			linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+			url("images/overlay.png"),
+			url("../../images/bg_9.png");
+		background-position: top left,						top left,							top left;
+		background-repeat: repeat,							repeat,							no-repeat;
+		background-size: auto,							auto,							150%;
 		color: rgba(255, 255, 255, 0.5);
 		height: 100%;
 		left: 0;
-		padding: 8em 4em;
+		padding: 4em 4em 1em 4em;
 		position: fixed;
 		text-align: right;
 		top: 0;
@@ -2639,8 +2683,9 @@ input, select, textarea {
 		}
 
 		#header .image.avatar {
+			height: 9em;
 			margin: 0 0 1em 0;
-			width: 6.25em;
+			width: 9em;
 		}
 
 /* Footer */
@@ -2684,7 +2729,7 @@ input, select, textarea {
 	#main {
 		margin-left: 35%;
 		max-width: 54em;
-		padding: 8em 4em 4em 4em;
+		padding: 4em 4em 4em 4em;
 		width: calc(100% - 35%);
 	}
 
@@ -3025,14 +3070,12 @@ input, select, textarea {
 
 		/* Main */
 
-			#main {
-				margin-left: 30%;
-				max-width: none;
-				padding: 6em 3em 3em 3em;
-				width: calc(100% - 30%);
-			}
-
-	}
+		#main {
+			margin-left: 30%;
+			max-width: none;
+			padding: 3em 3em 3em 3em;
+			width: calc(100% - 30%);
+		}	}
 
 /* Medium */
 
@@ -3078,7 +3121,7 @@ input, select, textarea {
 			#footer {
 				background-attachment: scroll;
 				background-color: #1f1815;
-				background-image: url("images/overlay.png"), url("../../images/bg.jpg");
+				background-image: url("images/overlay.png"), url("../../images/bg_1.jpg");
 				background-position: top left,						bottom center;
 				background-repeat: repeat,							no-repeat;
 				background-size: auto,							cover;
@@ -3108,13 +3151,11 @@ input, select, textarea {
 
 		/* Main */
 
-			#main {
-				margin: 0;
-				padding: 6em 4em;
-				width: 100%;
-			}
-
-	}
+		#main {
+			margin: 1;
+			padding: 3em 4em;
+			width: 100%;
+		}	}
 
 /* Small */
 
@@ -3142,6 +3183,12 @@ input, select, textarea {
 
 			header.major h2 {
 				font-size: 1.35em;
+			}
+
+			/* Project detail date/location on small screens: keep it close to the title */
+			section#project header.major h2 + p {
+				font-size: 0.95em;
+				margin-top: -0.45em;
 			}
 
 		/* List */
@@ -3172,16 +3219,14 @@ input, select, textarea {
 
 		/* Main */
 
-			#main {
-				padding: 2.25em 1.5em 0.25em 1.5em;
-			}
+		#main {
+			padding: 1.125em 1.5em 0.25em 1.5em;
+		}
 
-				#main > section {
-					margin: 2.25em 0 0 0;
-					padding: 2.25em 0 0 0;
-				}
-
-		/* Poptrox */
+			#main > section {
+				margin: 2.25em 0 0 0;
+				padding: 2.25em 0 0 0;
+			}		/* Poptrox */
 
 			.poptrox-popup {
 				border-radius: 0;

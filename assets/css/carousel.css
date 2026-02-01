@@ -1,0 +1,247 @@
+/* Carousel image captions */
+.carousel-slide > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.carousel-caption {
+  display: block;
+  text-align: left;
+  font-size: 0.89em;
+  color: #444a51;
+  margin-top: 0.5em;
+  margin-bottom: 0.2em;
+  line-height: 1.3;
+  min-height: 1.2em;
+  width: 100%;
+  max-width: 100%;
+  font-style: italic;
+  margin-left: 5%;
+}
+/* Carousel dot indicators */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7em;
+  margin: 1em 0 0.2em 0;
+}
+.carousel-dot {
+  width: 0.85em;
+  height: 0.85em;
+  border-radius: 50%;
+  background: #bbb;
+  opacity: 0.6;
+  transition: background 0.2s, opacity 0.2s;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 0;
+}
+.carousel-dot.active {
+  background: #444;
+  opacity: 1;
+}
+/* Carousel base styles */
+.carousel-demo { margin: 2em 0; }
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: transparent;
+  border-radius: 1em;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  min-height: 320px;
+}
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform;
+}
+.carousel-slide {
+  min-width: 50%;
+  box-sizing: border-box;
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.carousel-slide img {
+  width: 90%;
+  max-width: 320px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 0.7em;
+  box-shadow: none; /* remove shadow so image blends */
+  background: transparent; /* allow page background to show through */
+}
+.carousel-arrow {
+  position: absolute;
+  left: 0.2em;
+  right: auto;
+  top: 50%;
+  background: none;
+  color: #fff;
+  border: none;
+  border-radius: 0;
+  width: 2.7em;
+  height: 2.7em;
+  font-size: 2.7em;
+  font-family: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 2;
+  opacity: 0.95;
+  transition: color 0.2s;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  /* Center relative to image, not box */
+  /* Will be overridden for .carousel-v1 below */
+}
+.carousel-arrow.right {
+  left: auto;
+  right: 0.2em;
+}
+/* Center arrows relative to the image in carousel-v1 */
+.carousel-v1 .carousel-arrow {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.carousel-v1 .carousel-slide > div {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.carousel-v1 .carousel-arrow.left {
+  left: 0.2em;
+}
+.carousel-v1 .carousel-arrow.right {
+  right: 0.2em;
+}
+@media (min-width: 600px) {
+  .carousel-v1 .carousel-arrow {
+    top: calc(50% - 0.5em);
+    /* Adjust for caption height if needed */
+  }
+}
+.carousel-arrow.left { left: 0.2em; }
+.carousel-arrow.right { right: 0.2em; }
+.carousel-arrow:focus,
+.carousel-arrow:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.carousel-arrow:hover { color: #399762; }
+
+/* Hide carousel arrows by default and show them only when hovering the carousel box (version 1) */
+.carousel-v1 .carousel-arrow {
+  background: none;
+  border: none;
+  border-radius: 0;
+  width: 2.7em;
+  height: 2.7em;
+  font-size: 2.7em;
+  font-family: inherit;
+  font-weight: bold;
+  color: #fff;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, color 0.2s;
+  line-height: 1;
+  padding: 0;
+}
+.carousel-v1:hover .carousel-arrow {
+  opacity: 0.95;
+  pointer-events: auto;
+}
+.carousel-v1 .carousel-arrow svg {
+  width: 1.1em;
+  height: 1.1em;
+  display: block;
+  fill: currentColor;
+}
+.carousel-v1 .carousel-arrow:focus { outline: 2px solid #fff; }
+.carousel-v1 .carousel-arrow:hover { color: #399762; }
+.carousel-v1 {
+  overflow: hidden;
+  width: 100%;
+  max-width: 700px;
+  margin: 2em auto;
+  position: relative;
+  padding: 0;
+  background: transparent;
+  border-radius: 1em;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+.carousel-v1 .carousel-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform;
+}
+.carousel-v1 .carousel-slide {
+  min-width: 100%;
+  max-width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0 1.5em; /* small horizontal padding to show partial shadow */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: filter 0.3s;
+}
+.carousel-v1 .carousel-slide img {
+  width: 100%;
+  height: 340px;
+  max-width: 640px;
+  object-fit: contain; /* ensure entire image fits inside the box */
+  object-position: center center; /* center the image within the box */
+  border-radius: 1em;
+  box-shadow: none; /* remove shadow for seamless blending */
+  background: transparent;
+}
+@media (max-width: 900px) {
+  .carousel-v1 {
+    max-width: 98vw;
+  }
+  .carousel-v1 .carousel-slide,
+  .carousel-v1 .carousel-slide img {
+    min-width: 98vw;
+    max-width: 98vw;
+    height: 220px; /* keep fixed box height; image will contain within */
+  }
+}
+
+/* Fade version */
+.carousel-fade .carousel-track {
+  transition: none;
+}
+.carousel-fade .carousel-slide {
+  opacity: 0;
+  transition: opacity 0.6s cubic-bezier(0.4,0,0.2,1);
+  position: absolute;
+  left: 0; top: 0; right: 0; bottom: 0;
+  width: 50%;
+  background: #f7f7f7;
+  pointer-events: none;
+}
+.carousel-fade .carousel-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  position: relative;
+}
+
+/* Sliding version (for version 3) */
+.carousel-slide-anim .carousel-track {
+  transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
