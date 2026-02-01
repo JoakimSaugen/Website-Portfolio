@@ -47,12 +47,27 @@
       }
       /* Responsive correction: undo global 98vw constraints for the image */
       @media (max-width: 900px) {
-        .carousel-v1 .carousel-slide { min-width: 98vw; max-width: 98vw; }
+        .carousel-v1 .carousel-slide { 
+          min-width: 100% !important; 
+          max-width: 100% !important;
+          padding: 0 1em !important;
+        }
+        .carousel-v1 .carousel-slide > div {
+          width: 100% !important;
+          max-width: 100% !important;
+        }
         .carousel-v1 .carousel-slide img {
-          width: auto !important;
+          width: 100% !important;
           min-width: 0 !important;
-          max-width: 98vw;  /* image may grow up to viewport width */
+          max-width: 100% !important;
           height: 220px;    /* match small-screen box height */
+        }
+        .carousel-v1 .carousel-caption {
+          width: 100% !important;
+          max-width: 100% !important;
+          margin-left: 0 !important;
+          padding: 0 0.5em !important;
+          box-sizing: border-box !important;
         }
       }
 

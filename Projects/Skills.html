@@ -9,137 +9,20 @@
     <link rel="stylesheet" href="skills.css" />
     <link rel="stylesheet" href="../assets/css/carousel.css" />
     <link rel="stylesheet" href="../assets/css/hotspot.css" />
+    <link rel="stylesheet" href="../assets/css/navbar.css" />
+    <script src="../assets/js/load-navbar.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700&display=swap" rel="stylesheet" />
-        <!-- Navigation Bar -->
-        <nav class="main-navbar navbar-top">
-            <a href="../index.html" class="navbar-title">
-                Joakim Saugen<br>
-                <span style="font-size: 0.95em; font-weight: normal; color: #399762;">Mechanical R&amp;D Engineer</span>
-            </a>
-            <div style="flex: 1 1 auto;"></div>
-            <a href="Skills.html">Skills</a>
-            <a href="../index.html#projects">Projects</a>
-            <a href="About_Me.html" style="margin-right: 1.2em;">About Me</a>
-        </nav>
         <style>
-        body {
-            /* Prevent content jump when navbar overlays */
-            padding-top: 0 !important;
-        }
-        .main-navbar {
-            transition: background 0.4s cubic-bezier(.4,0,.2,1), color 0.4s cubic-bezier(.4,0,.2,1);
-        }
-        .main-navbar.navbar-top {
-            background: rgba(255,255,255,0.0) !important;
-            color: #222 !important;
-            box-shadow: none !important;
-        }
-        .main-navbar.navbar-top a {
-            color: #222 !important;
-        }
-        .main-navbar.navbar-top a:hover, .main-navbar.navbar-top a.active {
-            color: #399762 !important;
-        }
-        .main-navbar.navbar-top a::after {
-            background: #399762 !important;
-        }
-        .main-navbar.navbar-top a[href="Skills.html"].active {
-            color: #399762 !important;
-        }
-        .main-navbar.navbar-top a[href="About_Me.html"].active {
-            color: #399762 !important;
-        }
-        .main-navbar.navbar-top a[href="../index.html#projects"].active {
-            color: #399762 !important;
-        }
-                /* Modern top navigation bar */
-                .main-navbar {
-                    width: 100%;
-                    background: #222;
-                    color: #fff;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    gap: 2.5em;
-                    padding: 0.525em 0 0.525em 0;
-                    font-family: 'Source Sans Pro', Arial, sans-serif;
-                    font-size: 0.88em;
-                    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-                    position: sticky;
-                    top: 0;
-                    z-index: 1000;
-                    padding: 0.6em 0 0.6em 0;
-                }
-                .main-navbar a {
-                    color: #fff;
-                    text-decoration: none;
-                    padding: 0.5em 1.2em;
-                    border-radius: 6px;
-                    transition: background 0.18s, color 0.18s, border-bottom 0.18s;
-                    border-bottom: none;
-                    position: relative;
-                }
-                .main-navbar a:hover, .main-navbar a.active {
-                    background: transparent;
-                    color: #399762;
-                }
-                .main-navbar a::after {
-                    content: '';
-                    display: block;
-                    position: absolute;
-                    left: 0;
-                    right: 0;
-                    bottom: 0.2em;
-                    height: 3px;
-                    background: #399762;
-                    opacity: 0;
-                    transition: opacity 0.18s;
-                    border-radius: 2px;
-                }
-                .main-navbar a:hover::after, .main-navbar a.active::after {
-                    opacity: 1;
-                }
-                /* Persistent footnote bar */
-                .footnote-bar {
-                    width: 100%;
-                    background: #1f1815 url('../assets/css/images/bg_4.png') center center repeat;
-                    color: #fff;
-                    text-align: center;
-                    font-size: 0.95em;
-                    padding: 2em 0 1.4em 0;
-                    min-height: 4.5em;
-                    position: fixed;
-                    left: 0;
-                    bottom: 0;
-                    z-index: 1001;
-                    box-shadow: 0 -2px 8px rgba(0,0,0,0.07);
-                    display: none;
-                }
-                .footnote-bar.visible { display: block; }
-                .footnote-bar a { color: #49bf9d; text-decoration: underline; }
         .skill-link { color: #399762 !important; }
         .contact-info-box {
             max-width: 800px; margin: 2em auto; padding: 2em 2em 1em 2em;
             background: #f8f8f8; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.07);
         }
         </style>
-        <script>
-            // Toggle transparent navbar at top
-            document.addEventListener('DOMContentLoaded', function() {
-                var navbar = document.querySelector('.main-navbar');
-                function updateNavbar() {
-                    if (window.scrollY < 10) {
-                        navbar.classList.add('navbar-top');
-                    } else {
-                        navbar.classList.remove('navbar-top');
-                    }
-                }
-                updateNavbar();
-                window.addEventListener('scroll', updateNavbar);
-            });
-        </script>
 </head>
 <body class="is-preload">
+  <div id="navbar-include"></div>
+  <script src="../assets/js/load-navbar.js"></script>
 
     <div id="main" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; max-width: 900px; margin: 0 auto; width: 100%;">
         <header style="text-align: center; margin-bottom: 2em;">
@@ -423,18 +306,6 @@
             </div>
         </section>
     </div>
-    <footer id="footer">
-        <div class="inner">
-            <ul class="icons">
-                <li><a href="https://www.linkedin.com/in/joakim-saugen" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-                <li><a href="https://github.com/JoakimSaugen" class="icon brands fa-github"><span class="label">Github</span></a></li>
-                <li><a href="mailto:joakimes@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-            </ul>
-            <ul class="copyright">
-                <li>Web Design: Joakim Saugen. Base template from: <a href="http://html5up.net">HTML5 UP</a></li>
-            </ul>
-        </div>
-    </footer>
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/js/browser.min.js"></script>
     <script src="../assets/js/breakpoints.min.js"></script>
@@ -442,5 +313,19 @@
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/hotspot.js"></script>
     <script src="../assets/js/carousel-demo.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var navbar = document.querySelector('.main-navbar');
+        function updateNavbar() {
+          if (window.scrollY < 10) {
+            navbar.classList.add('navbar-top');
+          } else {
+            navbar.classList.remove('navbar-top');
+          }
+        }
+        updateNavbar();
+        window.addEventListener('scroll', updateNavbar);
+      });
+    </script>
 </body>
 </html>

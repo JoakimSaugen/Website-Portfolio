@@ -5,7 +5,7 @@
   </a>
   <div style="flex: 1 1 auto;"></div>
   <a href="Skills.html">Skills</a>
-  <a href="../index.html#projects">Projects</a>
+  <a href="../index.html#two">Projects</a>
   <a href="About_Me.html" style="margin-right: 1.2em;">About Me</a>
 </nav>
 <style>
@@ -33,7 +33,7 @@
 .main-navbar.navbar-top a::after { background: #399762 !important; }
 .main-navbar.navbar-top a[href="Skills.html"].active { color: #399762 !important; }
 .main-navbar.navbar-top a[href="About_Me.html"].active { color: #399762 !important; }
-.main-navbar.navbar-top a[href="../index.html#projects"].active { color: #399762 !important; }
+.main-navbar.navbar-top a[href="../index.html#two"].active { color: #399762 !important; }
 .main-navbar a {
   color: #fff;
   text-decoration: none;
@@ -67,6 +67,33 @@ body.navbar-layout {
 
 body.navbar-layout #main {
   flex: 1 0 auto;
+}
+
+/* Mobile responsive navbar */
+@media screen and (max-width: 980px) {
+  .main-navbar {
+    font-size: 0.75em !important;
+    gap: 1em !important;
+    padding: 0.5em 0.5em !important;
+  }
+  
+  .main-navbar a {
+    padding: 0.3em 0.5em !important;
+  }
+  
+  .main-navbar a.navbar-title span:first-child {
+    font-size: 0.9em !important;
+    margin-left: 0.3em !important;
+  }
+  
+  .main-navbar a.navbar-title span:last-child {
+    font-size: 0.75em !important;
+    margin-left: 0.3em !important;
+  }
+  
+  .main-navbar a[href="About_Me.html"] {
+    margin-right: 0.5em !important;
+  }
 }
 </style>
 

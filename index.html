@@ -98,6 +98,95 @@
 				}
 			}
 			
+			/* Mobile responsive fixes */
+			@media screen and (max-width: 980px) {
+				/* Override index-layout styles for mobile */
+				body.index-layout #main {
+					padding-left: 1.5em !important;
+					padding-right: 1.5em !important;
+					max-width: 100% !important;
+					margin: 0 !important;
+					width: 100% !important;
+				}
+				
+				/* Show footer on mobile */
+				body.index-layout #footer {
+					display: block !important;
+				}
+				
+				/* Get in Touch section - make text and icons smaller on mobile */
+				#three .contact-info-box {
+					flex-direction: column !important;
+				}
+				
+				#three .contact-info-box h2 {
+					font-size: 1.35em !important;
+				}
+				
+				#three .contact-info-box p {
+					font-size: 0.9em !important;
+				}
+				
+				#three .labeled-icons li {
+					margin-bottom: 1em !important;
+				}
+				
+				#three .labeled-icons h3 {
+					font-size: 0.9em !important;
+				}
+				
+				#three .labeled-icons span,
+				#three .labeled-icons a {
+					font-size: 0.95em !important;
+				}
+				
+				/* Recent Projects - keep 2 columns on mobile */
+				#two .work-item.col-12-xsmall {
+					width: 50% !important;
+				}
+				
+				#two .work-item h3 {
+					font-size: 1em !important;
+				}
+				
+				#two .work-item p {
+					font-size: 0.85em !important;
+				}
+				
+				/* Hard Skills section - keep 2 columns on mobile */
+				#one .contact-info-box .col-12-xsmall {
+					width: 50% !important;
+				}
+				
+				#one .contact-info-box {
+					padding: 1.5em 1.5em 1em 1.5em !important;
+				}
+				
+				#one .contact-info-box h2 {
+					font-size: 1.35em !important;
+				}
+				
+				#one .contact-info-box h4 {
+					font-size: 0.95em !important;
+				}
+				
+				#one .contact-info-box ul.skills-list li {
+					font-size: 0.85em !important;
+					padding: 0.4em 0 !important;
+				}
+				
+				/* Increase spacing above main header on mobile */
+				#one header.major {
+					margin-top: 2em !important;
+				}
+				
+				/* Adjust background image zoom on mobile */
+				#header {
+					background-size: auto, auto, 200% !important;
+					background-position: top left, top left, center top !important;
+				}
+			}
+			
 		</style>
 		<script>
 		// Early, flicker-free restore of scroll position when returning from a project page

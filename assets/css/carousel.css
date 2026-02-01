@@ -212,13 +212,37 @@
 }
 @media (max-width: 900px) {
   .carousel-v1 {
-    max-width: 98vw;
+    max-width: 100%;
+    overflow: hidden;
   }
-  .carousel-v1 .carousel-slide,
+  .carousel-v1 .carousel-slide {
+    min-width: 100%;
+    max-width: 100%;
+    padding: 0 1em;
+  }
+  .carousel-v1 .carousel-slide > div {
+    width: 100%;
+    max-width: 100%;
+  }
   .carousel-v1 .carousel-slide img {
-    min-width: 98vw;
-    max-width: 98vw;
-    height: 220px; /* keep fixed box height; image will contain within */
+    width: 100%;
+    max-width: 100%;
+    height: 220px;
+  }
+  .carousel-v1 .carousel-caption {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    padding: 0 0.5em;
+    box-sizing: border-box;
+  }
+  .carousel-v1 .carousel-track {
+    overflow: visible;
+  }
+  /* Ensure arrows are visible on mobile */
+  .carousel-v1 .carousel-arrow {
+    opacity: 0.7 !important;
+    pointer-events: auto !important;
   }
 }
 
