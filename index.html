@@ -6,18 +6,154 @@
 -->
 <html>
 	<head>
-		<title>Strata by HTML5 UP</title>
+		<title>Portfolio Website | Joakim Saugen</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="robots" content="noindex, nofollow" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/carousel.css" />
+		<link rel="stylesheet" href="assets/css/hotspot.css" />
+		<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700&display=swap" rel="stylesheet" />
+		<style>
+			/* Responsive video embed (16:9 aspect ratio) */
+			.video-embed {
+				position: relative;
+				padding-top: 56.25%; /* 16:9 aspect ratio */
+				height: 0;
+				width: 100%;
+				max-width: 800px;
+				margin: 0 auto;
+			}
+			.video-embed iframe {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				border: 0;
+			}
+			
+			/* Carousel inside modal adjustments */
+			.hotspot-modal-content .carousel-v1 {
+				margin: 1.5em 0;
+				max-width: 100%;
+			}
+			.hotspot-modal-content .carousel-v1 .carousel-slide > div {
+				width: 100% !important;
+			}
+			.hotspot-modal-content .carousel-v1 .carousel-slide img {
+				width: 100% !important;
+				height: auto !important;
+				max-height: 400px;
+				object-fit: contain;
+			}
+			/* Ensure video embeds maintain proper width in carousel */
+			.hotspot-modal-content .carousel-v1 .video-embed {
+				width: 100% !important;
+				max-width: 100% !important;
+			}
+			.hotspot-modal-content .carousel-v1 .carousel-caption {
+				width: 100% !important;
+				text-align: center;
+				margin-top: 0.5em;
+			}
+			@media (max-width: 900px) {
+				.hotspot-modal-content .carousel-v1 .carousel-slide img {
+					max-height: 300px;
+				}
+			}
+			.skill-link {
+				color: #399762 !important;
+			}
+
+			/* Index-only layout tweaks: use a bit more right-side space */
+			body.index-layout #main {
+				padding-left: 3em;
+				padding-right: 2em;
+				max-width: 58em;
+			}
+			/* Index-only: show icons + credit in fixed left header, hide global footer */
+			body.index-layout #footer {
+				display: none;
+			}
+			#header .header-bottom {
+				margin-top: 2em;
+			}
+			#header .header-bottom .icons a {
+				color: rgba(255, 255, 255, 0.4);
+			}
+			#header .header-credit {
+				margin-top: 0.75em;
+				font-size: 0.75em;
+				color: rgba(255, 255, 255, 0.4);
+			}
+			#header .header-credit a {
+				color: inherit;
+			}
+			
+			/* Fix for narrow screens: prevent negative margin from causing border overlap */
+			@media screen and (max-width: 736px) {
+				ul.actions {
+					margin-bottom: 0 !important;
+				}
+			}
+			
+		</style>
+		<script>
+		// Early, flicker-free restore of scroll position when returning from a project page
+		(function() {
+			try {
+				if (location.hash === '#return') {
+					var pos = parseInt(sessionStorage.getItem('indexScrollPos') || '0', 10);
+					if (!isNaN(pos) && pos >= 0) {
+						// Hide document to avoid showing top-of-page before scroll is applied
+						document.documentElement.style.visibility = 'hidden';
+						// Ensure no smooth behavior interferes
+						document.documentElement.style.scrollBehavior = 'auto';
+						// Attempt immediate scroll
+						window.scrollTo(0, pos);
+						// Confirm scroll and reveal as soon as DOM is ready or fully loaded
+						var reveal = function() {
+							window.scrollTo(0, pos);
+							document.documentElement.style.visibility = '';
+						};
+						document.addEventListener('DOMContentLoaded', reveal, { once: true });
+						window.addEventListener('load', reveal, { once: true });
+						// Clean hash early so refresh won't re-trigger
+						history.replaceState(null, '', location.pathname + location.search);
+					}
+				}
+			} catch (e) { /* no-op */ }
+		})();
+		</script>
 	</head>
-	<body class="is-preload">
+	<body class="is-preload index-layout">
 
 		<!-- Header -->
 		<header id="header">
- 			 <a href="#" class="image avatar"><img src="images/avatar.jpg" alt="Joakim Saugen" /></a>
- 					 	<h1><strong>Joakim Saugen</strong>, Mechanical Engineer<br />
- 						specializing in aerospace, thermal systems, and R&D.</h1>
+			<div class="inner">
+				<a href="#" class="image avatar"><img src="images/avatars/Profile_Picture.png" alt="Joakim Saugen" /></a>
+				<h1 style="margin-top: 1.2em;">
+					<!--
+					<span style="background: rgba(180,180,180,0.4); border-radius: 0.18em; color: black; display: inline; box-decoration-break: clone; -webkit-box-decoration-break: clone;">
+						<strong>Joakim Saugen</strong>, Mechanical Engineer
+					</span><br />
+					<span style="background: rgba(180,180,180,0.4); border-radius: 0.18em; color: black; display: inline; box-decoration-break: clone; -webkit-box-decoration-break: clone;">
+						Specializing in Energy Storage, Electromobility, Aerospace,<br>Thermal Systems, and R&amp;D.
+					</span>
+					-->
+					<strong>Joakim Saugen</strong>, Mechanical Engineer<br />
+					Specializing in Energy Storage,<br /> Electromobility, Aerospace,<br>Thermal Systems, and R&amp;D.
+				</h1>
+			</div>
+			<div class="header-bottom">
+				<ul class="icons">
+					<li><a href="https://www.linkedin.com/in/joakim-saugen" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+					<li><a href="https://github.com/JoakimSaugen" class="icon brands fa-github"><span class="label">Github</span></a></li>
+					<li><a href="mailto:joakimes@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+				</ul>
+				<p class="header-credit">Web Design: Joakim Saugen. Base template from: <a href="http://html5up.net">HTML5 UP</a></p>
+			</div>
 		</header>
 
 
@@ -28,97 +164,341 @@
 				<!-- One -->
 					<section id="one">
 						<header class="major">
-							<h2>Ipsum lorem dolor aliquam ante commodo<br />
-							magna sed accumsan arcu neque.</h2>
+							<h2 style="color: black; display: inline; background: linear-gradient(120deg, #b6e2cd 60%, #399762 100%); box-decoration-break: clone; padding: 0.1em 0.3em 0.1em 0.2em; border-radius: 0.25em; font-family: 'Libre Baskerville', serif;">Welcome to my Online Porfolio Website.</h2>
 						</header>
-						<p>Accumsan orci faucibus id eu lorem semper. Eu ac iaculis ac nunc nisi lorem vulputate lorem neque cubilia ac in adipiscing in curae lobortis tortor primis integer massa adipiscing id nisi accumsan pellentesque commodo blandit enim arcu non at amet id arcu magna. Accumsan orci faucibus id eu lorem semper nunc nisi lorem vulputate lorem neque cubilia. Test to check how to update</p>
-						<ul class="actions">
-							<li><a href="#" class="button">Learn More</a></li>
-						</ul>
+						<p style="margin-top: 2.5em;"></p>
+						<p>Hi, I’m Joakim Saugen. </br>
+							I'm a mechanical and energy storage engineer with a background in electro-mobility, power electronics and aerospace. 
+							I have hands-on experience designing and prototyping lightweight structures, battery packs and cooling systems. I’m passionate about solving complex, multi-disciplinary 
+							challenges. In this portfolio, you can see some of my skills and projects. 
+						</br>
+						<!-- This portfolio showcases a selection of my recent projects: -->
+						</p>
+ <!-- Skills: two-column lists for easy linking later -->
+
+				<div class="contact-info-box" style="max-width: 800px; min-width: 320px; margin: 2em auto; padding: 2em 2.5em 1.5em 2.5em; background: #f8f8f8; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.07);">
+					<h2 style="color: black;">Hard Skills</h2>
+					<!-- Replace # in the links below with a relevant project URL later, e.g., 'Projects/Revolve_R22.html' -->
+					<div class="row">
+						<div class="col-6 col-12-xsmall">
+							<h4 style="color: black;"><u>Engineering Software</u></h4>
+							<ul class="alt skills-list">
+								<li><a href="#" class="skill-link" data-modal="skill-modal-solidworks" title="Open details">SolidWorks CAD - Proficient</a></li>
+								<li><a href="#" class="skill-link" data-modal="skill-modal-onshape" title="Open details">Onshape CAD - Proficient</a></li>
+								<li><a href="#" class="skill-link" data-modal="skill-modal-altair" title="Open details">Simscale Heat Transfer - Basic</a></li>
+								<li><a href="#" class="skill-link" data-modal="skill-modal-simscale" title="Open details">SimScale CFD - Basic</a></li>
+								<li><a href="#" class="skill-link" data-modal="skill-modal-altium" title="Open details">Altium PCB Design - Basic</a></li>
+								<li><a href="#" class="skill-link" data-modal="skill-modal-matlab" title="Open details">MATLAB Data Analysis - Proficient</a></li>
+							</ul>
+						</div>
+						<div class="col-6 col-12-xsmall">
+							<h4 style="color: black;"><u>Rapid Prototyping</u></h4>
+							<ul class="alt skills-list">
+									<li><a href="#" class="skill-link" data-modal="skill-modal-3dprinting" title="Open details">3D printing (FDM, SLS and SLA)</a></li>
+									<li><a href="#" class="skill-link" data-modal="skill-modal-milling" title="Open details">Milling</a></li>
+									<li><a href="#" class="skill-link" data-modal="skill-modal-sheetmetal" title="Open details">Sheet metal</a></li>
+									<li><a href="#" class="skill-link" data-modal="skill-modal-lasercutting" title="Open details">Laser cutting</a></li>
+										<li><a href="#" class="skill-link" data-modal="skill-modal-batterytesting" title="Open details">Battery Cell Testing</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+        <!-- Skill Modals (reusing hotspot modal styles) -->
+        <!-- Engineering Software -->
+		<div id="skill-modal-solidworks" class="hotspot-modal">
+          <div class="hotspot-modal-content">
+            <span class="hotspot-modal-close">&times;</span>
+            <h3>SolidWorks CAD</h3>
+			<p>Two years experience in soldiworks, building parts and assemblies.</p>
+			<img src="images/Skills/Solidworks.png" alt="CFD_GIF" class="hotspot-modal-image" />
+			<p>I used SolidWorks at Revolve NTNU to design part for the cars <a href="Projects/Revolve_R22.html">Battery </a> and <a href="Projects/Revolve_R23_Cooling.html">Cooling System</a>.</p>
+            <!-- Link to project later: <a href="Projects/Revolve_R23_Cooling.html">See project</a> -->
+          </div>
+        </div>
+		<div id="skill-modal-onshape" class="hotspot-modal">
+          <div class="hotspot-modal-content">
+            <span class="hotspot-modal-close">&times;</span>
+            <h3>Onshape CAD</h3>
+			<p>Two years experience in Onshape, including EWIS CAD.</p>
+			<img src="images/Skills/Onshape.png" alt="CFD_GIF" class="hotspot-modal-image" />
+			<p>I used Onshape at <a href="Projects/Aircraft_Propulsion_Design.html">Elfly</a> and <a href="Projects/Mechanical_Engineer_Product_Developer.html">DC Opportunities</a>, as well as own hobby projects.</p>
+          </div>
+        </div>
+        <div id="skill-modal-altair" class="hotspot-modal">
+          <div class="hotspot-modal-content">
+            <span class="hotspot-modal-close">&times;</span>
+            <h3>Simscale Heat Transfer</h3>
+            <p>Basic experience with thermal simulation using the Conjugate Heat Transfer Analysis module in simscale.</p>
+			<img src="images/Projects/DCO/CFD Animation.gif" alt="CFD_GIF" class="hotspot-modal-image" />
+            <p>You can click here to read more about <a href="Projects/Mechanical_Engineer_Product_Developer.html">this project</a>.</p>
+          </div>
+        </div>
+        <div id="skill-modal-simscale" class="hotspot-modal">
+          <div class="hotspot-modal-content">
+            <span class="hotspot-modal-close">&times;</span>
+            <h3>SimScale CFD</h3>
+            <p>During my thesis for the Noemi aircraft program, I did a CFD study on the hull of a seaplane.</p>
+            <img src="images/Projects/Aero_Thesis/Forside.png" alt="Aero Thesis - Forside" class="hotspot-modal-image" />
+            <p>You can click here to read more about <a href="Projects/Aerodynamic_Optimization_Flying_Boat_Hull.html">this project</a>.</p>
+          </div>
+        </div>
+        <div id="skill-modal-altium" class="hotspot-modal">
+          <div class="hotspot-modal-content">
+            <span class="hotspot-modal-close">&times;</span>
+            <h3>Altium PCB Design</h3>
+            <p>Design of a PCB for LV power distribution with 37V, 24V and 12V, distributed among 10 fused busses.</p>
+            <div style="width: 75%; margin: 1em auto; text-align: center;">
+              <img src="images/Projects/Aurora Pack/DB_In_Casing.jpg" alt="Aurora Pack - DB In Casing" class="hotspot-modal-image" style="width: 100%; display: block; margin: 0 auto;" />
+			  <p class="carousel-caption"> PCB designed in Altium Designer.</p>
+			</div>
+			<p>You can click here to read more about <a href="Projects/Revolve_R22.html">this project</a>.</p>
+		
+          </div>
+        </div>
+
+        <!-- Programming -->
+        <div id="skill-modal-matlab" class="hotspot-modal">
+          <div class="hotspot-modal-content">
+            <span class="hotspot-modal-close">&times;</span>
+            <h3>MATLAB Data Analysis</h3>
+            <p>Proficient in data processing, plotting, and analysis in MATLAB. Some of the projects I have used MATLAB are: </p>
+			<img src="images/Projects/Aurora Pack/SOC_Temp_Effect_3D_view_New_Scale.png" alt="MATLAB Plot Example" class="hotspot-modal-image" style="width: 75%; display: block; margin-left: auto; margin-right: auto;" />
+			<p class="carousel-caption"> Example plot from battery testing, showing interal resistance as a function of temperature and state of charge.</p>
+
+            <ul>
+              <li>Data analysis and plotting for <a href ="Projects/Lithium_Ion_Battery_Pack_Thermal_Management_PCM.html">battery cell testing </a>. </li>
+              <li>Data analysis and plotting of data from <a href="Projects/Aerodynamic_Optimization_Flying_Boat_Hull.html">wind tunnel testing</a> </li>
+              <li>Wrote script to log, translate and plot CANBUS data from battery cell testing</li>
+              <li>Wrote script to size cooling system for electric propusion unit of a seaplane</li>
+            </ul>
+          </div>
+        </div>
+        <div id="skill-modal-ccppython" class="hotspot-modal">
+          <div class="hotspot-modal-content">
+            <span class="hotspot-modal-close">&times;</span>
+            <h3>C / C++ / Python</h3>
+            <p>Basic experience across scripting and embedded-oriented tasks. Python for data analysis.</p>
+          </div>
+        </div>
+		<div id="skill-modal-3dprinting" class="hotspot-modal">
+		  <div class="hotspot-modal-content">
+			<span class="hotspot-modal-close">&times;</span>
+			<h3>3D Printing</h3>
+			<p>Though the past years, I have printed hundreds of parts, both for functional prototypes, jigs, and visual models, in materials ranging from PLA to UL94 V-0 ABS and PA-GF. Here's some examples:</p>
+			<div class="carousel carousel-v1" id="printing-carousel">
+			  <button class="carousel-arrow left" aria-label="Previous">
+				<svg viewBox="0 0 32 32"><polyline points="20,8 12,16 20,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+			  </button>
+			  <div class="carousel-track">
+				<div class="carousel-slide">
+				  <div>
+					<img src="images/Skills/Wind_Tunnel_Model.jpg" alt="3D-printed wind tunnel model" />
+					<div class="carousel-caption">1.4 meter wind tunnel model, FDM 3D printed in sections, and strengthened with internal aluminium profiles. The design included 14 quickly interchangable geometries in the section of interest.</div>
+				  </div>
+				</div>
+				<div class="carousel-slide">
+				  <div>
+					<img src="images/Skills/3D print ABS.JPG" alt="Battery Brackets" />
+					<div class="carousel-caption">Functional battery brackets for Formula Student battery pack, FDM printed in UL94 V-0 ABS.</div>
+				  </div>
+				</div>
+				<div class="carousel-slide">
+				  <div>
+					<img src="images/Projects/Lyra/SLS_Cap.jpg" alt="SLS printed cap" />
+					<div class="carousel-caption">SLS-printed cap used in for the cooling of electric motors.</div>
+				  </div>
+				</div>
+				<div class="carousel-slide">
+				  <div>
+					<img src="images/Skills/Battery_Mock_Up.jpg" alt="Battery mock-up" />
+					<div class="carousel-caption">FDM 3D-printed mock-up of battery module.</div>
+				  </div>
+				</div>
+			  </div>
+			  <button class="carousel-arrow right" aria-label="Next">
+				<svg viewBox="0 0 32 32"><polyline points="12,8 20,16 12,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+			  </button>
+			  <div class="carousel-dots"></div>
+			</div>
+		  </div>
+		</div>
+		<div id="skill-modal-milling" class="hotspot-modal">
+		  <div class="hotspot-modal-content">
+			<span class="hotspot-modal-close">&times;</span>
+			<h3>Milling</h3>
+			<p>Experience with manual milling for brackets, fixtures, and small components, including basic workholding and tooling selection.</p>
+			<div style="width: 75%; margin: 1em auto; text-align: center;">
+			  <img src="images/Projects/DCO/CNC - Heatsink.png" alt="CNC milled heatsink" class="hotspot-modal-image" style="width: 100%; display: block; margin: 0 auto;" />
+			  <p class="carousel-caption" style="margin-top: 0.5em;">CNC-milled heatsink geometry for power electronics cooling.</p>
+			</div>
+		  </div>
+		</div>
+		<div id="skill-modal-sheetmetal" class="hotspot-modal">
+		  <div class="hotspot-modal-content">
+			<span class="hotspot-modal-close">&times;</span>
+			<h3>Sheet Metal</h3>
+			<p>Designing metal parts such as enclosures, considering bend radii, tolerances, and manufacturability. I've also manufactured some simple sheet metal parts by hand. Here's an example:</p>
+			<div class="carousel carousel-v1" id="sheetmetal-carousel">
+			  <button class="carousel-arrow left" aria-label="Previous">
+				<svg viewBox="0 0 32 32"><polyline points="20,8 12,16 20,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+			  </button>
+			  <div class="carousel-track">
+				<div class="carousel-slide">
+				  <div>
+					<img src="images/Projects/DCO/Sheet Metal Enclosure_2.png" alt="Sheet metal enclosure" />
+					<div class="carousel-caption">Sheet metal enclosure prototype for power electronics assembly.</div>
+				  </div>
+				</div>
+				<div class="carousel-slide">
+				  <div>
+					<img src="images/Projects/DCO/Sheet Metal Enclosure_3.jpg" alt="Sheet metal enclosure variant" />
+					<div class="carousel-caption">Sheet metal enclosure prototype for power electronics assembly.</div>
+				  </div>
+				</div>
+			  </div>
+			  <button class="carousel-arrow right" aria-label="Next">
+				<svg viewBox="0 0 32 32"><polyline points="12,8 20,16 12,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+			  </button>
+			  <div class="carousel-dots"></div>
+			</div>
+		  </div>
+		</div>
+		<div id="skill-modal-lasercutting" class="hotspot-modal">
+		  <div class="hotspot-modal-content">
+			<span class="hotspot-modal-close">&times;</span>
+			<h3>Laser Cutting</h3>
+			<p>I using laser cutting for quick prototyping, and other applications. Here's some examples:</p>
+			<div class="carousel carousel-v1" id="laser-carousel">
+			  <button class="carousel-arrow left" aria-label="Previous">
+				<svg viewBox="0 0 32 32"><polyline points="20,8 12,16 20,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+			  </button>
+			  <div class="carousel-track">
+				<div class="carousel-slide">
+				  <div>
+					<img src="images/Projects/DCO/Circuit Breaker Mock-up.png" alt="Laser-cut dimming plates" />
+					<div class="carousel-caption">Quick mockup to visualize size and fit, made from laser cut and bend plastic sheets.</div>
+				  </div>
+				</div>
+				<div class="carousel-slide">
+				  <div>
+					<img src="images/Skills/Safety_Enclosure.jpg" alt="Laser-cut stand wall" />
+					<div class="carousel-caption">Custom electrically insulating laser-cut panels for power electronics testing enclosure.</div>
+				  </div>
+				</div>
+			  </div>
+			  <button class="carousel-arrow right" aria-label="Next">
+				<svg viewBox="0 0 32 32"><polyline points="12,8 20,16 12,24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+			  </button>
+			  <div class="carousel-dots"></div>
+			</div>
+		  </div>
+		</div>
+
+        <!-- Other Skills -->
+        <div id="skill-modal-batterytesting" class="hotspot-modal">
+          <div class="hotspot-modal-content">
+            <span class="hotspot-modal-close">&times;</span>
+            <h3>Battery Cell Testing</h3>
+            <p>Experience with various aspects of cell testing, writing test plans, safety around cell testing, thermal runaway testing, in labs at Institute for Energy Technology (IFE) and Norwegian University of Science and Technology (NTNU).</p>
+			            <div style="width: 75%; margin: 1em auto; text-align: center;">
+					  <img src="images/Skills/IFE_Cell_Testing.jpg" alt="IFE Cell Testing" class="hotspot-modal-image" style="width: 100%; display: block; margin: 0 auto;" />
+							<p class="carousel-caption">Cell testing at IFE</p>
+						</div>
+			<p>You can <a href="Projects/Lithium_Ion_Battery_Pack_Thermal_Management_PCM.html">click here to read more </a>about some of the cell testing I have worked on.</p>
+          </div>
+        </div>
+						
+						
+						<div style="max-width: 800px; min-width: 320px; margin: 0 auto;">
+							<ul class="actions" style="margin-bottom:-3em;">
+								<li><a href="Projects/Skills.html" class="button">More Skills</a></li>
+							</ul>
+						</div>
 					</section>
 
 				<!-- Two -->
 					<section id="two">
-						<h2>Recent Work</h2>
-						<div class="row">
+						<div class="contact-info-box" style="max-width: 800px; min-width: 320px; margin: 2em auto; padding: 0 0 0 0; background: transparent; box-shadow: none; border-radius: 0;">
+							<h2 style="color: black;">Recent Projects</h2>
+							<div class="row">
 							<article class="col-6 col-12-xsmall work-item">
- 					 			<a href="images/fulls/01.jpg" class="image fit thumb"><img src="images/thumbs/01.jpg" alt="" /></a>
-								<h3>Magna sed consequat tempus</h3>
-								<p>This is a test</p>
+								<a href="Projects/Mechanical_Engineer_Product_Developer.html" class="image fit thumb" data-poptrox="ignore"><img src="images/thumbs/500A SSCB.png" alt="Mechanical Engineer / Product Developer" /></a>
+								<h3>Mechanical Engineer / Product Developer</h3>
+								<p><i>DC Opportunities, Delft, July 2025 - </i></p>
+								<p>Mechanical Engineer with responibility for mechanical and thermal design of several power electronics projects. </p>
 							</article>
 
 							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/02.jpg" class="image fit thumb"><img src="images/thumbs/02.jpg" alt="" /></a>
-								<h3>Ultricies lacinia interdum</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+								<a href="Projects/Aircraft_Propulsion_Design.html" class="image fit thumb" data-poptrox="ignore"><img src="images/thumbs/elfly.jpg" alt="Aircraft Propulsion Design" /></a>
+								<h3>Aircraft Propulsion Design</h3>
+								<p><i>Noemi, Norway, Nov. 2023 - July 2025</i></p>
+								<p>Propulsion engineer for the Noemi Aircraft program. Worked primarely on battery integration.</p>
 							</article>
 							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/03.jpg" class="image fit thumb"><img src="images/thumbs/03.jpg" alt="" /></a>
-								<h3>Tortor metus commodo</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
+								<a href="Projects/Aerodynamic_Optimization_Flying_Boat_Hull.html" class="image fit thumb" data-poptrox="ignore"><img src="images/thumbs/Wind Tunnel Setup Scaled.png" alt="Aerodynamic Optimization of a Flying Boat Hull" /></a>
+								<h3>Aerodynamic Optimization of a Flying Boat Hull</h3>
+								<p><i>NTNU, Norway, Automn 2024</i></p>
+								<p>Theses on aerodynamic optimization using wind tunnel testing and CFD.</p>
+						</article>
+
 							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/04.jpg" class="image fit thumb"><img src="images/thumbs/Revolve_Track.jpg" alt="" /></a>
-								<h3>Quam neque phasellus</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
+							<a href="Projects/Revolve_R23_Cooling.html" class="image fit thumb" data-poptrox="ignore"><img src="images/thumbs/Lyra_Flipped.png" alt="Revolve NTNU Formula Student" /></a>
+							<h3>Electric Racecar Powertrain Cooling</h3> 
+							<p><i>Revolve NTNU Formula Student Team, Trondheim, 2022 - 2023</i></p>
+							<p>Design of thermal management system for 80kW electric powertrain.</p>
+						</article>
+
 							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/05.jpg" class="image fit thumb"><img src="images/thumbs/05.jpg" alt="" /></a>
-								<h3>Revolve NTNU Formula Student</h3>
-								<p>Design of battery modules and powertrain cooling system</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/06.jpg" class="image fit thumb"><img src="images/thumbs/06.jpg" alt="" /></a>
-								<h3>Risus ornare lacinia</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
+								<a href="Projects/Lithium_Ion_Battery_Pack_Thermal_Management_PCM.html" class="image fit thumb" data-poptrox="ignore"><img src="images/thumbs/PCM.png" alt="Lithium-Ion battery pack thermal management using phase change materials" /></a>
+								<h3>Lithium-Ion battery pack thermal management using phase change materials</h3>
+								<p><i>NTNU, Norway, Spring 2022</i></p>
+								<p>Thesis on using phase change materials for thermal management of an electric race car battery pack.</p>
+						</article>
+						<article class="col-6 col-12-xsmall work-item">
+							<a href="Projects/Revolve_R22.html" class="image fit thumb" data-poptrox="ignore"><img src="images/thumbs/Aurora.jpg" alt="" /></a>
+							<h3>Electric Racecar Battery Pack Design</h3>
+							<p><i>Revolve NTNU Formula Student Team, Trondheim, 2021 - 2022</i></p>
+							<p>Design of 600V, 7.44 kWh, 80 kW battery pack for electric race car.<br>
+							Design of LV distribution system with 37.5V, 24V and 12V busses. </p>
+						</article>
 						</div>
-						<ul class="actions">
+						<!-- <ul class="actions">
 							<li><a href="#" class="button">Full Portfolio</a></li>
 						</ul>
 					</section>
 
+				<hr style="border-bottom: 2px solid #000; margin: 2em 0;">
+
 				<!-- Three -->
 					<section id="three">
-						<h2>Get In Touch</h2>
-						<p>Accumsan pellentesque commodo blandit enim arcu non at amet id arcu magna. Accumsan orci faucibus id eu lorem semper nunc nisi lorem vulputate lorem neque lorem ipsum dolor.</p>
-						<div class="row">
-							<div class="col-8 col-12-small">
-								<form method="post" action="#">
-									<div class="row gtr-uniform gtr-50">
-										<div class="col-6 col-12-xsmall"><input type="text" name="name" id="name" placeholder="Name" /></div>
-										<div class="col-6 col-12-xsmall"><input type="email" name="email" id="email" placeholder="Email" /></div>
-										<div class="col-12"><textarea name="message" id="message" placeholder="Message" rows="4"></textarea></div>
-									</div>
-								</form>
-								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
-								</ul>
+						<div class="contact-info-box" style="max-width: 800px; min-width: 320px; margin: 2em auto; padding: 2em 2em 1em 2em; background: #f8f8f8; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); display: flex; flex-direction: row; align-items: flex-start;">
+							<div style="flex-basis: 100%; width: 100%; max-width: 340px; margin-bottom: 0; margin-right: auto;">
+								<h2 style="margin-bottom: 0.5em; color: #222;">Get In Touch</h2>
+								<p style="margin-bottom: 1.5em; color: #666; font-size: 0.98em; margin-top: 0;">Feel free to reach out with any questions, opportunities, or just to connect!</p>
 							</div>
-							<div class="col-4 col-12-small">
-								<ul class="labeled-icons">
-									<li>
-										<h3 class="icon solid fa-home"><span class="label">Address</span></h3>
-										1234 Somewhere Rd.<br />
-										Nashville, TN 00000<br />
-										United States
+							<div style="flex: 1; min-width: 220px;">
+								<ul class="labeled-icons" style="list-style: none; padding: 0;">
+									<li style="margin-bottom: 1.5em;">
+										<h3 class="icon solid fa-home" style="color: #399762; margin-bottom: 0.3em;"><span class="label">Address</span></h3>
+										<span style="font-size: 1.1em; color: #222;">Delft, Netherlands</span>
+									</li>
+									<li style="margin-bottom: 1.5em;">
+										<h3 class="icon solid fa-mobile-alt" style="color: #399762; margin-bottom: 0.3em;"><span class="label">Phone</span></h3>
+										<span style="font-size: 1.1em; color: #222;">+31 6 28961102</span>
 									</li>
 									<li>
-										<h3 class="icon solid fa-mobile-alt"><span class="label">Phone</span></h3>
-										000-000-0000
-									</li>
-									<li>
-										<h3 class="icon solid fa-envelope"><span class="label">Email</span></h3>
-										<a href="#">hello@untitled.tld</a>
+										<h3 class="icon solid fa-envelope" style="color: #399762; margin-bottom: 0.3em;"><span class="label">Email</span></h3>
+										<a href="mailto:Joakimes@gmail.com" style="font-size: 1.1em; color: #222; text-decoration: underline;">joakimes@gmail.com</a>
 									</li>
 								</ul>
 							</div>
+							<div style="flex: 1;"></div>
 						</div>
 					</section>
 
 				<!-- Four -->
-				<!--
-					<section id="four">
+					<!--<section id="four">
 						<h2>Elements</h2>
 
 						<section>
@@ -161,7 +541,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 						<section>
 							<h4>Lists</h4>
 							<div class="row">
-								<div class="col-6 col-12-xsmall">
+								<div class="col-6 col-12-small">
 									<h5>Unordered</h5>
 									<ul>
 										<li>Dolor pulvinar etiam magna etiam.</li>
@@ -175,7 +555,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 										<li>Felis enim feugiat dolore viverra.</li>
 									</ul>
 								</div>
-								<div class="col-6 col-12-xsmall">
+								<div class="col-6 col-12-small">
 									<h5>Ordered</h5>
 									<ol>
 										<li>Dolor pulvinar etiam magna etiam.</li>
@@ -267,172 +647,171 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 											<td>19.99</td>
 										</tr>
 										<tr>
-											<td>Item Five</td>
-											<td>Ante turpis integer aliquet porttitor.</td>
-											<td>29.99</td>
-										</tr>
-									</tbody>
-									<tfoot>
-										<tr>
-											<td colspan="2"></td>
-											<td>100.00</td>
-										</tr>
-									</tfoot>
-								</table>
-							</div>
+<td>Item Five</td>
+<td>Ante turpis integer aliquet porttitor.</td>
+<td>29.99</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="2"></td>
+<td>100.00</td>
+</tr>
+</tfoot>
+</table>
+</div>
 
-							<h5>Alternate</h5>
-							<div class="table-wrapper">
-								<table class="alt">
-									<thead>
-										<tr>
-											<th>Name</th>
-											<th>Description</th>
-											<th>Price</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Item One</td>
-											<td>Ante turpis integer aliquet porttitor.</td>
-											<td>29.99</td>
-										</tr>
-										<tr>
-											<td>Item Two</td>
-											<td>Vis ac commodo adipiscing arcu aliquet.</td>
-											<td>19.99</td>
-										</tr>
-										<tr>
-											<td>Item Three</td>
-											<td> Morbi faucibus arcu accumsan lorem.</td>
-											<td>29.99</td>
-										</tr>
-										<tr>
-											<td>Item Four</td>
-											<td>Vitae integer tempus condimentum.</td>
-											<td>19.99</td>
-										</tr>
-										<tr>
-											<td>Item Five</td>
-											<td>Ante turpis integer aliquet porttitor.</td>
-											<td>29.99</td>
-										</tr>
-									</tbody>
-									<tfoot>
-										<tr>
-											<td colspan="2"></td>
-											<td>100.00</td>
-										</tr>
-									</tfoot>
-								</table>
-							</div>
-						</section>
+<h5>Alternate</h5>
+<div class="table-wrapper">
+<table class="alt">
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Price</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Item One</td>
+<td>Ante turpis integer aliquet porttitor.</td>
+<td>29.99</td>
+</tr>
+<tr>
+<td>Item Two</td>
+<td>Vis ac commodo adipiscing arcu aliquet.</td>
+<td>19.99</td>
+</tr>
+<tr>
+<td>Item Three</td>
+<td> Morbi faucibus arcu accumsan lorem.</td>
+<td>29.99</td>
+</tr>
+<tr>
+<td>Item Four</td>
+<td>Vitae integer tempus condimentum.</td>
+<td>19.99</td>
+</tr>
+<tr>
+<td>Item Five</td>
+<td>Ante turpis integer aliquet porttitor.</td>
+<td>29.99</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="2"></td>
+<td>100.00</td>
+</tr>
+</tfoot>
+</table>
+</div>
+</section>
 
-						<section>
-							<h4>Buttons</h4>
-							<ul class="actions">
-								<li><a href="#" class="button primary">Primary</a></li>
-								<li><a href="#" class="button">Default</a></li>
-							</ul>
-							<ul class="actions">
-								<li><a href="#" class="button large">Large</a></li>
-								<li><a href="#" class="button">Default</a></li>
-								<li><a href="#" class="button small">Small</a></li>
-							</ul>
-							<ul class="actions fit">
-								<li><a href="#" class="button primary fit">Fit</a></li>
-								<li><a href="#" class="button fit">Fit</a></li>
-							</ul>
-							<ul class="actions fit small">
-								<li><a href="#" class="button primary fit small">Fit + Small</a></li>
-								<li><a href="#" class="button fit small">Fit + Small</a></li>
-							</ul>
-							<ul class="actions">
-								<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
-								<li><a href="#" class="button icon solid fa-download">Icon</a></li>
-							</ul>
-							<ul class="actions">
-								<li><span class="button primary disabled">Primary</span></li>
-								<li><span class="button disabled">Default</span></li>
-							</ul>
-						</section>
+<section>
+<h4>Buttons</h4>
+<ul class="actions">
+<li><a href="#" class="button primary">Primary</a></li>
+<li><a href="#" class="button">Default</a></li>
+</ul>
+<ul class="actions">
+<li><a href="#" class="button large">Large</a></li>
+<li><a href="#" class="button">Default</a></li>
+<li><a href="#" class="button small">Small</a></li>
+</ul>
+<ul class="actions fit">
+<li><a href="#" class="button primary fit">Fit</a></li>
+<li><a href="#" class="button fit">Fit</a></li>
+</ul>
+<ul class="actions fit small">
+<li><a href="#" class="button primary fit small">Fit + Small</a></li>
+<li><a href="#" class="button fit small">Fit + Small</a></li>
+</ul>
+<ul class="actions">
+<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
+<li><a href="#" class="button icon solid fa-download">Icon</a></li>
+</ul>
+<ul class="actions">
+<li><span class="button primary disabled">Primary</span></li>
+<li><span class="button disabled">Default</span></li>
+</ul>
+</section>
 
-						<section>
-							<h4>Form</h4>
-							<form method="post" action="#">
-								<div class="row gtr-uniform gtr-50">
-									<div class="col-6 col-12-xsmall">
-										<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
-									</div>
-									<div class="col-6 col-12-xsmall">
-										<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
-									</div>
-									<div class="col-12">
-										<select name="demo-category" id="demo-category">
-											<option value="">- Category -</option>
-											<option value="1">Manufacturing</option>
-											<option value="1">Shipping</option>
-											<option value="1">Administration</option>
-											<option value="1">Human Resources</option>
-										</select>
-									</div>
-									<div class="col-4 col-12-small">
-										<input type="radio" id="demo-priority-low" name="demo-priority" checked>
-										<label for="demo-priority-low">Low Priority</label>
-									</div>
-									<div class="col-4 col-12-small">
-										<input type="radio" id="demo-priority-normal" name="demo-priority">
-										<label for="demo-priority-normal">Normal Priority</label>
-									</div>
-									<div class="col-4 col-12-small">
-										<input type="radio" id="demo-priority-high" name="demo-priority">
-										<label for="demo-priority-high">High Priority</label>
-									</div>
-									<div class="col-6 col-12-small">
-										<input type="checkbox" id="demo-copy" name="demo-copy">
-										<label for="demo-copy">Email me a copy of this message</label>
-									</div>
-									<div class="col-6 col-12-small">
-										<input type="checkbox" id="demo-human" name="demo-human" checked>
-										<label for="demo-human">I am a human and not a robot</label>
-									</div>
-									<div class="col-12">
-										<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
-									</div>
-									<div class="col-12">
-										<ul class="actions">
-											<li><input type="submit" value="Send Message" class="primary" /></li>
-											<li><input type="reset" value="Reset" /></li>
-										</ul>
-									</div>
-								</div>
-							</form>
-						</section>
+<section>
+<h4>Form</h4>
+<form method="post" action="#">
+<div class="row gtr-uniform gtr-50">
+<div class="col-6 col-12-xsmall">
+<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
+</div>
+<div class="col-6 col-12-xsmall">
+<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
+</div>
+<div class="col-12">
+<select name="demo-category" id="demo-category">
+<option value="">- Category -</option>
+<option value="1">Manufacturing</option>
+<option value="1">Shipping</option>
+<option value="1">Administration</option>
+<option value="1">Human Resources</option>
+</select>
+</div>
+<div class="col-4 col-12-small">
+<input type="radio" id="demo-priority-low" name="demo-priority" checked>
+<label for="demo-priority-low">Low Priority</label>
+</div>
+<div class="col-4 col-12-small">
+<input type="radio" id="demo-priority-normal" name="demo-priority">
+<label for="demo-priority-normal">Normal Priority</label>
+</div>
+<div class="col-4 col-12-small">
+<input type="radio" id="demo-priority-high" name="demo-priority">
+<label for="demo-priority-high">High Priority</label>
+</div>
+<div class="col-6 col-12-small">
+<input type="checkbox" id="demo-copy" name="demo-copy">
+<label for="demo-copy">Email me a copy of this message</label>
+</div>
+<div class="col-6 col-12-small">
+<input type="checkbox" id="demo-human" name="demo-human" checked>
+<label for="demo-human">I am a human and not a robot</label>
+</div>
+<div class="col-12">
+<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
+</div>
+<div class="col-12">
+<ul class="actions">
+<li><input type="submit" value="Send Message" class="primary" /></li>
+<li><input type="reset" value="Reset" /></li>
+</ul>
+</div>
+</div>
+</form>
+</section>
 
-						<section>
-							<h4>Image</h4>
-							<h5>Fit</h5>
-							<div class="box alt">
-								<div class="row gtr-50 gtr-uniform">
-									<div class="col-12"><span class="image fit"><img src="images/fulls/05.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/thumbs/01.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/thumbs/02.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/thumbs/03.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/thumbs/04.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/thumbs/05.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/thumbs/06.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/thumbs/03.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/thumbs/02.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/thumbs/01.jpg" alt="" /></span></div>
-								</div>
-							</div>
-							<h5>Left &amp; Right</h5>
-							<p><span class="image left"><img src="images/avatar.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
-							<p><span class="image right"><img src="images/avatar.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
-						</section>
+<section>
+<h4>Image</h4>
+<h5>Fit</h5>
+<div class="box alt">
+<div class="row gtr-50 gtr-uniform">
+<div class="col-12"><span class="image fit"><img src="images/fulls/05.jpg" alt="" /></span></div>
+<div class="col-4"><span class="image fit"><img src="images/thumbs/01.jpg" alt="" /></span></div>
+<div class="col-4"><span class="image fit"><img src="images/thumbs/02.jpg" alt="" /></span></div>
+<div class="col-4"><span class="image fit"><img src="images/thumbs/03.jpg" alt="" /></span></div>
+<div class="col-4"><span class="image fit"><img src="images/thumbs/04.jpg" alt="" /></span></div>
+<div class="col-4"><span class="image fit"><img src="images/thumbs/05.jpg" alt="" /></span></div>
+<div class="col-4"><span class="image fit"><img src="images/thumbs/06.jpg" alt="" /></span></div>
+<div class="col-4"><span class="image fit"><img src="images/thumbs/03.jpg" alt="" /></span></div>
+<div class="col-4"><span class="image fit"><img src="images/thumbs/02.jpg" alt="" /></span></div>
+<div class="col-4"><span class="image fit"><img src="images/thumbs/01.jpg" alt="" /></span></div>
+</div>
+</div>
+<h5>Left &amp; Right</h5>
+<p><span class="image left"><img src="images/avatar.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
+<p><span class="image right"><img src="images/avatar.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
+</section>
 
-					</section>
-				-->
+					</section> -->
 
 			</div>
 
@@ -440,13 +819,12 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<footer id="footer">
 				<div class="inner">
 					<ul class="icons">
-						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-						<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+						<li><a href="https://www.linkedin.com/in/joakim-saugen" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+						<li><a href="https://github.com/JoakimSaugen" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="mailto:joakimes@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
 					</ul>
 					<ul class="copyright">
-						<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						<li>Web Design: Joakim Saugen. Base template from: <a href="http://html5up.net">HTML5 UP</a></li>
 					</ul>
 				</div>
 			</footer>
@@ -458,6 +836,68 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="assets/js/carousel-demo.js"></script>
+			<script src="assets/js/hotspot.js"></script>
+
+			<script>
+			// Save scroll position when navigating to a project from the index
+			document.addEventListener('DOMContentLoaded', function () {
+				try {
+					document.querySelectorAll('a[href^="Projects/"]').forEach(function (a) {
+						a.addEventListener('click', function () {
+							var y = window.scrollY || window.pageYOffset || 0;
+							sessionStorage.setItem('indexScrollPos', String(y));
+						});
+					});
+				} catch (e) { /* no-op */ }
+			});
+			
+			// Pause video when modal closes
+			const modals = document.querySelectorAll('.hotspot-modal');
+			modals.forEach(function(modal) {
+				const observer = new MutationObserver(function(mutations) {
+					mutations.forEach(function(mutation) {
+						if (mutation.attributeName === 'class') {
+							if (!modal.classList.contains('active')) {
+								// Modal was closed - pause all videos inside
+								const iframes = modal.querySelectorAll('iframe[data-video-slide]');
+								iframes.forEach(function(iframe) {
+									const src = iframe.src;
+									iframe.src = '';
+									iframe.src = src; // Reset to stop playback
+								});
+							}
+						}
+					});
+				});
+				observer.observe(modal, { attributes: true });
+			});
+			
+			// Pause video when navigating carousel slides
+			const blenderCarousel = document.getElementById('blender-carousel');
+			if (blenderCarousel) {
+				const arrows = blenderCarousel.querySelectorAll('.carousel-arrow');
+				const dots = blenderCarousel.querySelectorAll('.carousel-dot');
+				
+				function pauseVideos() {
+					const iframes = blenderCarousel.querySelectorAll('iframe[data-video-slide]');
+					iframes.forEach(function(iframe) {
+						const slide = iframe.closest('.carousel-slide');
+						// Check if slide is not currently centered/active
+						const track = blenderCarousel.querySelector('.carousel-track');
+						const transform = window.getComputedStyle(track).transform;
+						// If slide is not visible, pause video
+						const src = iframe.src;
+						iframe.src = '';
+						setTimeout(function() { iframe.src = src; }, 50); // Brief reset to stop
+					});
+				}
+				
+				arrows.forEach(function(arrow) {
+					arrow.addEventListener('click', pauseVideos);
+				});
+			}
+			</script>
 
 	</body>
 
