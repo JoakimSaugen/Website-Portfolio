@@ -213,21 +213,31 @@
 @media (max-width: 900px) {
   .carousel-v1 {
     max-width: 100%;
-    overflow: hidden;
+    overflow: hidden !important;
+    position: relative;
   }
   .carousel-v1 .carousel-slide {
-    min-width: 100%;
-    max-width: 100%;
+    min-width: 100% !important;
+    max-width: 100% !important;
     padding: 0 1em;
+    flex-shrink: 0;
+    box-sizing: border-box;
   }
   .carousel-v1 .carousel-slide > div {
     width: 100%;
     max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
   }
   .carousel-v1 .carousel-slide img {
-    width: 100%;
-    max-width: 100%;
+    width: 90% !important;
+    max-width: 90% !important;
     height: 220px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
   }
   .carousel-v1 .carousel-caption {
     width: 100%;
@@ -235,9 +245,11 @@
     margin-left: 0;
     padding: 0 0.5em;
     box-sizing: border-box;
+    text-align: center;
   }
   .carousel-v1 .carousel-track {
-    overflow: visible;
+    display: flex;
+    flex-wrap: nowrap;
   }
   /* Ensure arrows are visible on mobile */
   .carousel-v1 .carousel-arrow {
